@@ -39,6 +39,9 @@ program
   .option("--no-embed", "skip CLIP embeddings (identity_embedding_similarity = null)")
   .action(async (roomDir: string, o: { system: string; room?: string; out?: string; runs: string; model: string; effort: "low" | "medium" | "high"; embed: boolean }) => {
     if (!process.env.ANTHROPIC_API_KEY) throw new Error("ANTHROPIC_API_KEY is not set");
+    const runs = Number(o.runs);
+    if (!Number.isInteger(runs) || runs < 1) throw new Error(`--runs must be an integer >= 1, got "${o.runs}"`);
+    if (runs % 2 === 0) process.stderr.write(`[masb] warning: --runs ${runs} is even; an odd count avoids median/majority ties\n`);
     const { originals, staged } = await loadRoomDir(roomDir);
     let embedder: Embedder | null = null;
     if (o.embed && process.env.REPLICATE_API_TOKEN) embedder = new ReplicateClipEmbedder();
@@ -49,7 +52,7 @@ program
       staged,
       judge: new AnthropicJudge({ model: o.model, effort: o.effort }),
       embedder,
-      runs: Number(o.runs),
+      runs,
       log: (m) => process.stderr.write(`[masb] ${m}\n`),
     });
     const json = JSON.stringify(result, null, 2) + "\n";

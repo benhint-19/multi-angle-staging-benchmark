@@ -3,8 +3,9 @@ import { aggregateMatch, aggregateQuality } from "./aggregate.js";
 import type { Embedder } from "./embed.js";
 import { identityAgreement, itemEmbeddingSimilarity } from "./identity.js";
 import { inventoryAgreement, presentByMajority, representativeRun } from "./inventory.js";
-import type { Judge } from "./judge.js";
+import { sanitizeMatch, type Judge } from "./judge.js";
 import { placementAgreement } from "./placement.js";
+import { PROMPT_VERSION } from "./prompts.js";
 import type { BBox, Inventory, MasbResult, MatchResult, QualityResult, SharedItem } from "./types.js";
 
 export interface ScoreOptions {
@@ -71,6 +72,7 @@ async function embeddingSimilarity(
 export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   const { judge, originals, staged } = opts;
   const runs = opts.runs ?? 3;
+  if (!Number.isInteger(runs) || runs < 1) throw new Error(`runs must be an integer >= 1, got ${runs}`);
   const log = opts.log ?? (() => {});
   const n = staged.length;
   if (n < 2) throw new Error(`need at least 2 photos, got ${n}`);
@@ -89,8 +91,12 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   );
 
   log(`match: ${runs} runs`);
-  const matchRuns: MatchResult[] = await times(() => judge.match(origJ, stagedJ, inventories));
-  const match = aggregateMatch(matchRuns);
+  const sanitized = await times(async () => sanitizeMatch(await judge.match(origJ, stagedJ, inventories), inventories));
+  const matchRuns: MatchResult[] = sanitized.map((x) => x.match);
+  const unknownKeys = [...new Set(sanitized.flatMap((x) => x.unknownKeys))];
+  if (unknownKeys.length) log(`visibility: dropped unknown keys ${unknownKeys.join(", ")}`);
+  const match = aggregateMatch(matchRuns, n);
+  if (match.fallback) log("match: no link reached a majority; using the median-consistency run");
 
   log(`quality: ${n} photos x ${runs} runs`);
   const qualityRuns: QualityResult[][] = await Promise.all(
@@ -142,10 +148,13 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
       runs: { inventory: invRuns, match: matchRuns, quality: qualityRuns },
       flags: {
         no_shared_items: match.shared.length === 0,
+        shared_fallback_median_run: match.fallback,
+        visibility_unknown_keys: unknownKeys,
         ...(embeddingNote ? { embedding_note: embeddingNote } : {}),
       },
     },
-    judge: { model: judge.model, runs, aggregated: "median" },
+    judge: { model: judge.model, prompt_version: PROMPT_VERSION, runs, aggregated: "median/majority" },
+    embedder: opts.embedder && sims.length ? { model: opts.embedder.model, version: opts.embedder.version } : null,
     cost_usd: round(cost, 4),
     scored_at: (opts.now ?? (() => new Date()))().toISOString(),
   };

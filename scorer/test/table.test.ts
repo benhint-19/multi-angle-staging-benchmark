@@ -25,9 +25,10 @@ const result = (system: string, room: string, consistency: number, noShared = fa
     quality: [],
     embedding: [],
     runs: { inventory: [], match: [], quality: [] },
-    flags: { no_shared_items: noShared },
+    flags: { no_shared_items: noShared, shared_fallback_median_run: false, visibility_unknown_keys: [] },
   },
-  judge: { model: "claude-sonnet-5", runs: 3, aggregated: "median" },
+  judge: { model: "claude-sonnet-5", prompt_version: "0.1.1", runs: 3, aggregated: "median/majority" },
+  embedder: null,
   cost_usd: 0.3,
   scored_at: "2026-09-27T00:00:00Z",
 });

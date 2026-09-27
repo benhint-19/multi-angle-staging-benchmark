@@ -28,9 +28,21 @@ describe("inventory agreement", () => {
     expect(inventoryAgreement(present, visibility, 3)).toBeCloseTo(66.667, 2);
   });
 
-  it("clips at 1 when a category appears in more photos than the judge expected", () => {
+  it("an appearance where the category is not expected does not count", () => {
     const present = { lamp: [1, 2] };
     const visibility = { lamp: { "1": true, "2": false } };
+    expect(inventoryAgreement(present, visibility, 2)).toBe(100);
+  });
+
+  it("unexpected appearances cannot offset expected absences (present {1,3}, visible {1,2} → 50)", () => {
+    const present = { sofa: [1, 3] };
+    const visibility = { sofa: { "1": true, "2": true, "3": false } };
+    expect(inventoryAgreement(present, visibility, 3)).toBe(50);
+  });
+
+  it("ratio is 1 when no photo is expected to show the category", () => {
+    const present = { mirror: [2] };
+    const visibility = { mirror: { "1": false, "2": false } };
     expect(inventoryAgreement(present, visibility, 2)).toBe(100);
   });
 

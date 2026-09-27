@@ -4,6 +4,9 @@
  */
 import { CATEGORIES } from "./types.js";
 
+/** Version of the prompt set below. Bump on any wording change; recorded in every result. */
+export const PROMPT_VERSION = "0.1.1";
+
 export const CATEGORY_LIST = CATEGORIES.join(", ");
 
 export const SYSTEM_PROMPT =
@@ -31,7 +34,7 @@ Task A: shared items. Find every physical item that appears in two or more stage
 - "identity" 0-4: is it the same physical piece in every appearance (form, colour, material, size)? 4 = clearly identical, 3 = same piece with minor differences, 2 = similar but noticeably different, 1 = same kind but a different piece, 0 = unrelated.
 - "placement" 0-4: is it in the same position relative to fixed room features (windows, doors, wall corners, fireplace, built-ins) in every appearance? 4 = same spot, 3 = slightly shifted, 2 = clearly moved within the same area, 1 = a different area of the room, 0 = incompatible positions.
 
-Task B: visibility. Use the ORIGINAL photos to understand each camera's field of view. For each category below, say whether an item of that category, standing where it stands in the staged photos, would be visible from each angle (true) or would be outside the frame or fully hidden (false).
+Task B: visibility. For each category below and each angle, say whether an item of that category, standing where it stands in the room (as shown by the staged photos that contain it), would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Do not use whether the item appears in a staged photo. An item missing from a staged photo it should appear in is still visible=true. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
 Categories: {CATEGORIES_PRESENT}
 
 Return:

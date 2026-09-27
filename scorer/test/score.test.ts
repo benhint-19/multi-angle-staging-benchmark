@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { scoreRoom } from "../src/score.js";
+import { MasbResultSchema } from "../src/schema.js";
+import { PROMPT_VERSION } from "../src/prompts.js";
 import type { Inventory, MatchResult } from "../src/types.js";
 import { FakeEmbedder, FakeJudge, tinyJpeg } from "./fakes.js";
 
@@ -67,7 +69,11 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.identity_embedding_similarity).toBe(1);
     expect(r.details.runs.match).toHaveLength(3);
     expect(r.details.flags.no_shared_items).toBe(false);
-    expect(r.judge).toEqual({ model: "fake-judge", runs: 3, aggregated: "median" });
+    expect(r.judge).toEqual({ model: "fake-judge", prompt_version: PROMPT_VERSION, runs: 3, aggregated: "median/majority" });
+    expect(r.embedder).toEqual({ model: "fake-embedder", version: "0" });
+    expect(r.details.flags.shared_fallback_median_run).toBe(false);
+    expect(r.details.flags.visibility_unknown_keys).toEqual([]);
+    expect(() => MasbResultSchema.parse(r)).not.toThrow();
     expect(r.cost_usd).toBe(0.01);
     expect(r.photos).toBe(3);
   });
@@ -86,6 +92,15 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.inventory_agreement).toBe(100);
     expect(r.scores.consistency).toBeCloseTo(33.3, 1);
     expect(r.scores.identity_embedding_similarity).toBeNull();
+    expect(r.embedder).toBeNull();
+    expect(() => MasbResultSchema.parse(r)).not.toThrow();
+  });
+
+  it("rejects a non-integer or zero run count", async () => {
+    const p = await tinyJpeg("#000");
+    const judge = new FakeJudge(() => sofaOnly, [{ shared: [], visibility: {} }], []);
+    await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p], judge, runs: 0 })).rejects.toThrow(/runs/);
+    await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p], judge, runs: 1.5 })).rejects.toThrow(/runs/);
   });
 
   it("rejects mismatched photo counts", async () => {

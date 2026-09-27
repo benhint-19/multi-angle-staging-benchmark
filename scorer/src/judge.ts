@@ -8,7 +8,7 @@ export interface Judge {
   readonly model: string;
   /** Items in one staged photo. */
   inventory(staged: Buffer): Promise<Inventory>;
-  /** Cross-photo matching + visibility. `inventories[i]` belongs to staged photo i+1. */
+  /** Cross-photo matching + visibility (raw; the scorer sanitises it). `inventories[i]` is photo i+1's. */
   match(originals: Buffer[], staged: Buffer[], inventories: Inventory[]): Promise<MatchResult>;
   /** Per-photo realism + architecture check. */
   quality(original: Buffer, staged: Buffer): Promise<QualityResult>;
@@ -18,7 +18,7 @@ export interface Judge {
 // ---------- schemas ----------
 
 const categorySchema = z.preprocess((v) => {
-  const s = String(v).trim().toLowerCase().replace(/[\s-]+/g, "_");
+  const s = normalizeCategory(String(v));
   return (CATEGORIES as readonly string[]).includes(s) ? s : "other";
 }, z.enum(CATEGORIES));
 
@@ -63,11 +63,30 @@ export function extractJson(text: string): unknown {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+export function normalizeCategory(v: string): string {
+  return v.trim().toLowerCase().replace(/[\s-]+/g, "_");
+}
+
+/** "1", "01", "photo 1", "Photo_1" → 1; anything else → null. */
+export function normalizePhotoKey(v: string): number | null {
+  const m = /^\s*(?:photo[\s_-]*)?0*(\d+)\s*$/i.exec(v);
+  return m ? Number(m[1]) : null;
+}
+
+export interface SanitizedMatch {
+  match: MatchResult;
+  /** Visibility keys that did not normalise to a known category / photo number (dropped). */
+  unknownKeys: string[];
+}
+
 /**
- * Drop appearances that reference unknown photos/items, keep one appearance per photo, reuse no
- * inventory entry twice, and drop shared items left with fewer than two photos.
+ * Clean one raw match reply against the pinned inventories:
+ * - shared: drop appearances that reference unknown photos/items, keep one appearance per photo, let each
+ *   inventory entry belong to one shared item, drop items left with fewer than two photos;
+ * - visibility: normalise category keys (case, spaces, hyphens) and photo keys ("01", "photo 1" → "1");
+ *   drop and report keys that are not a category in the inventories or not a photo 1..N.
  */
-export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): MatchResult {
+export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): SanitizedMatch {
   const used = new Set<string>();
   const shared = [];
   for (const s of m.shared) {
@@ -84,7 +103,27 @@ export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): MatchRe
     for (const a of appearances) used.add(`${a.photo}:${a.itemId}`);
     shared.push({ ...s, appearances });
   }
-  return { shared, visibility: m.visibility };
+
+  const known = new Set(inventories.flatMap((inv) => inv.items.map((i) => i.category as string)));
+  const unknownKeys: string[] = [];
+  const visibility: MatchResult["visibility"] = {};
+  for (const [rawCat, row] of Object.entries(m.visibility)) {
+    const cat = normalizeCategory(rawCat);
+    if (!known.has(cat)) {
+      unknownKeys.push(`category:${rawCat}`);
+      continue;
+    }
+    const out = (visibility[cat] ??= {});
+    for (const [rawPhoto, v] of Object.entries(row)) {
+      const p = normalizePhotoKey(rawPhoto);
+      if (p === null || p < 1 || p > inventories.length) {
+        unknownKeys.push(`photo:${rawCat}/${rawPhoto}`);
+        continue;
+      }
+      if (!(String(p) in out)) out[String(p)] = v;
+    }
+  }
+  return { match: { shared, visibility }, unknownKeys };
 }
 
 // ---------- Anthropic implementation ----------
@@ -174,8 +213,7 @@ export class AnthropicJudge implements Judge {
     );
     const cats = [...new Set(inventories.flatMap((inv) => inv.items.map((i) => i.category as Category)))].sort();
     content.push(txt(renderMatchPrompt(originals.length, invJson, cats)));
-    const raw = (await this.call(content, matchSchema)) as MatchResult;
-    return sanitizeMatch(raw, inventories);
+    return (await this.call(content, matchSchema)) as MatchResult;
   }
 
   quality(original: Buffer, staged: Buffer): Promise<QualityResult> {

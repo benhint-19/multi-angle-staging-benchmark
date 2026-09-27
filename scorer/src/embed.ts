@@ -1,12 +1,18 @@
 /** Image embedder for the secondary identity_embedding_similarity number. Inject a fake in tests. */
 export interface Embedder {
-  readonly name: string;
+  readonly model: string;
+  readonly version: string;
   embed(images: Buffer[]): Promise<number[][]>;
   costUsd(): number;
 }
 
 const API = "https://api.replicate.com/v1";
 const MODEL = "andreasjansson/clip-features";
+/**
+ * Pinned model version (latest_version.id of andreasjansson/clip-features, fetched 2026-09-27 from
+ * GET /v1/models/andreasjansson/clip-features). Pinned so scores stay comparable if the model changes.
+ */
+export const CLIP_VERSION = "75b33f253f7714a281ad3e9b28f63e3232d583716ef6718f2e46641077ea040a";
 /** Approximate Replicate GPU rate (USD/s) used for cost reporting; CLIP runs take well under a second. */
 const USD_PER_SECOND = 0.000225;
 
@@ -25,10 +31,10 @@ interface Prediction {
  * and the upload is deleted afterwards.
  */
 export class ReplicateClipEmbedder implements Embedder {
-  readonly name = `replicate:${MODEL}`;
+  readonly model = `replicate:${MODEL}`;
+  readonly version = CLIP_VERSION;
   private readonly token: string;
   private seconds = 0;
-  private version: string | undefined;
 
   constructor(token = process.env.REPLICATE_API_TOKEN) {
     if (!token) throw new Error("REPLICATE_API_TOKEN is not set");
@@ -55,14 +61,6 @@ export class ReplicateClipEmbedder implements Embedder {
     return (res.status === 204 ? undefined : await res.json()) as T;
   }
 
-  private async latestVersion(): Promise<string> {
-    if (!this.version) {
-      const m = await this.req<{ latest_version: { id: string } }>(`${API}/models/${MODEL}`);
-      this.version = m.latest_version.id;
-    }
-    return this.version;
-  }
-
   private async predict(version: string, url: string): Promise<number[]> {
     let pred = await this.req<Prediction>(`${API}/predictions`, {
       method: "POST",
@@ -81,7 +79,7 @@ export class ReplicateClipEmbedder implements Embedder {
 
   async embed(images: Buffer[]): Promise<number[][]> {
     if (images.length === 0) return [];
-    const version = await this.latestVersion();
+    const version = this.version;
     const files: { id: string; urls: { get: string } }[] = [];
     try {
       for (const [i, buf] of images.entries()) {

@@ -48,11 +48,12 @@ describe("aggregateMatch", () => {
       { shared: [sofa(3, 4, "ba")], visibility: { sofa: { "1": true, "2": false } } },
       { shared: [sofa(4, 3)], visibility: { sofa: { "1": true, "2": true } } },
     ];
-    const agg = aggregateMatch(runs);
+    const agg = aggregateMatch(runs, 3);
     expect(agg.shared).toHaveLength(1);
     expect(agg.shared[0]!.identity).toBe(4);
     expect(agg.shared[0]!.placement).toBe(3);
-    expect(agg.visibility.sofa).toEqual({ "1": true, "2": true });
+    expect(agg.visibility.sofa).toEqual({ "1": true, "2": true, "3": true });
+    expect(agg.fallback).toBe(false);
   });
 
   it("drops a shared item that only a minority of runs report", () => {
@@ -68,7 +69,61 @@ describe("aggregateMatch", () => {
       { shared: [sofa(4, 4)], visibility: {} },
       { shared: [sofa(4, 4)], visibility: {} },
     ];
-    const agg = aggregateMatch(runs);
+    const agg = aggregateMatch(runs, 3);
     expect(agg.shared.map((s) => s.category)).toEqual(["sofa"]);
+  });
+
+  const item = (photos: number[], identity: number, placement: number) => ({
+    key: `sofa-${photos.join("")}`,
+    category: "sofa" as const,
+    appearances: photos.map((photo) => ({ photo, itemId: "i1" })),
+    identity,
+    placement,
+  });
+
+  it("keeps an item whose runs split its appearances ({1,2,3} / {1,2} / {1,3})", () => {
+    const runs: MatchResult[] = [
+      { shared: [item([1, 2, 3], 4, 4)], visibility: {} },
+      { shared: [item([1, 2], 3, 2)], visibility: {} },
+      { shared: [item([1, 3], 2, 4)], visibility: {} },
+    ];
+    const agg = aggregateMatch(runs, 3);
+    expect(agg.fallback).toBe(false);
+    expect(agg.shared).toHaveLength(1);
+    expect(agg.shared[0]!.appearances.map((a) => a.photo)).toEqual([1, 2, 3]);
+    expect(agg.shared[0]!.identity).toBe(3); // median(4, 3, 2)
+    expect(agg.shared[0]!.placement).toBe(4); // median(4, 2, 4)
+  });
+
+  it("falls back to the median-consistency run when no link reaches a majority", () => {
+    const runs: MatchResult[] = [
+      { shared: [item([1, 2], 4, 4)], visibility: {} },
+      { shared: [item([2, 3], 2, 2)], visibility: {} },
+      { shared: [item([1, 3], 0, 0)], visibility: {} },
+    ];
+    const agg = aggregateMatch(runs, 3);
+    expect(agg.fallback).toBe(true);
+    expect(agg.shared.map((s) => s.key)).toEqual(["sofa-23"]);
+  });
+
+  it("never joins two entries of the same photo into one item", () => {
+    const mk = (key: string, ...nodes: [number, string][]) => ({
+      key,
+      category: "sofa" as const,
+      identity: 4,
+      placement: 4,
+      appearances: nodes.map(([photo, itemId]) => ({ photo, itemId })),
+    });
+    // Majority links: 1:i1-2:i1, 1:i2-3:i1, 2:i1-3:i1. The last would put 1:i1 and 1:i2 together.
+    const runs: MatchResult[] = [
+      { shared: [mk("a", [1, "i1"], [2, "i1"]), mk("b", [1, "i2"], [3, "i1"])], visibility: {} },
+      { shared: [mk("c", [1, "i1"], [2, "i1"], [3, "i1"])], visibility: {} },
+      { shared: [mk("d", [1, "i2"], [2, "i1"], [3, "i1"])], visibility: {} },
+    ];
+    const agg = aggregateMatch(runs, 3);
+    expect(agg.shared.map((s) => s.appearances.map((x) => `${x.photo}:${x.itemId}`))).toEqual([
+      ["1:i1", "2:i1"],
+      ["1:i2", "3:i1"],
+    ]);
   });
 });

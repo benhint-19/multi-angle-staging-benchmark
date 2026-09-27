@@ -106,6 +106,10 @@ export interface Details {
   };
   flags: {
     no_shared_items: boolean;
+    /** No pairwise link reached a majority; the median-consistency match run's shared set was used. */
+    shared_fallback_median_run: boolean;
+    /** Visibility keys from the judge that did not normalise to a known category / photo (dropped). */
+    visibility_unknown_keys: string[];
     embedding_note?: string;
   };
 }
@@ -118,7 +122,9 @@ export interface MasbResult {
   photos: number;
   scores: Scores;
   details: Details;
-  judge: { model: string; runs: number; aggregated: "median" };
+  judge: { model: string; prompt_version: string; runs: number; aggregated: "median/majority" };
+  /** Image embedder used for identity_embedding_similarity; null when none ran. */
+  embedder: { model: string; version: string } | null;
   cost_usd: number;
   scored_at: string;
 }

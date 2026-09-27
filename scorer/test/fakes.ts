@@ -30,7 +30,8 @@ export class FakeJudge implements Judge {
 }
 
 export class FakeEmbedder implements Embedder {
-  readonly name = "fake";
+  readonly model = "fake-embedder";
+  readonly version = "0";
   async embed(images: Buffer[]) {
     return images.map(() => [1, 0, 0]);
   }

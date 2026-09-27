@@ -1,8 +1,10 @@
-# MASB Scoring Protocol (v0.1.0)
+# MASB Scoring Protocol (v0.1.0, prompt set 0.1.1)
 
 This document is the contract for the Multi-Angle Staging Benchmark scorer in `scorer/`. It publishes
 the judge prompts verbatim, the aggregation rules and the exact formulas. Any change to a prompt or a
-formula is a new protocol version; results from different versions are not comparable.
+formula is a new protocol version; results from different versions are not comparable. Each result
+records `judge.prompt_version` (currently `0.1.1`: visibility is decided from the original photos'
+geometry only).
 
 ## Inputs
 
@@ -75,7 +77,7 @@ Task A: shared items. Find every physical item that appears in two or more stage
 - "identity" 0-4: is it the same physical piece in every appearance (form, colour, material, size)? 4 = clearly identical, 3 = same piece with minor differences, 2 = similar but noticeably different, 1 = same kind but a different piece, 0 = unrelated.
 - "placement" 0-4: is it in the same position relative to fixed room features (windows, doors, wall corners, fireplace, built-ins) in every appearance? 4 = same spot, 3 = slightly shifted, 2 = clearly moved within the same area, 1 = a different area of the room, 0 = incompatible positions.
 
-Task B: visibility. Use the ORIGINAL photos to understand each camera's field of view. For each category below, say whether an item of that category, standing where it stands in the staged photos, would be visible from each angle (true) or would be outside the frame or fully hidden (false).
+Task B: visibility. For each category below and each angle, say whether an item of that category, standing where it stands in the room (as shown by the staged photos that contain it), would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Do not use whether the item appears in a staged photo. An item missing from a staged photo it should appear in is still visible=true. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
 Categories: {CATEGORIES_PRESENT}
 
 Return:
@@ -87,7 +89,10 @@ visibility: { [category]: { [photo]: boolean } } }`.
 
 After validation the scorer drops appearances that reference an unknown photo or item id, keeps at
 most one appearance per photo per shared item, lets each inventory entry belong to only one shared
-item, and discards shared items left with fewer than two photos.
+item, and discards shared items left with fewer than two photos. Visibility keys are normalised
+(category keys: lower-case, spaces and hyphens to `_`; photo keys: `"01"`, `"photo 1"` → `"1"`); a key
+that is not a category in the pinned inventories or not a photo 1..N is dropped and listed in
+`details.flags.visibility_unknown_keys`.
 
 ### Call 3: quality (per photo)
 
@@ -109,11 +114,16 @@ Output: `{ realism: 0–4, architecture_preserved: boolean, notes }`.
   runs list at least one item of category *c*. One run per photo is then **pinned** as that photo's
   item list (the first run whose category set equals the majority set, otherwise the closest one); its
   item ids are what the match call refers to, and its boxes are used for crops.
-- **Match.** Because item ids are pinned, a shared item is identified by its set of
-  `photo:itemId` appearances. A shared item is kept when a strict majority of match runs report that
-  exact appearance set; its `identity` and `placement` are the **medians** over the runs that
-  reported it. `visibility[c][p]` is the strict **majority** over runs (a run that omits the cell
-  counts as visible).
+- **Match.** Because item ids are pinned, each shared item in a run is a set of pairwise **links**
+  between inventory entries (`photo:itemId`). A link is kept when a strict majority of match runs make
+  it. Kept links are joined into shared items (connected components, strongest links first, never
+  joining two entries of the same photo), so runs that split an item ({1,2,3} / {1,2} / {1,3}) still
+  yield one item over photos 1–3. An item's `identity` and `placement` are the **medians** over every
+  run item that contributed one of its kept links; its category is the most common among them. If no
+  link reaches a majority but some run found shared items, the shared set of the run with the median
+  mean(identity, placement) is used and `details.flags.shared_fallback_median_run` is true.
+  `visibility[c][p]` is the strict **majority** over runs (a run that omits the cell counts as
+  visible).
 - **Quality.** Per photo, `realism` is the **median** over runs and `architecture_preserved` the
   strict **majority**; `notes` come from the first run.
 
@@ -127,7 +137,7 @@ Let N be the number of photos, *present(c)* the set of photos where category *c*
 
 ```
 inventory_agreement = 100 × mean over categories c with |present(c)| ≥ 1 of
-                        min(1, |present(c)| / |visible(c)|)          (ratio = 1 if |visible(c)| = 0)
+                        |present(c) ∩ visible(c)| / |visible(c)|     (ratio = 1 if |visible(c)| = 0)
 identity_agreement  = 100 × mean(s.identity  for s in S) / 4         (0 if S is empty)
 placement_agreement = 100 × mean(s.placement for s in S) / 4         (0 if S is empty)
 consistency         = mean(inventory_agreement, identity_agreement, placement_agreement)
@@ -139,26 +149,30 @@ identity_embedding_similarity = mean over s in S of
 ```
 
 - A category that is absent from a photo where the judge says it would not be visible (outside the
-  frame or occluded) is **not** penalised: that photo is not in the denominator.
+  frame, or blocked by a wall, doorway or column) is **not** penalised: that photo is not in the
+  denominator. An appearance in such a photo does not count either, so it cannot offset an absence
+  where the category is expected (present {1,3}, visible {1,2} → 1/2 = 50).
 - If *S* is empty, identity and placement are 0 and the result carries `no_shared_items: true`.
 - `realism`, `architecture_preserved_rate` and `identity_embedding_similarity` are reported but are
   **not** part of `consistency`.
 - Embeddings: each shared item's appearance is cropped by its pinned bounding box from the
   full-resolution staged photo (crops under 8 px are skipped) and embedded with CLIP ViT-L/14 via
-  Replicate (`andreasjansson/clip-features`, latest version, one prediction per crop). If
+  Replicate (`andreasjansson/clip-features`, pinned version
+  `75b33f253f7714a281ad3e9b28f63e3232d583716ef6718f2e46641077ea040a`, one prediction per crop). The
+  model and version are recorded in the result's `embedder` field. If
   `REPLICATE_API_TOKEN` is unset, `--no-embed` is passed, or the call fails, the value is `null` and
   `details.flags.embedding_note` says why.
 - Scores are rounded to 1 decimal (architecture rate to 3, embedding similarity to 3).
 
 ## Worked example
 
-Three photos. Every inventory run lists a sofa in photos 1–3 and a rug in photos 1–2 (in photo 3 the
-rug is hidden behind the sofa). The three match runs return the sofa with (identity, placement) =
+Three photos. Every inventory run lists a sofa in photos 1–3 and a rug in photos 1–2 (from angle 3
+the rug's position is behind a wall). The three match runs return the sofa with (identity, placement) =
 (4, 2), (2, 4), (4, 4) and the rug with (4, 4) each time; two of three runs say the rug is not visible
 from angle 3. Quality runs per photo give realism 3, 4, 2 and architecture true, true, false.
 
 - Present: sofa {1,2,3}, rug {1,2}. Visible (majority): sofa {1,2,3}, rug {1,2}.
-- inventory_agreement = 100 × mean(3/3, 2/2) = **100** (the occluded rug is not penalised).
+- inventory_agreement = 100 × mean(3/3, 2/2) = **100** (the rug is not penalised for angle 3).
 - Sofa identity = median(4, 2, 4) = 4, placement = median(2, 4, 4) = 4; rug 4 and 4.
 - identity_agreement = 100 × 4/4 = **100**; placement_agreement = **100**; consistency = **100**.
 - Each photo's realism = median(3, 4, 2) = 3 → realism = 100 × 3/4 = **75**; architecture = majority
@@ -170,7 +184,8 @@ rug ratio would be 2/3 and inventory_agreement 100 × mean(1, 0.667) = 83.3.
 ## Output
 
 `masb score` writes one JSON file per (system, room), type `MasbResult` in
-`scorer/src/types.ts` (importable as `masb-scorer/types`):
+`scorer/src/types.ts` (importable as `masb-scorer/types`); `MasbResultSchema` in
+`scorer/src/schema.ts` validates a file at runtime:
 
 ```jsonc
 {
@@ -189,9 +204,13 @@ rug ratio would be 2/3 and inventory_agreement 100 × mean(1, 0.667) = 83.3.
     "quality": [ /* aggregated per photo */ ],
     "embedding": [ { "key": "...", "similarity": 0.98 } ],
     "runs": { "inventory": [[/* photo 1 runs */]], "match": [/* runs */], "quality": [[/* photo 1 runs */]] },
-    "flags": { "no_shared_items": false, "embedding_note": "..." }
+    "flags": {
+      "no_shared_items": false, "shared_fallback_median_run": false,
+      "visibility_unknown_keys": [], "embedding_note": "..."  // note only when embeddings are missing
+    }
   },
-  "judge": { "model": "claude-sonnet-5", "runs": 3, "aggregated": "median" },
+  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.1", "runs": 3, "aggregated": "median/majority" },
+  "embedder": { "model": "replicate:andreasjansson/clip-features", "version": "75b33f25…" } | null,
   "cost_usd": 0.16,
   "scored_at": "2026-09-27T00:00:00.000Z"
 }
@@ -220,7 +239,7 @@ node dist/cli.js score ./rooms/my-tool/amber-ridge-living --system my-tool \
 node dist/cli.js table ../results --out ../RESULTS.md
 ```
 
-Options for `score`: `--runs <n>` (default 3), `--model <id>` (default `claude-sonnet-5`),
+Options for `score`: `--runs <n>` (integer ≥ 1, default 3; an even count warns because it allows ties), `--model <id>` (default `claude-sonnet-5`),
 `--effort low|medium|high` (default `medium`), `--no-embed`. Without `--out` the JSON goes to stdout.
 `pnpm masb <command>` runs the CLI from source via tsx.
 

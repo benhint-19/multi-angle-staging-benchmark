@@ -13,6 +13,7 @@ import { ReplicateClipEmbedder } from "../src/embed.js";
 import { listNumbered } from "../src/io.js";
 import { AnthropicJudge } from "../src/judge.js";
 import { scoreRoom } from "../src/score.js";
+import { MasbResultSchema } from "../src/schema.js";
 
 const ROOM = fileURLToPath(new URL("../../data/rooms/amber-ridge-living", import.meta.url));
 const staged = process.env.MASB_LIVE_STAGED;
@@ -33,6 +34,7 @@ describe.skipIf(!live)("live: identical staged photos", () => {
     });
     if (process.env.MASB_LIVE_OUT) await writeFile(process.env.MASB_LIVE_OUT, JSON.stringify(result, null, 2));
     console.log(JSON.stringify({ scores: result.scores, cost_usd: result.cost_usd, flags: result.details.flags }));
+    expect(() => MasbResultSchema.parse(result)).not.toThrow();
     expect(result.details.flags.no_shared_items).toBe(false);
     expect(result.scores.consistency).toBeGreaterThanOrEqual(95);
     expect(result.cost_usd).toBeLessThan(0.5);

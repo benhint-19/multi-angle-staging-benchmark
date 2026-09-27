@@ -46,17 +46,24 @@ export function representativeRun(photoRuns: Inventory[], majoritySet: Set<strin
 
 /**
  * inventory_agreement = 100 × mean over categories c present in ≥1 photo of
- *   min(1, |photos where c is present| / |photos where visibility[c][p] is true|).
- * A missing visibility cell counts as visible. If no photo is expected to show c (denominator 0), the
- * ratio is 1 (the category appeared where the judge did not expect it; that is not penalised).
+ *   |present(c) ∩ visible(c)| / |visible(c)|,   visible(c) = photos p with visibility[c][p] true.
+ * A missing visibility cell counts as visible. If no photo is expected to show c (|visible(c)| = 0) the
+ * ratio is 1. Appearances in photos where c is not expected neither help nor hurt: they cannot offset
+ * absences in photos where it is expected.
  */
 export function inventoryAgreement(present: Presence, visibility: Visibility, photos: number): number {
   const ratios: number[] = [];
   for (const [c, where] of Object.entries(present)) {
     if (where.length === 0) continue;
+    const at = new Set(where);
     let visible = 0;
-    for (let p = 1; p <= photos; p++) if (visibility[c]?.[String(p)] ?? true) visible++;
-    ratios.push(visible === 0 ? 1 : Math.min(1, where.length / visible));
+    let hit = 0;
+    for (let p = 1; p <= photos; p++) {
+      if (!(visibility[c]?.[String(p)] ?? true)) continue;
+      visible++;
+      if (at.has(p)) hit++;
+    }
+    ratios.push(visible === 0 ? 1 : hit / visible);
   }
   if (ratios.length === 0) return 0;
   return (100 * ratios.reduce((a, b) => a + b, 0)) / ratios.length;
