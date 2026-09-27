@@ -44,8 +44,16 @@ export function renderTable(results: MasbResult[]): string {
   for (const r of sorted) {
     const s = r.scores;
     const flag = r.details.flags.no_shared_items ? " (no shared items)" : "";
+    const absent = r.details.flags.absent ?? [];
+    const photos = absent.length ? `${r.photos - absent.length} of ${r.photos}` : `${r.photos}`;
     lines.push(
-      `| ${r.room} | ${r.photos} | ${r.system} | ${f1(s.consistency)}${flag} | ${f1(s.inventory_agreement)} | ${f1(s.identity_agreement)} | ${f1(s.placement_agreement)} | ${f1(s.realism)} | ${pct(s.architecture_preserved_rate)} | ${sim(s.identity_embedding_similarity)} |`,
+      `| ${r.room} | ${photos} | ${r.system} | ${f1(s.consistency)}${flag} | ${f1(s.inventory_agreement)} | ${f1(s.identity_agreement)} | ${f1(s.placement_agreement)} | ${f1(s.realism)} | ${pct(s.architecture_preserved_rate)} | ${sim(s.identity_embedding_similarity)} |`,
+    );
+  }
+  if (sorted.some((r) => (r.details.flags.absent ?? []).length > 0)) {
+    lines.push(
+      "",
+      "\"k of N\" photos: the system did not deliver N − k angles; absent angles count as missing items in Inventory (PROTOCOL.md, \"Absent angles\").",
     );
   }
   const judges = [...new Set(results.map((r) => `${r.judge.model} (median of ${r.judge.runs})`))];

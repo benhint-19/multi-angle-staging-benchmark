@@ -1,10 +1,12 @@
-# MASB Scoring Protocol (v0.1.0, prompt set 0.1.1)
+# MASB Scoring Protocol (benchmark v0.1.0, protocol 0.1.2, prompt set 0.1.1)
 
 This document is the contract for the Multi-Angle Staging Benchmark scorer in `scorer/`. It publishes
 the judge prompts verbatim, the aggregation rules and the exact formulas. Any change to a prompt or a
 formula is a new protocol version; results from different versions are not comparable. Each result
 records `judge.prompt_version` (currently `0.1.1`: visibility is decided from the original photos'
-geometry only).
+geometry only) and `judge.protocol_version` (currently `0.1.2`: absent angles count against
+inventory, see "Absent angles"; the prompts are unchanged). A result without `protocol_version` was
+scored under protocol 0.1.1, which gives the same scores whenever no angle is absent.
 
 ## Inputs
 
@@ -18,6 +20,10 @@ A **room directory** with two folders, numbered identically:
 
 `masb prepare <data-room> <staged-dir> <out-room-dir>` assembles one (staged files may be `.jpg`,
 `.png` or `.webp`, numbered `01`/`1`/...; they are re-encoded to JPEG). A room needs N ≥ 2 photos.
+A staged number missing from `<staged-dir>` is an **absent angle** (the system did not deliver that
+photo): `prepare` writes `room.json` with `{"angles": N, "absent": [<photo numbers>]}` and the scorer
+penalises it (see "Absent angles"). A staged photo that is missing and not listed in `room.json` is an
+error.
 
 Before judging, every image is auto-rotated and downscaled to at most 1024 px on the long edge
 (JPEG q88). Item crops for embeddings are taken from the full-resolution staged photo.
@@ -164,6 +170,26 @@ identity_embedding_similarity = mean over s in S of
   `details.flags.embedding_note` says why.
 - Scores are rounded to 1 decimal (architecture rate to 3, embedding similarity to 3).
 
+## Absent angles
+
+A system that fails to deliver an angle is penalised, not excused. For an absent staged photo *p*:
+
+- **Inventory.** *p*'s inventory is empty (no judge call): no category is present in *p*.
+- **Visibility** is still judged from the ORIGINALS for all N angles. The match call is sent unchanged
+  with all N angles; in *p*'s "Staged" slot the judge sees the original photo, and *p*'s inventory
+  is the empty list. So every category expected visible from *p* counts as a miss in
+  `inventory_agreement`.
+- **Identity and placement** are computed over the delivered photos only (no shared item can
+  reference *p*, which has no items); formulas unchanged.
+- **Quality.** No quality call for *p*. `realism` and `architecture_preserved_rate` average over the
+  delivered photos only; `details.quality[p]` is `null` and `details.runs.quality[p]` is `[]`.
+- **Result.** `photos` stays N. `details.flags.delivered` = N − |absent| and `details.flags.absent`
+  lists the absent photo numbers.
+
+Example: three angles, photo 3 absent, a sofa present in photos 1 and 2 and judged visible from all
+three: the sofa's ratio is 2/3, so its inventory contribution is 66.7 (unit test in
+`test/score.test.ts`).
+
 ## Worked example
 
 Three photos. Every inventory run lists a sofa in photos 1–3 and a rug in photos 1–2 (from angle 3
@@ -201,15 +227,16 @@ rug ratio would be 2/3 and inventory_agreement 100 × mean(1, 0.667) = 83.3.
     "present": { "<category>": [1, 2] },
     "shared": [ /* aggregated shared items */ ],
     "visibility": { "<category>": { "1": true } },
-    "quality": [ /* aggregated per photo */ ],
+    "quality": [ /* aggregated per photo; null for an absent photo */ ],
     "embedding": [ { "key": "...", "similarity": 0.98 } ],
     "runs": { "inventory": [[/* photo 1 runs */]], "match": [/* runs */], "quality": [[/* photo 1 runs */]] },
     "flags": {
       "no_shared_items": false, "shared_fallback_median_run": false,
-      "visibility_unknown_keys": [], "embedding_note": "..."  // note only when embeddings are missing
+      "visibility_unknown_keys": [], "embedding_note": "...",  // note only when embeddings are missing
+      "delivered": 3, "absent": []                              // protocol ≥ 0.1.2
     }
   },
-  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.1", "runs": 3, "aggregated": "median/majority" },
+  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.1", "protocol_version": "0.1.2", "runs": 3, "aggregated": "median/majority" },
   "embedder": { "model": "replicate:andreasjansson/clip-features", "version": "75b33f25…" } | null,
   "cost_usd": 0.16,
   "scored_at": "2026-09-27T00:00:00.000Z"
@@ -269,6 +296,9 @@ crops can take 2–3 minutes. `cost_usd` in each result is the measured spend fo
   items to disagree about.
 - **Small dataset.** v0.1 has three rooms from one property. Treat differences of a few points as
   noise.
+- **Realism is not discriminative yet.** In v0.1 every room of every system scored realism 75
+  exactly (each photo's median rating was 3), so the realism column does not separate systems.
+  Treat it as a sanity check, not a ranking signal, until the quality prompt or scale is revised.
 - **No empty-room baseline.** An unstaged room has no items, so consistency is undefined in spirit
   (it scores low and is meaningless); the benchmark measures agreement between staged photos, not whether staging
   happened.

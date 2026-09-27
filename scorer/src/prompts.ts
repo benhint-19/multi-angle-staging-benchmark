@@ -7,6 +7,9 @@ import { CATEGORIES } from "./types.js";
 /** Version of the prompt set below. Bump on any wording change; recorded in every result. */
 export const PROMPT_VERSION = "0.1.1";
 
+/** Version of the scoring protocol (aggregation + formulas, incl. absent angles). Recorded in every result. */
+export const PROTOCOL_VERSION = "0.1.2";
+
 export const CATEGORY_LIST = CATEGORIES.join(", ");
 
 export const SYSTEM_PROMPT =

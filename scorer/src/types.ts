@@ -94,15 +94,15 @@ export interface Details {
   shared: SharedItem[];
   /** Aggregated visibility (majority). */
   visibility: Visibility;
-  /** Aggregated quality per photo (median realism, majority architecture). */
-  quality: QualityResult[];
+  /** Aggregated quality per photo (median realism, majority architecture); null for an absent photo. */
+  quality: (QualityResult | null)[];
   /** Per-item embedding similarity (null when unavailable). */
   embedding: { key: string; similarity: number | null }[];
   /** Raw per-run judge outputs so disagreement between runs is visible. */
   runs: {
     inventory: Inventory[][]; // [photo][run]
     match: MatchResult[]; // [run]
-    quality: QualityResult[][]; // [photo][run]
+    quality: QualityResult[][]; // [photo][run]; [] for an absent photo
   };
   flags: {
     no_shared_items: boolean;
@@ -111,6 +111,10 @@ export interface Details {
     /** Visibility keys from the judge that did not normalise to a known category / photo (dropped). */
     visibility_unknown_keys: string[];
     embedding_note?: string;
+    /** Photos the system delivered (N minus absent). Protocol ≥ 0.1.2. */
+    delivered?: number;
+    /** 1-based photo numbers the system did not deliver (see PROTOCOL.md "Absent angles"). Protocol ≥ 0.1.2. */
+    absent?: number[];
   };
 }
 
@@ -122,7 +126,7 @@ export interface MasbResult {
   photos: number;
   scores: Scores;
   details: Details;
-  judge: { model: string; prompt_version: string; runs: number; aggregated: "median/majority" };
+  judge: { model: string; prompt_version: string; protocol_version?: string; runs: number; aggregated: "median/majority" };
   /** Image embedder used for identity_embedding_similarity; null when none ran. */
   embedder: { model: string; version: string } | null;
   cost_usd: number;

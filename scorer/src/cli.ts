@@ -81,18 +81,24 @@ program
 program
   .command("prepare")
   .argument("<data-room>", "dataset room dir, e.g. data/rooms/amber-ridge-living")
-  .argument("<staged-dir>", "a system's outputs numbered like the originals (01.jpg / 1.png / ...)")
-  .argument("<out-room-dir>", "room dir to create (originals/ + staged/)")
+  .argument("<staged-dir>", "a system's outputs numbered like the originals (01.jpg / 1.png / ...); missing numbers are absent angles")
+  .argument("<out-room-dir>", "room dir to create (originals/ + staged/ + room.json)")
   .action(async (dataRoom: string, stagedDir: string, outDir: string) => {
     const originals = await listNumbered(dataRoom);
     const staged = await listNumbered(stagedDir);
-    if (originals.map((x) => x.n).join() !== staged.map((x) => x.n).join())
-      throw new Error(`numbering differs: originals ${originals.map((x) => x.n)} vs staged ${staged.map((x) => x.n)}`);
+    const on = new Set(originals.map((x) => x.n));
+    const extra = staged.filter((x) => !on.has(x.n)).map((x) => x.n);
+    if (extra.length) throw new Error(`staged photos without an original: ${extra.join(",")}`);
+    const sn = new Set(staged.map((x) => x.n));
+    const absent = originals.filter((x) => !sn.has(x.n)).map((x) => x.n);
     await mkdir(join(outDir, "originals"), { recursive: true });
     await mkdir(join(outDir, "staged"), { recursive: true });
     for (const x of originals) await copyFile(x.file, join(outDir, "originals", `${pad(x.n)}.jpg`));
     for (const x of staged) await sharp(x.file).rotate().jpeg({ quality: 92 }).toFile(join(outDir, "staged", `${pad(x.n)}.jpg`));
-    process.stderr.write(`[masb] prepared ${originals.length} photos in ${outDir}\n`);
+    await writeFile(join(outDir, "room.json"), JSON.stringify({ angles: originals.length, absent }, null, 2) + "\n");
+    process.stderr.write(
+      `[masb] prepared ${originals.length} photos in ${outDir}${absent.length ? ` (absent: ${absent.join(", ")})` : ""}\n`,
+    );
   });
 
 program.parseAsync().catch((err: unknown) => {

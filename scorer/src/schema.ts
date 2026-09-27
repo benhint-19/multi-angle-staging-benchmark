@@ -38,7 +38,7 @@ export const MasbResultSchema = z.object({
     present: z.record(z.string(), z.array(z.number().int())),
     shared: z.array(shared),
     visibility,
-    quality: z.array(quality),
+    quality: z.array(quality.nullable()),
     embedding: z.array(z.object({ key: z.string(), similarity: z.number().nullable() })),
     runs: z.object({
       inventory: z.array(z.array(inventory)),
@@ -50,11 +50,14 @@ export const MasbResultSchema = z.object({
       shared_fallback_median_run: z.boolean(),
       visibility_unknown_keys: z.array(z.string()),
       embedding_note: z.string().optional(),
+      delivered: z.number().int().min(0).optional(),
+      absent: z.array(z.number().int().min(1)).optional(),
     }),
   }),
   judge: z.object({
     model: z.string(),
     prompt_version: z.string(),
+    protocol_version: z.string().optional(),
     runs: z.number().int().min(1),
     aggregated: z.literal("median/majority"),
   }),

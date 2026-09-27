@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { scoreRoom } from "../src/score.js";
 import { MasbResultSchema } from "../src/schema.js";
-import { PROMPT_VERSION } from "../src/prompts.js";
+import { PROMPT_VERSION, PROTOCOL_VERSION } from "../src/prompts.js";
 import type { Inventory, MatchResult } from "../src/types.js";
 import { FakeEmbedder, FakeJudge, tinyJpeg } from "./fakes.js";
 
@@ -69,7 +69,7 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.identity_embedding_similarity).toBe(1);
     expect(r.details.runs.match).toHaveLength(3);
     expect(r.details.flags.no_shared_items).toBe(false);
-    expect(r.judge).toEqual({ model: "fake-judge", prompt_version: PROMPT_VERSION, runs: 3, aggregated: "median/majority" });
+    expect(r.judge).toEqual({ model: "fake-judge", prompt_version: PROMPT_VERSION, protocol_version: PROTOCOL_VERSION, runs: 3, aggregated: "median/majority" });
     expect(r.embedder).toEqual({ model: "fake-embedder", version: "0" });
     expect(r.details.flags.shared_fallback_median_run).toBe(false);
     expect(r.details.flags.visibility_unknown_keys).toEqual([]);
@@ -93,6 +93,50 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.consistency).toBeCloseTo(33.3, 1);
     expect(r.scores.identity_embedding_similarity).toBeNull();
     expect(r.embedder).toBeNull();
+    expect(() => MasbResultSchema.parse(r)).not.toThrow();
+  });
+
+  it("absent angle: counts as missing items where visible, quality over delivered photos only", async () => {
+    const photos = await Promise.all(["#888", "#999", "#aaa"].map(tinyJpeg));
+    const judge = new FakeJudge(
+      () => sofaOnly,
+      [
+        {
+          shared: [{ key: "sofa", category: "sofa", appearances: [1, 2].map((photo) => ({ photo, itemId: "i1" })), identity: 4, placement: 4 }],
+          visibility: { sofa: { "1": true, "2": true, "3": true } },
+        },
+      ],
+      [
+        { realism: 4, architecture_preserved: true, notes: "" },
+        { realism: 2, architecture_preserved: false, notes: "" },
+        { realism: 4, architecture_preserved: true, notes: "" },
+      ],
+    );
+    const r = await scoreRoom({
+      system: "s",
+      room: "r",
+      originals: photos,
+      staged: [photos[0]!, photos[1]!, null],
+      judge,
+      embedder: null,
+      runs: 3,
+    });
+    // no inventory or quality calls for the absent photo; the match call still covers all 3 angles
+    expect(judge.calls).toEqual({ inventory: 6, match: 3, quality: 6 });
+    expect(r.details.present).toEqual({ sofa: [1, 2] });
+    // sofa visible from 1, 2, 3 but present in 1, 2 → 2/3
+    expect(r.scores.inventory_agreement).toBe(66.7);
+    expect(r.scores.identity_agreement).toBe(100);
+    expect(r.scores.placement_agreement).toBe(100);
+    expect(r.scores.consistency).toBe(88.9);
+    // each delivered photo: realism median(4,2,4)=4, architecture majority true
+    expect(r.scores.realism).toBe(100);
+    expect(r.scores.architecture_preserved_rate).toBe(1);
+    expect(r.details.quality[2]).toBeNull();
+    expect(r.details.runs.quality[2]).toEqual([]);
+    expect(r.details.flags.delivered).toBe(2);
+    expect(r.details.flags.absent).toEqual([3]);
+    expect(r.photos).toBe(3);
     expect(() => MasbResultSchema.parse(r)).not.toThrow();
   });
 

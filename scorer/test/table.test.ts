@@ -51,3 +51,15 @@ describe("renderTable", () => {
     expect(md).toContain("Judge: claude-sonnet-5 (median of 3).");
   });
 });
+
+describe("renderTable absent angles", () => {
+  it("shows delivered of N and a footnote", () => {
+    const r = result("sys", "room", 70);
+    r.photos = 4;
+    r.details.flags.absent = [4];
+    r.details.flags.delivered = 3;
+    const md = renderTable([r]);
+    expect(md).toContain("| room | 3 of 4 | sys |");
+    expect(md).toContain("Absent angles");
+  });
+});

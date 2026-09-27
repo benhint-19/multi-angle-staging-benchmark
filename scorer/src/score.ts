@@ -5,7 +5,7 @@ import { identityAgreement, itemEmbeddingSimilarity } from "./identity.js";
 import { inventoryAgreement, presentByMajority, representativeRun } from "./inventory.js";
 import { sanitizeMatch, type Judge } from "./judge.js";
 import { placementAgreement } from "./placement.js";
-import { PROMPT_VERSION } from "./prompts.js";
+import { PROMPT_VERSION, PROTOCOL_VERSION } from "./prompts.js";
 import type { BBox, Inventory, MasbResult, MatchResult, QualityResult, SharedItem } from "./types.js";
 
 export interface ScoreOptions {
@@ -13,8 +13,8 @@ export interface ScoreOptions {
   room: string;
   /** Original photos, in shooting order (photo 1 first). */
   originals: Buffer[];
-  /** A system's staged outputs, same order as `originals`. */
-  staged: Buffer[];
+  /** A system's staged outputs, same order as `originals`; null where the system delivered nothing. */
+  staged: (Buffer | null)[];
   judge: Judge;
   /** null/undefined → identity_embedding_similarity is reported as null. */
   embedder?: Embedder | null;
@@ -69,6 +69,9 @@ async function embeddingSimilarity(
   }));
 }
 
+/** Staged buffers with absent slots filled by the original (never cropped: absent photos have no items). */
+const stagedFull = (staged: (Buffer | null)[], originals: Buffer[]) => staged.map((b, i) => b ?? originals[i]!);
+
 export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   const { judge, originals, staged } = opts;
   const runs = opts.runs ?? 3;
@@ -77,14 +80,22 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   const n = staged.length;
   if (n < 2) throw new Error(`need at least 2 photos, got ${n}`);
   if (originals.length !== n) throw new Error(`originals (${originals.length}) and staged (${n}) counts differ`);
+  // Absent angles (PROTOCOL.md): inventory is empty (nothing present), the match call shows the
+  // original in the staged slot so visibility is still judged for all N angles, and quality skips it.
+  const absent = staged.flatMap((b, i) => (b ? [] : [i + 1]));
+  const delivered = n - absent.length;
+  if (delivered === 0) throw new Error("no staged photos delivered");
+  if (absent.length) log(`absent: photo ${absent.join(", ")} (counted as missing items)`);
 
   const maxEdge = opts.judgeMaxEdge ?? 1024;
   const origJ = await Promise.all(originals.map((b) => forJudge(b, maxEdge)));
-  const stagedJ = await Promise.all(staged.map((b) => forJudge(b, maxEdge)));
+  const stagedJ = await Promise.all(staged.map((b, i) => (b ? forJudge(b, maxEdge) : origJ[i]!)));
   const times = <T>(f: () => Promise<T>) => Promise.all(Array.from({ length: runs }, f));
 
-  log(`inventory: ${n} photos x ${runs} runs`);
-  const invRuns: Inventory[][] = await Promise.all(stagedJ.map((s) => times(() => judge.inventory(s))));
+  log(`inventory: ${delivered} photos x ${runs} runs`);
+  const invRuns: Inventory[][] = await Promise.all(
+    stagedJ.map((s, i) => (staged[i] ? times(() => judge.inventory(s)) : Promise.resolve(Array.from({ length: runs }, () => ({ items: [] }))))),
+  );
   const present = presentByMajority(invRuns);
   const inventories = invRuns.map((photoRuns, i) =>
     representativeRun(photoRuns, new Set(Object.entries(present).filter(([, ps]) => ps.includes(i + 1)).map(([c]) => c))),
@@ -98,11 +109,12 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   const match = aggregateMatch(matchRuns, n);
   if (match.fallback) log("match: no link reached a majority; using the median-consistency run");
 
-  log(`quality: ${n} photos x ${runs} runs`);
+  log(`quality: ${delivered} photos x ${runs} runs`);
   const qualityRuns: QualityResult[][] = await Promise.all(
-    stagedJ.map((s, i) => times(() => judge.quality(origJ[i]!, s))),
+    stagedJ.map((s, i) => (staged[i] ? times(() => judge.quality(origJ[i]!, s)) : Promise.resolve([]))),
   );
-  const quality = qualityRuns.map(aggregateQuality);
+  const quality = qualityRuns.map((r, i) => (staged[i] ? aggregateQuality(r) : null));
+  const deliveredQuality = quality.filter((q): q is QualityResult => q !== null);
 
   let embedding: { key: string; similarity: number | null }[] = match.shared.map((s) => ({ key: s.key, similarity: null }));
   let embeddingNote: string | undefined;
@@ -111,7 +123,7 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   } else if (match.shared.length > 0) {
     log(`embeddings: ${match.shared.length} shared items`);
     try {
-      embedding = await embeddingSimilarity(match.shared, inventories, staged, opts.embedder);
+      embedding = await embeddingSimilarity(match.shared, inventories, stagedFull(staged, originals), opts.embedder);
     } catch (err) {
       embeddingNote = `embedding failed: ${String(err)}`;
     }
@@ -134,8 +146,8 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
       inventory_agreement: round(inv),
       identity_agreement: round(id),
       placement_agreement: round(pl),
-      realism: round((100 * quality.reduce((a, q) => a + q.realism, 0)) / n / 4),
-      architecture_preserved_rate: round(quality.filter((q) => q.architecture_preserved).length / n, 3),
+      realism: round((100 * deliveredQuality.reduce((a, q) => a + q.realism, 0)) / delivered / 4),
+      architecture_preserved_rate: round(deliveredQuality.filter((q) => q.architecture_preserved).length / delivered, 3),
       identity_embedding_similarity: sims.length ? round(sims.reduce((a, b) => a + b, 0) / sims.length, 3) : null,
     },
     details: {
@@ -151,9 +163,11 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
         shared_fallback_median_run: match.fallback,
         visibility_unknown_keys: unknownKeys,
         ...(embeddingNote ? { embedding_note: embeddingNote } : {}),
+        delivered,
+        absent,
       },
     },
-    judge: { model: judge.model, prompt_version: PROMPT_VERSION, runs, aggregated: "median/majority" },
+    judge: { model: judge.model, prompt_version: PROMPT_VERSION, protocol_version: PROTOCOL_VERSION, runs, aggregated: "median/majority" },
     embedder: opts.embedder && sims.length ? { model: opts.embedder.model, version: opts.embedder.version } : null,
     cost_usd: round(cost, 4),
     scored_at: (opts.now ?? (() => new Date()))().toISOString(),
