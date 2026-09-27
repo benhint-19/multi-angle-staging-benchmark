@@ -5,7 +5,8 @@ const pct = (n: number) => `${Math.round(n * 100)}%`;
 const sim = (n: number | null) => (n === null ? "n/a" : n.toFixed(3));
 
 /** Render RESULTS.md from a set of result files. */
-export function renderTable(results: MasbResult[]): string {
+/** Optional free-text markdown (e.g. results/RUN_POLICY.md) rendered before the judge line so it survives regeneration. */
+export function renderTable(results: MasbResult[], notes?: string): string {
   const sorted = [...results].sort((a, b) => a.room.localeCompare(b.room) || b.scores.consistency - a.scores.consistency);
   const lines: string[] = [
     "# MASB results",
@@ -60,6 +61,7 @@ export function renderTable(results: MasbResult[]): string {
     "",
     "Inventory expects each category from every angle whose frame covers where such an item would normally stand (visibility is judged from the original photos only). A system that keeps a small item out of one frame is penalised, so inventory is best compared across systems rather than read as an absolute rate (PROTOCOL.md, Limitations).",
   );
+  if (notes?.trim()) lines.push("", notes.trim());
   const judges = [...new Set(results.map((r) => `${r.judge.model} (median of ${r.judge.runs})`))];
   lines.push("", `Judge: ${judges.join(", ") || "n/a"}.`, "");
   return lines.join("\n");

@@ -63,3 +63,14 @@ describe("renderTable absent angles", () => {
     expect(md).toContain("Absent angles");
   });
 });
+
+describe("renderTable notes", () => {
+  it("renders RUN_POLICY notes before the judge line and omits them when absent", () => {
+    const r = result("s", "r", 80);
+    const withNotes = renderTable([r], "## Run policy\n\nOne run per room.\n");
+    const idx = withNotes.indexOf("## Run policy");
+    expect(idx).toBeGreaterThan(0);
+    expect(idx).toBeLessThan(withNotes.indexOf("Judge:"));
+    expect(renderTable([r])).not.toContain("## Run policy");
+  });
+});

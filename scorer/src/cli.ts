@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { mkdir, readdir, readFile, writeFile, copyFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import sharp from "sharp";
 import { ReplicateClipEmbedder, type Embedder } from "./embed.js";
@@ -73,7 +74,9 @@ program
       const j = JSON.parse(await readFile(f, "utf8")) as MasbResult;
       if (j.benchmark === "MASB") results.push(j);
     }
-    const md = renderTable(results);
+    const notesPath = join(dir, "RUN_POLICY.md");
+    const notes = existsSync(notesPath) ? await readFile(notesPath, "utf8") : undefined;
+    const md = renderTable(results, notes);
     if (o.out) await writeFile(o.out, md);
     else process.stdout.write(md);
   });
