@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this dataset or scorer, please cite it as below."
+title: "Multi-Angle Staging Benchmark"
+authors:
+  - family-names: Hinton
+    given-names: Ben
+version: 0.1.0
+date-released: "2026-09-27"
+repository-code: "https://github.com/benhint-19/multi-angle-staging-benchmark"
+license: MIT
