@@ -56,6 +56,10 @@ export function renderTable(results: MasbResult[]): string {
       "\"k of N\" photos: the system did not deliver N − k angles; absent angles count as missing items in Inventory (PROTOCOL.md, \"Absent angles\").",
     );
   }
+  lines.push(
+    "",
+    "Inventory expects each category from every angle whose frame covers where such an item would normally stand (visibility is judged from the original photos only). A system that keeps a small item out of one frame is penalised, so inventory is best compared across systems rather than read as an absolute rate (PROTOCOL.md, Limitations).",
+  );
   const judges = [...new Set(results.map((r) => `${r.judge.model} (median of ${r.judge.runs})`))];
   lines.push("", `Judge: ${judges.join(", ") || "n/a"}.`, "");
   return lines.join("\n");

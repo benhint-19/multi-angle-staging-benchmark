@@ -306,6 +306,13 @@ crops can take 2–3 minutes. `cost_usd` in each result is the measured spend fo
   embeddings of an identical item score about 0.9–0.98, not 1.0. CLIP similarity between unrelated
   crops of the same room is also high (about 0.8), so the embedding number is only meaningful
   relative to other systems on the same room.
+- **Visibility is judged from room geometry alone.** The visibility call sees only the original
+  photos, never a system's output, so a category is expected from every angle whose frame covers where
+  such an item would normally stand. A stager that legitimately keeps a small item (a lamp, a plant, a
+  piece of decor) out of one frame is penalised in `inventory_agreement` for that angle. This is the
+  price of a visibility judgement that no system can influence. It is why staging-multi-angle's
+  inventory moved from 98.6 under protocol 0.1.2 (visibility read from the staged photos) to 92.4
+  under 0.1.3. Inventory is therefore best read relative to other systems, not as an absolute rate.
 - **Visibility is judged, not measured.** Whether an item "should" be visible from an angle is the
   judge's estimate from the original photos, not a geometric computation.
 - **Single style.** v0.1 compares systems in one staging style family; scores across very different
