@@ -5,10 +5,10 @@
 import { CATEGORIES } from "./types.js";
 
 /** Version of the prompt set below. Bump on any wording change; recorded in every result. */
-export const PROMPT_VERSION = "0.1.1";
+export const PROMPT_VERSION = "0.1.3";
 
 /** Version of the scoring protocol (aggregation + formulas, incl. absent angles). Recorded in every result. */
-export const PROTOCOL_VERSION = "0.1.2";
+export const PROTOCOL_VERSION = "0.1.3";
 
 export const CATEGORY_LIST = CATEGORIES.join(", ");
 
@@ -27,7 +27,7 @@ For each item give:
 List each physical piece separately (four dining chairs are four items). Return:
 {"items": [{"id": "i1", "category": "sofa", "description": "...", "bbox": [0.1, 0.5, 0.4, 0.9]}]}`;
 
-/** Placeholders: {N}, {INVENTORIES}, {CATEGORIES_PRESENT}. */
+/** Placeholders: {N}, {INVENTORIES}. */
 export const MATCH_PROMPT_TEMPLATE = `These photos show ONE room from {N} different camera angles. For each angle you are given the ORIGINAL photo (before staging) followed by the STAGED photo (the same view after virtual staging). The images are labelled in order: "Original 1", "Staged 1", "Original 2", "Staged 2", and so on.
 
 Inventory of the items in each staged photo (item ids are local to each photo):
@@ -37,11 +37,17 @@ Task A: shared items. Find every physical item that appears in two or more stage
 - "identity" 0-4: is it the same physical piece in every appearance (form, colour, material, size)? 4 = clearly identical, 3 = same piece with minor differences, 2 = similar but noticeably different, 1 = same kind but a different piece, 0 = unrelated.
 - "placement" 0-4: is it in the same position relative to fixed room features (windows, doors, wall corners, fireplace, built-ins) in every appearance? 4 = same spot, 3 = slightly shifted, 2 = clearly moved within the same area, 1 = a different area of the room, 0 = incompatible positions.
 
-Task B: visibility. For each category below and each angle, say whether an item of that category, standing where it stands in the room (as shown by the staged photos that contain it), would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Do not use whether the item appears in a staged photo. An item missing from a staged photo it should appear in is still visible=true. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
-Categories: {CATEGORIES_PRESENT}
+Return:
+{"shared": [{"key": "short-name", "category": "sofa", "appearances": [{"photo": 1, "itemId": "i2"}, {"photo": 2, "itemId": "i1"}], "identity": 4, "placement": 4}]}`;
+
+/** Placeholders: {N}, {CATEGORIES}. Shown only the N original (unstaged) photos. */
+export const VISIBILITY_PROMPT_TEMPLATE = `These photos show ONE empty room from {N} different camera angles, before any staging. The images are labelled in order: "Original 1", "Original 2", and so on. The room is to be furnished with items of the categories below, each placed where such an item would normally stand in this room.
+
+For each category below and each angle, say whether an item of that category, standing where it would normally stand in this room, would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
+Categories: {CATEGORIES}
 
 Return:
-{"shared": [{"key": "short-name", "category": "sofa", "appearances": [{"photo": 1, "itemId": "i2"}, {"photo": 2, "itemId": "i1"}], "identity": 4, "placement": 4}], "visibility": {"sofa": {"1": true, "2": false}}}`;
+{"visibility": {"sofa": {"1": true, "2": false}}}`;
 
 export const QUALITY_PROMPT = `Image 1 is the ORIGINAL photo of a room. Image 2 is the same photo after virtual staging. Rate the staged photo:
 - "realism" 0-4: does it look like a real photograph of a furnished room? Consider scale, perspective, lighting and shadows, contact with the floor, and artefacts. 4 = indistinguishable from a real photo, 3 = minor flaws, 2 = noticeable flaws, 1 = obviously edited, 0 = broken.
@@ -49,8 +55,10 @@ export const QUALITY_PROMPT = `Image 1 is the ORIGINAL photo of a room. Image 2 
 - "notes": one sentence explaining the ratings.
 Return: {"realism": 3, "architecture_preserved": true, "notes": "..."}`;
 
-export function renderMatchPrompt(n: number, inventoriesJson: string, categoriesPresent: string[]): string {
-  return MATCH_PROMPT_TEMPLATE.replace("{N}", String(n))
-    .replace("{INVENTORIES}", inventoriesJson)
-    .replace("{CATEGORIES_PRESENT}", categoriesPresent.join(", "));
+export function renderMatchPrompt(n: number, inventoriesJson: string): string {
+  return MATCH_PROMPT_TEMPLATE.replace("{N}", String(n)).replace("{INVENTORIES}", inventoriesJson);
+}
+
+export function renderVisibilityPrompt(n: number, categories: string[]): string {
+  return VISIBILITY_PROMPT_TEMPLATE.replace("{N}", String(n)).replace("{CATEGORIES}", categories.join(", "));
 }

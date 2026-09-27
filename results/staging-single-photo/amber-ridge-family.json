@@ -5,13 +5,13 @@
   "room": "amber-ridge-family",
   "photos": 4,
   "scores": {
-    "consistency": 74.1,
-    "inventory_agreement": 75,
-    "identity_agreement": 69.4,
-    "placement_agreement": 77.8,
+    "consistency": 70.8,
+    "inventory_agreement": 69.4,
+    "identity_agreement": 58.9,
+    "placement_agreement": 83.9,
     "realism": 75,
     "architecture_preserved_rate": 1,
-    "identity_embedding_similarity": 0.854
+    "identity_embedding_similarity": 0.847
   },
   "details": {
     "inventories": [
@@ -20,11 +20,11 @@
           {
             "id": "i1",
             "category": "wall_art",
-            "description": "Framed abstract painting, beige and green geometric shapes",
+            "description": "Framed abstract painting, beige and green geometric blocks",
             "bbox": [
-              0.178,
+              0.18,
               0.09,
-              0.284,
+              0.28,
               0.33
             ]
           },
@@ -33,153 +33,120 @@
             "category": "curtains",
             "description": "White sheer curtains flanking sliding glass door",
             "bbox": [
-              0.335,
-              0.235,
+              0.33,
+              0.24,
               0.64,
-              0.5
+              0.49
             ]
           },
           {
             "id": "i3",
             "category": "sofa",
-            "description": "Beige upholstered sofa with cushions",
+            "description": "Beige upholstered sofa with cushions and throw",
             "bbox": [
-              0.335,
-              0.365,
-              0.685,
+              0.33,
+              0.36,
+              0.68,
               0.5
             ]
           },
           {
             "id": "i4",
             "category": "decor",
-            "description": "Green throw blanket draped on sofa arm",
+            "description": "Green and cream throw pillows on sofa",
             "bbox": [
-              0.6,
-              0.42,
-              0.685,
-              0.5
+              0.38,
+              0.37,
+              0.65,
+              0.44
             ]
           },
           {
             "id": "i5",
             "category": "decor",
-            "description": "Olive green throw pillow, left",
+            "description": "Gray knit throw blanket draped on sofa arm",
             "bbox": [
-              0.377,
-              0.375,
-              0.44,
-              0.42
+              0.59,
+              0.4,
+              0.68,
+              0.49
             ]
           },
           {
             "id": "i6",
-            "category": "decor",
-            "description": "White throw pillow, left-center",
+            "category": "coffee_table",
+            "description": "Wooden rectangular coffee table with dark brown finish",
             "bbox": [
-              0.41,
-              0.395,
-              0.468,
-              0.435
+              0.36,
+              0.46,
+              0.64,
+              0.57
             ]
           },
           {
             "id": "i7",
             "category": "decor",
-            "description": "White throw pillow, right-center",
-            "bbox": [
-              0.53,
-              0.395,
-              0.59,
-              0.435
-            ]
-          },
-          {
-            "id": "i8",
-            "category": "decor",
-            "description": "Olive green throw pillow, right",
-            "bbox": [
-              0.6,
-              0.375,
-              0.66,
-              0.42
-            ]
-          },
-          {
-            "id": "i9",
-            "category": "coffee_table",
-            "description": "Dark wood rectangular coffee table with drawer",
-            "bbox": [
-              0.365,
-              0.47,
-              0.635,
-              0.56
-            ]
-          },
-          {
-            "id": "i10",
-            "category": "decor",
-            "description": "White ceramic bowl on coffee table",
+            "description": "White decorative bowl on coffee table",
             "bbox": [
               0.44,
-              0.455,
+              0.46,
               0.5,
-              0.48
-            ]
-          },
-          {
-            "id": "i11",
-            "category": "plant",
-            "description": "Small potted green plant on coffee table",
-            "bbox": [
-              0.51,
-              0.44,
-              0.58,
-              0.485
-            ]
-          },
-          {
-            "id": "i12",
-            "category": "decor",
-            "description": "Stack of books on coffee table",
-            "bbox": [
-              0.43,
-              0.47,
-              0.49,
               0.49
             ]
           },
           {
-            "id": "i13",
+            "id": "i8",
+            "category": "plant",
+            "description": "Small potted plant in white pot on coffee table",
+            "bbox": [
+              0.51,
+              0.44,
+              0.58,
+              0.5
+            ]
+          },
+          {
+            "id": "i9",
+            "category": "decor",
+            "description": "Stack of books on coffee table",
+            "bbox": [
+              0.42,
+              0.48,
+              0.49,
+              0.5
+            ]
+          },
+          {
+            "id": "i10",
             "category": "rug",
-            "description": "Beige woven jute area rug under coffee table",
+            "description": "Beige woven area rug under coffee table",
             "bbox": [
               0.18,
-              0.49,
-              0.84,
-              0.61
+              0.48,
+              0.83,
+              0.6
             ]
           },
           {
-            "id": "i14",
+            "id": "i11",
             "category": "other",
-            "description": "Wall-mounted flat screen TV, black",
+            "description": "Wall-mounted flat screen TV, black rectangular",
             "bbox": [
-              0.635,
+              0.65,
               0.3,
-              0.685,
-              0.36
+              0.69,
+              0.37
             ]
           },
           {
-            "id": "i15",
+            "id": "i12",
             "category": "plant",
-            "description": "Large fiddle leaf fig plant in white planter",
+            "description": "Large fiddle leaf fig plant in white cylindrical pot",
             "bbox": [
-              0.745,
+              0.72,
               0.21,
               0.94,
-              0.585
+              0.58
             ]
           }
         ]
@@ -189,7 +156,7 @@
           {
             "id": "i1",
             "category": "plant",
-            "description": "Large fiddle leaf fig plant in round beige ceramic pot",
+            "description": "Large fiddle-leaf fig plant in round beige ceramic pot",
             "bbox": [
               0.1,
               0.24,
@@ -200,100 +167,122 @@
           {
             "id": "i2",
             "category": "curtains",
-            "description": "Red-orange fabric valance over left kitchen window",
+            "description": "Red-orange fabric curtain panel above kitchen window",
             "bbox": [
               0,
-              0.2,
+              0.18,
               0.12,
-              0.24
+              0.26
             ]
           },
           {
             "id": "i3",
             "category": "curtains",
-            "description": "Red-orange fabric valance over second window",
+            "description": "Red-orange fabric curtain panel above side window",
             "bbox": [
               0.24,
-              0.2,
+              0.19,
               0.38,
-              0.23
+              0.26
             ]
           },
           {
             "id": "i4",
-            "category": "sectional",
-            "description": "Beige upholstered L-shaped sectional sofa with cushions",
+            "category": "curtains",
+            "description": "Sheer white curtain panel beside sliding glass door",
             "bbox": [
-              0.26,
-              0.36,
-              0.7,
-              0.53
+              0.78,
+              0.19,
+              0.86,
+              0.47
             ]
           },
           {
             "id": "i5",
-            "category": "decor",
-            "description": "Two olive-green throw pillows on sofa ends",
+            "category": "wall_art",
+            "description": "Framed abstract landscape painting in wood frame",
             "bbox": [
-              0.31,
-              0.37,
-              0.38,
-              0.44
+              0.42,
+              0.21,
+              0.58,
+              0.35
             ]
           },
           {
             "id": "i6",
-            "category": "decor",
-            "description": "Cream and beige patterned throw pillows in center",
+            "category": "sectional",
+            "description": "Large beige upholstered sectional sofa with chaise",
             "bbox": [
-              0.39,
-              0.38,
-              0.55,
-              0.44
+              0.27,
+              0.36,
+              0.71,
+              0.53
             ]
           },
           {
             "id": "i7",
             "category": "decor",
-            "description": "Olive green knit throw blanket draped over sofa arm",
+            "description": "Two grey-green throw pillows on sofa",
             "bbox": [
-              0.58,
-              0.42,
-              0.7,
-              0.53
+              0.31,
+              0.37,
+              0.4,
+              0.44
             ]
           },
           {
             "id": "i8",
-            "category": "wall_art",
-            "description": "Framed abstract landscape painting in wooden frame",
+            "category": "decor",
+            "description": "White textured throw pillow on sofa",
             "bbox": [
-              0.42,
-              0.22,
-              0.58,
-              0.34
+              0.37,
+              0.38,
+              0.46,
+              0.44
             ]
           },
           {
             "id": "i9",
-            "category": "rug",
-            "description": "Large woven beige textured area rug on floor",
+            "category": "decor",
+            "description": "Cream striped lumbar pillow on sofa",
             "bbox": [
-              0.05,
-              0.51,
-              0.87,
-              0.68
+              0.44,
+              0.4,
+              0.55,
+              0.45
             ]
           },
           {
             "id": "i10",
-            "category": "curtains",
-            "description": "Sheer white curtain panel by sliding glass door",
+            "category": "decor",
+            "description": "Grey-green throw pillow on right side of sofa",
             "bbox": [
-              0.77,
-              0.2,
-              0.85,
-              0.46
+              0.6,
+              0.37,
+              0.68,
+              0.44
+            ]
+          },
+          {
+            "id": "i11",
+            "category": "decor",
+            "description": "Olive green knit throw blanket draped over sofa",
+            "bbox": [
+              0.58,
+              0.42,
+              0.71,
+              0.52
+            ]
+          },
+          {
+            "id": "i12",
+            "category": "rug",
+            "description": "Large woven beige textured area rug",
+            "bbox": [
+              0.04,
+              0.5,
+              0.87,
+              0.68
             ]
           }
         ]
@@ -303,12 +292,12 @@
           {
             "id": "i1",
             "category": "curtains",
-            "description": "red fabric valance swags on decorative rod",
+            "description": "red patterned curtain swag over left window",
             "bbox": [
               0.06,
               0.09,
-              0.31,
-              0.2
+              0.3,
+              0.19
             ]
           },
           {
@@ -325,7 +314,7 @@
           {
             "id": "i3",
             "category": "wall_art",
-            "description": "abstract framed print in beige and brown tones",
+            "description": "abstract framed artwork in beige and brown tones",
             "bbox": [
               0.37,
               0.21,
@@ -336,100 +325,111 @@
           {
             "id": "i4",
             "category": "curtains",
-            "description": "sheer white curtain panel by sliding glass door",
+            "description": "sheer white curtains flanking rear sliding glass doors",
             "bbox": [
-              0.85,
+              0.53,
               0.19,
-              0.94,
-              0.47
+              0.6,
+              0.48
             ]
           },
           {
             "id": "i5",
-            "category": "sectional",
-            "description": "large beige upholstered sectional sofa with chaise",
+            "category": "curtains",
+            "description": "long white curtain panel by right sliding door",
             "bbox": [
-              0.49,
-              0.34,
-              0.85,
-              0.55
+              0.83,
+              0.19,
+              0.93,
+              0.52
             ]
           },
           {
             "id": "i6",
-            "category": "decor",
-            "description": "cluster of beige and green throw pillows on sofa",
+            "category": "sectional",
+            "description": "large beige upholstered sectional sofa with chaise",
             "bbox": [
               0.5,
+              0.34,
+              0.83,
+              0.55
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "decor",
+            "description": "cream and green throw pillows on sectional",
+            "bbox": [
+              0.52,
               0.35,
               0.79,
               0.42
             ]
           },
           {
-            "id": "i7",
+            "id": "i8",
             "category": "decor",
-            "description": "olive green throw blanket draped on chaise",
+            "description": "green throw blanket draped on chaise end",
             "bbox": [
-              0.68,
+              0.7,
               0.42,
               0.83,
               0.53
             ]
           },
           {
-            "id": "i8",
-            "category": "coffee_table",
-            "description": "rectangular wooden coffee table with lower shelf",
-            "bbox": [
-              0.43,
-              0.43,
-              0.63,
-              0.54
-            ]
-          },
-          {
             "id": "i9",
-            "category": "decor",
-            "description": "stack of books on coffee table",
+            "category": "coffee_table",
+            "description": "rectangular dark wood coffee table with lower shelf",
             "bbox": [
-              0.48,
               0.42,
-              0.53,
-              0.45
+              0.42,
+              0.63,
+              0.53
             ]
           },
           {
             "id": "i10",
             "category": "decor",
-            "description": "white vase with small potted greenery on table",
+            "description": "stack of books on coffee table",
             "bbox": [
+              0.47,
+              0.42,
               0.51,
-              0.4,
-              0.57,
-              0.45
+              0.44
             ]
           },
           {
             "id": "i11",
-            "category": "decor",
-            "description": "round decorative bowl with balls on coffee table",
+            "category": "plant",
+            "description": "small potted plant in woven basket on table",
             "bbox": [
-              0.55,
-              0.44,
-              0.61,
-              0.47
+              0.5,
+              0.4,
+              0.56,
+              0.45
             ]
           },
           {
             "id": "i12",
-            "category": "rug",
-            "description": "large tan woven jute area rug under seating",
+            "category": "decor",
+            "description": "round bowl with decorative balls on coffee table",
             "bbox": [
-              0.29,
-              0.47,
+              0.55,
+              0.43,
+              0.61,
+              0.45
+            ]
+          },
+          {
+            "id": "i13",
+            "category": "rug",
+            "description": "large tan jute woven area rug under seating",
+            "bbox": [
+              0.31,
+              0.46,
               0.87,
-              0.68
+              0.65
             ]
           }
         ]
@@ -481,7 +481,7 @@
     },
     "shared": [
       {
-        "key": "abstract-wall-art",
+        "key": "abstract_wall_art",
         "category": "wall_art",
         "appearances": [
           {
@@ -490,91 +490,43 @@
           },
           {
             "photo": 2,
-            "itemId": "i8"
+            "itemId": "i5"
           },
           {
             "photo": 3,
             "itemId": "i3"
           }
         ],
-        "identity": 3,
-        "placement": 3
-      },
-      {
-        "key": "coffee-table-bowl",
-        "category": "decor",
-        "appearances": [
-          {
-            "photo": 1,
-            "itemId": "i10"
-          },
-          {
-            "photo": 3,
-            "itemId": "i11"
-          }
-        ],
         "identity": 2,
         "placement": 3
       },
       {
-        "key": "coffee-table-greenery",
-        "category": "decor",
-        "appearances": [
-          {
-            "photo": 1,
-            "itemId": "i11"
-          },
-          {
-            "photo": 3,
-            "itemId": "i10"
-          }
-        ],
-        "identity": 3,
-        "placement": 3
-      },
-      {
-        "key": "coffee-table-books",
-        "category": "decor",
-        "appearances": [
-          {
-            "photo": 1,
-            "itemId": "i12"
-          },
-          {
-            "photo": 3,
-            "itemId": "i9"
-          }
-        ],
-        "identity": 3,
-        "placement": 3
-      },
-      {
-        "key": "area-rug",
+        "key": "beige_area_rug",
         "category": "rug",
         "appearances": [
           {
             "photo": 1,
-            "itemId": "i13"
+            "itemId": "i10"
           },
           {
             "photo": 2,
-            "itemId": "i9"
+            "itemId": "i12"
           },
           {
             "photo": 3,
-            "itemId": "i12"
+            "itemId": "i13"
           }
         ],
         "identity": 3,
         "placement": 3
       },
       {
-        "key": "fiddle-leaf-plant",
+        "key": "fiddle_leaf_plant",
         "category": "plant",
         "appearances": [
           {
             "photo": 1,
-            "itemId": "i15"
+            "itemId": "i12"
           },
           {
             "photo": 2,
@@ -585,11 +537,11 @@
             "itemId": "i2"
           }
         ],
-        "identity": 3,
+        "identity": 2,
         "placement": 3
       },
       {
-        "key": "sheer-curtains",
+        "key": "white_sheer_curtains",
         "category": "curtains",
         "appearances": [
           {
@@ -598,19 +550,19 @@
           },
           {
             "photo": 2,
-            "itemId": "i10"
+            "itemId": "i4"
           },
           {
             "photo": 3,
             "itemId": "i4"
           }
         ],
-        "identity": 4,
+        "identity": 3,
         "placement": 4
       },
       {
-        "key": "main-seating",
-        "category": "sofa",
+        "key": "beige_sofa_sectional",
+        "category": "other",
         "appearances": [
           {
             "photo": 1,
@@ -618,37 +570,53 @@
           },
           {
             "photo": 2,
-            "itemId": "i4"
+            "itemId": "i6"
           },
           {
             "photo": 3,
-            "itemId": "i5"
+            "itemId": "i6"
           }
         ],
         "identity": 1,
         "placement": 3
       },
       {
-        "key": "coffee-table",
+        "key": "wood_coffee_table",
         "category": "coffee_table",
         "appearances": [
           {
             "photo": 1,
-            "itemId": "i9"
+            "itemId": "i6"
           },
           {
             "photo": 3,
-            "itemId": "i8"
+            "itemId": "i9"
           }
         ],
         "identity": 3,
-        "placement": 3
+        "placement": 4
+      },
+      {
+        "key": "small_table_plant",
+        "category": "plant",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i8"
+          },
+          {
+            "photo": 3,
+            "itemId": "i11"
+          }
+        ],
+        "identity": 2.5,
+        "placement": 3.5
       }
     ],
     "visibility": {
       "coffee_table": {
         "1": true,
-        "2": true,
+        "2": false,
         "3": true,
         "4": false
       },
@@ -662,11 +630,11 @@
         "1": true,
         "2": true,
         "3": true,
-        "4": false
+        "4": true
       },
       "other": {
         "1": true,
-        "2": false,
+        "2": true,
         "3": true,
         "4": true
       },
@@ -674,23 +642,23 @@
         "1": true,
         "2": true,
         "3": true,
-        "4": false
+        "4": true
       },
       "rug": {
         "1": true,
-        "2": true,
+        "2": false,
         "3": true,
         "4": false
       },
       "sectional": {
         "1": true,
-        "2": true,
+        "2": false,
         "3": true,
         "4": false
       },
       "sofa": {
         "1": true,
-        "2": true,
+        "2": false,
         "3": true,
         "4": false
       },
@@ -698,63 +666,55 @@
         "1": true,
         "2": true,
         "3": true,
-        "4": false
+        "4": true
       }
     },
     "quality": [
       {
         "realism": 3,
         "architecture_preserved": true,
-        "notes": "Furniture, rug, art, and plant are proportionate with plausible shadows and floor contact, though lighting is slightly flat; all structural elements (walls, windows, doors, floor, ceiling, view) remain unchanged."
+        "notes": "Furniture, rug, plant and art are well-scaled with plausible shadows and floor contact, though lighting is slightly flat; all structural elements, windows, doors, and the outdoor view remain unchanged."
       },
       {
         "realism": 3,
         "architecture_preserved": true,
-        "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and floor contact, though lighting on the sofa looks slightly flat compared to ambient room light; all fixed architectural elements remain unchanged."
+        "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and floor contact, though lighting on the couch is slightly flat compared to ambient room light; all fixed architectural elements remain unchanged."
       },
       {
         "realism": 3,
         "architecture_preserved": true,
-        "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting, though the sofa's contact shadow on the rug is slightly soft; all structural elements (walls, windows, floor, ceiling, doors, view) remain unchanged."
+        "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting consistent with the original room, though the rug edge and coffee table contact points look slightly soft; all structural elements (walls, windows, floor, ceiling, sliding door, view) remain unchanged."
       },
       null
     ],
     "embedding": [
       {
-        "key": "abstract-wall-art",
-        "similarity": 0.8660777220779017
+        "key": "abstract_wall_art",
+        "similarity": 0.8915566839272002
       },
       {
-        "key": "coffee-table-bowl",
-        "similarity": 0.9264700229349384
+        "key": "beige_area_rug",
+        "similarity": 0.8879189067157385
       },
       {
-        "key": "coffee-table-greenery",
-        "similarity": 0.8796385625776563
+        "key": "fiddle_leaf_plant",
+        "similarity": 0.8608619917455957
       },
       {
-        "key": "coffee-table-books",
-        "similarity": 0.7877607571939161
+        "key": "white_sheer_curtains",
+        "similarity": 0.7904948586006736
       },
       {
-        "key": "area-rug",
-        "similarity": 0.8910043902683582
+        "key": "beige_sofa_sectional",
+        "similarity": 0.7400403680338384
       },
       {
-        "key": "fiddle-leaf-plant",
-        "similarity": 0.8611932133237854
+        "key": "wood_coffee_table",
+        "similarity": 0.8890910525039077
       },
       {
-        "key": "sheer-curtains",
-        "similarity": 0.8057051331446443
-      },
-      {
-        "key": "main-seating",
-        "similarity": 0.7813376106277596
-      },
-      {
-        "key": "coffee-table",
-        "similarity": 0.8842867082974081
+        "key": "small_table_plant",
+        "similarity": 0.8658152367505991
       }
     ],
     "runs": {
@@ -765,11 +725,11 @@
               {
                 "id": "i1",
                 "category": "wall_art",
-                "description": "Framed abstract painting, beige and green geometric shapes",
+                "description": "Framed abstract painting, beige and green geometric blocks",
                 "bbox": [
-                  0.178,
+                  0.18,
                   0.09,
-                  0.284,
+                  0.28,
                   0.33
                 ]
               },
@@ -778,153 +738,120 @@
                 "category": "curtains",
                 "description": "White sheer curtains flanking sliding glass door",
                 "bbox": [
-                  0.335,
-                  0.235,
+                  0.33,
+                  0.24,
                   0.64,
-                  0.5
+                  0.49
                 ]
               },
               {
                 "id": "i3",
                 "category": "sofa",
-                "description": "Beige upholstered sofa with cushions",
+                "description": "Beige upholstered sofa with cushions and throw",
                 "bbox": [
-                  0.335,
-                  0.365,
-                  0.685,
+                  0.33,
+                  0.36,
+                  0.68,
                   0.5
                 ]
               },
               {
                 "id": "i4",
                 "category": "decor",
-                "description": "Green throw blanket draped on sofa arm",
+                "description": "Green and cream throw pillows on sofa",
                 "bbox": [
-                  0.6,
-                  0.42,
-                  0.685,
-                  0.5
+                  0.38,
+                  0.37,
+                  0.65,
+                  0.44
                 ]
               },
               {
                 "id": "i5",
                 "category": "decor",
-                "description": "Olive green throw pillow, left",
+                "description": "Gray knit throw blanket draped on sofa arm",
                 "bbox": [
-                  0.377,
-                  0.375,
-                  0.44,
-                  0.42
+                  0.59,
+                  0.4,
+                  0.68,
+                  0.49
                 ]
               },
               {
                 "id": "i6",
-                "category": "decor",
-                "description": "White throw pillow, left-center",
+                "category": "coffee_table",
+                "description": "Wooden rectangular coffee table with dark brown finish",
                 "bbox": [
-                  0.41,
-                  0.395,
-                  0.468,
-                  0.435
+                  0.36,
+                  0.46,
+                  0.64,
+                  0.57
                 ]
               },
               {
                 "id": "i7",
                 "category": "decor",
-                "description": "White throw pillow, right-center",
-                "bbox": [
-                  0.53,
-                  0.395,
-                  0.59,
-                  0.435
-                ]
-              },
-              {
-                "id": "i8",
-                "category": "decor",
-                "description": "Olive green throw pillow, right",
-                "bbox": [
-                  0.6,
-                  0.375,
-                  0.66,
-                  0.42
-                ]
-              },
-              {
-                "id": "i9",
-                "category": "coffee_table",
-                "description": "Dark wood rectangular coffee table with drawer",
-                "bbox": [
-                  0.365,
-                  0.47,
-                  0.635,
-                  0.56
-                ]
-              },
-              {
-                "id": "i10",
-                "category": "decor",
-                "description": "White ceramic bowl on coffee table",
+                "description": "White decorative bowl on coffee table",
                 "bbox": [
                   0.44,
-                  0.455,
+                  0.46,
                   0.5,
-                  0.48
-                ]
-              },
-              {
-                "id": "i11",
-                "category": "plant",
-                "description": "Small potted green plant on coffee table",
-                "bbox": [
-                  0.51,
-                  0.44,
-                  0.58,
-                  0.485
-                ]
-              },
-              {
-                "id": "i12",
-                "category": "decor",
-                "description": "Stack of books on coffee table",
-                "bbox": [
-                  0.43,
-                  0.47,
-                  0.49,
                   0.49
                 ]
               },
               {
-                "id": "i13",
+                "id": "i8",
+                "category": "plant",
+                "description": "Small potted plant in white pot on coffee table",
+                "bbox": [
+                  0.51,
+                  0.44,
+                  0.58,
+                  0.5
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "decor",
+                "description": "Stack of books on coffee table",
+                "bbox": [
+                  0.42,
+                  0.48,
+                  0.49,
+                  0.5
+                ]
+              },
+              {
+                "id": "i10",
                 "category": "rug",
-                "description": "Beige woven jute area rug under coffee table",
+                "description": "Beige woven area rug under coffee table",
                 "bbox": [
                   0.18,
-                  0.49,
-                  0.84,
-                  0.61
+                  0.48,
+                  0.83,
+                  0.6
                 ]
               },
               {
-                "id": "i14",
+                "id": "i11",
                 "category": "other",
-                "description": "Wall-mounted flat screen TV, black",
+                "description": "Wall-mounted flat screen TV, black rectangular",
                 "bbox": [
-                  0.635,
+                  0.65,
                   0.3,
-                  0.685,
-                  0.36
+                  0.69,
+                  0.37
                 ]
               },
               {
-                "id": "i15",
+                "id": "i12",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in white planter",
+                "description": "Large fiddle leaf fig plant in white cylindrical pot",
                 "bbox": [
-                  0.745,
+                  0.72,
                   0.21,
                   0.94,
-                  0.585
+                  0.58
                 ]
               }
             ]
@@ -934,12 +861,12 @@
               {
                 "id": "i1",
                 "category": "wall_art",
-                "description": "Framed abstract painting in beige, green, and cream tones",
+                "description": "Framed abstract painting in beige, black, green tones",
                 "bbox": [
                   0.181,
-                  0.089,
-                  0.286,
-                  0.334
+                  0.09,
+                  0.284,
+                  0.328
                 ]
               },
               {
@@ -947,141 +874,108 @@
                 "category": "curtains",
                 "description": "White sheer curtains flanking sliding glass door",
                 "bbox": [
-                  0.325,
-                  0.234,
+                  0.334,
+                  0.235,
                   0.647,
-                  0.494
+                  0.487
                 ]
               },
               {
                 "id": "i3",
                 "category": "sofa",
-                "description": "Beige upholstered sofa with multiple throw pillows",
+                "description": "Beige upholstered sofa with green and white throw pillows",
                 "bbox": [
                   0.328,
-                  0.361,
+                  0.368,
                   0.687,
-                  0.499
+                  0.503
                 ]
               },
               {
                 "id": "i4",
                 "category": "decor",
-                "description": "Green and white striped throw pillow on sofa",
+                "description": "Green and beige throw blanket draped over sofa arm",
                 "bbox": [
-                  0.596,
-                  0.366,
-                  0.663,
-                  0.415
+                  0.598,
+                  0.407,
+                  0.687,
+                  0.492
                 ]
               },
               {
                 "id": "i5",
-                "category": "decor",
-                "description": "White throw pillow on sofa",
+                "category": "coffee_table",
+                "description": "Dark wood rectangular coffee table with drawer",
                 "bbox": [
-                  0.396,
-                  0.386,
-                  0.469,
-                  0.432
+                  0.365,
+                  0.454,
+                  0.626,
+                  0.559
                 ]
               },
               {
                 "id": "i6",
                 "category": "decor",
-                "description": "Green patterned throw pillow on sofa",
-                "bbox": [
-                  0.545,
-                  0.373,
-                  0.61,
-                  0.415
-                ]
-              },
-              {
-                "id": "i7",
-                "category": "decor",
-                "description": "Olive green folded throw blanket on sofa arm",
-                "bbox": [
-                  0.59,
-                  0.418,
-                  0.69,
-                  0.491
-                ]
-              },
-              {
-                "id": "i8",
-                "category": "coffee_table",
-                "description": "Rectangular dark wood coffee table with drawer",
-                "bbox": [
-                  0.365,
-                  0.454,
-                  0.634,
-                  0.559
-                ]
-              },
-              {
-                "id": "i9",
-                "category": "decor",
                 "description": "White ceramic bowl on coffee table",
                 "bbox": [
-                  0.443,
-                  0.451,
-                  0.516,
+                  0.44,
+                  0.454,
+                  0.494,
                   0.474
                 ]
               },
               {
-                "id": "i10",
+                "id": "i7",
                 "category": "plant",
-                "description": "Small potted green plant on coffee table",
+                "description": "Small potted green plant in white pot on table",
                 "bbox": [
-                  0.514,
-                  0.443,
+                  0.51,
+                  0.436,
                   0.575,
                   0.484
                 ]
               },
               {
-                "id": "i11",
+                "id": "i8",
                 "category": "decor",
                 "description": "Stack of books on coffee table",
                 "bbox": [
                   0.427,
-                  0.472,
-                  0.494,
-                  0.487
+                  0.474,
+                  0.487,
+                  0.489
                 ]
               },
               {
-                "id": "i12",
+                "id": "i9",
                 "category": "rug",
-                "description": "Beige woven area rug under coffee table",
+                "description": "Beige woven jute-style area rug under coffee table",
                 "bbox": [
                   0.183,
-                  0.489,
+                  0.487,
                   0.836,
                   0.607
                 ]
               },
               {
-                "id": "i13",
+                "id": "i10",
                 "category": "other",
-                "description": "Wall-mounted flat screen TV, black",
+                "description": "Wall-mounted flat screen TV, black rectangular",
                 "bbox": [
-                  0.635,
-                  0.309,
-                  0.694,
-                  0.37
+                  0.647,
+                  0.301,
+                  0.699,
+                  0.361
                 ]
               },
               {
-                "id": "i14",
+                "id": "i11",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in white textured pot",
+                "description": "Large fiddle-leaf fig plant in round white planter",
                 "bbox": [
-                  0.735,
-                  0.213,
-                  0.943,
+                  0.729,
+                  0.212,
+                  0.94,
                   0.591
                 ]
               }
@@ -1092,67 +986,67 @@
               {
                 "id": "i1",
                 "category": "wall_art",
-                "description": "Abstract framed painting in beige, black and cream tones",
+                "description": "Abstract framed painting in beige, black, white tones",
                 "bbox": [
-                  0.178,
-                  0.093,
-                  0.283,
+                  0.181,
+                  0.09,
+                  0.284,
                   0.331
                 ]
               },
               {
                 "id": "i2",
                 "category": "curtains",
-                "description": "White sheer curtains flanking sliding glass door",
+                "description": "White sheer curtain panels flanking sliding glass door",
                 "bbox": [
                   0.335,
                   0.238,
-                  0.645,
-                  0.478
+                  0.638,
+                  0.487
                 ]
               },
               {
                 "id": "i3",
                 "category": "sofa",
-                "description": "Beige upholstered sofa with fabric cushions",
+                "description": "Beige upholstered sofa with green and white throw pillows",
                 "bbox": [
-                  0.328,
-                  0.365,
-                  0.688,
+                  0.335,
+                  0.368,
+                  0.687,
                   0.497
                 ]
               },
               {
                 "id": "i4",
                 "category": "decor",
-                "description": "Green and cream throw pillows on sofa",
+                "description": "Green and white throw pillows on sofa",
                 "bbox": [
                   0.375,
-                  0.369,
+                  0.383,
                   0.655,
-                  0.43
+                  0.435
                 ]
               },
               {
                 "id": "i5",
                 "category": "decor",
-                "description": "Green knit throw blanket draped on sofa arm",
+                "description": "Olive green folded throw blanket draped on sofa arm",
                 "bbox": [
                   0.6,
                   0.4,
-                  0.688,
-                  0.48
+                  0.69,
+                  0.49
                 ]
               },
               {
                 "id": "i6",
                 "category": "coffee_table",
-                "description": "Dark wood rectangular coffee table",
+                "description": "Dark wood rectangular coffee table with drawer",
                 "bbox": [
-                  0.365,
-                  0.463,
-                  0.63,
-                  0.57
+                  0.366,
+                  0.46,
+                  0.633,
+                  0.564
                 ]
               },
               {
@@ -1161,20 +1055,20 @@
                 "description": "White ceramic bowl on coffee table",
                 "bbox": [
                   0.44,
-                  0.45,
-                  0.51,
-                  0.475
+                  0.457,
+                  0.5,
+                  0.478
                 ]
               },
               {
                 "id": "i8",
-                "category": "plant",
+                "category": "decor",
                 "description": "Small potted green plant on coffee table",
                 "bbox": [
-                  0.505,
-                  0.44,
-                  0.58,
-                  0.49
+                  0.51,
+                  0.443,
+                  0.565,
+                  0.486
                 ]
               },
               {
@@ -1183,42 +1077,42 @@
                 "description": "Stack of books on coffee table",
                 "bbox": [
                   0.43,
-                  0.475,
-                  0.5,
-                  0.495
+                  0.473,
+                  0.49,
+                  0.49
                 ]
               },
               {
                 "id": "i10",
                 "category": "rug",
-                "description": "Beige woven area rug under seating area",
+                "description": "Beige woven area rug under coffee table",
                 "bbox": [
-                  0.185,
-                  0.485,
-                  0.835,
+                  0.183,
+                  0.487,
+                  0.836,
                   0.61
                 ]
               },
               {
                 "id": "i11",
                 "category": "other",
-                "description": "Flat-screen TV mounted on wall",
+                "description": "Wall-mounted flat screen TV, black frame",
                 "bbox": [
                   0.638,
                   0.303,
-                  0.7,
+                  0.694,
                   0.365
                 ]
               },
               {
                 "id": "i12",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in white pot",
+                "description": "Large fiddle leaf fig plant in round white planter",
                 "bbox": [
-                  0.745,
+                  0.735,
                   0.213,
                   0.94,
-                  0.585
+                  0.583
                 ]
               }
             ]
@@ -1230,7 +1124,7 @@
               {
                 "id": "i1",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in round beige ceramic pot",
+                "description": "Large fiddle-leaf fig plant in round beige ceramic pot",
                 "bbox": [
                   0.1,
                   0.24,
@@ -1241,198 +1135,40 @@
               {
                 "id": "i2",
                 "category": "curtains",
-                "description": "Red-orange fabric valance over left kitchen window",
+                "description": "Red-orange fabric curtain panel above kitchen window",
                 "bbox": [
                   0,
-                  0.2,
+                  0.18,
                   0.12,
-                  0.24
+                  0.26
                 ]
               },
               {
                 "id": "i3",
                 "category": "curtains",
-                "description": "Red-orange fabric valance over second window",
+                "description": "Red-orange fabric curtain panel above side window",
                 "bbox": [
                   0.24,
-                  0.2,
+                  0.19,
                   0.38,
-                  0.23
+                  0.26
                 ]
               },
               {
                 "id": "i4",
-                "category": "sectional",
-                "description": "Beige upholstered L-shaped sectional sofa with cushions",
-                "bbox": [
-                  0.26,
-                  0.36,
-                  0.7,
-                  0.53
-                ]
-              },
-              {
-                "id": "i5",
-                "category": "decor",
-                "description": "Two olive-green throw pillows on sofa ends",
-                "bbox": [
-                  0.31,
-                  0.37,
-                  0.38,
-                  0.44
-                ]
-              },
-              {
-                "id": "i6",
-                "category": "decor",
-                "description": "Cream and beige patterned throw pillows in center",
-                "bbox": [
-                  0.39,
-                  0.38,
-                  0.55,
-                  0.44
-                ]
-              },
-              {
-                "id": "i7",
-                "category": "decor",
-                "description": "Olive green knit throw blanket draped over sofa arm",
-                "bbox": [
-                  0.58,
-                  0.42,
-                  0.7,
-                  0.53
-                ]
-              },
-              {
-                "id": "i8",
-                "category": "wall_art",
-                "description": "Framed abstract landscape painting in wooden frame",
-                "bbox": [
-                  0.42,
-                  0.22,
-                  0.58,
-                  0.34
-                ]
-              },
-              {
-                "id": "i9",
-                "category": "rug",
-                "description": "Large woven beige textured area rug on floor",
-                "bbox": [
-                  0.05,
-                  0.51,
-                  0.87,
-                  0.68
-                ]
-              },
-              {
-                "id": "i10",
                 "category": "curtains",
-                "description": "Sheer white curtain panel by sliding glass door",
+                "description": "Sheer white curtain panel beside sliding glass door",
                 "bbox": [
-                  0.77,
-                  0.2,
-                  0.85,
-                  0.46
-                ]
-              }
-            ]
-          },
-          {
-            "items": [
-              {
-                "id": "i1",
-                "category": "plant",
-                "description": "Large fiddle leaf fig plant in round beige ceramic pot",
-                "bbox": [
-                  0.1,
-                  0.24,
-                  0.24,
-                  0.49
-                ]
-              },
-              {
-                "id": "i2",
-                "category": "sectional",
-                "description": "Beige upholstered sofa with cushions and chaise section",
-                "bbox": [
-                  0.27,
-                  0.35,
-                  0.7,
-                  0.53
-                ]
-              },
-              {
-                "id": "i3",
-                "category": "decor",
-                "description": "Green throw pillow on left arm of sofa",
-                "bbox": [
-                  0.31,
-                  0.37,
-                  0.39,
-                  0.43
-                ]
-              },
-              {
-                "id": "i4",
-                "category": "decor",
-                "description": "Cream throw pillow with tassels",
-                "bbox": [
-                  0.36,
-                  0.38,
-                  0.44,
-                  0.44
+                  0.78,
+                  0.19,
+                  0.86,
+                  0.47
                 ]
               },
               {
                 "id": "i5",
-                "category": "decor",
-                "description": "Textured cream lumbar pillow at sofa center",
-                "bbox": [
-                  0.43,
-                  0.4,
-                  0.53,
-                  0.44
-                ]
-              },
-              {
-                "id": "i6",
-                "category": "decor",
-                "description": "Green throw pillow on right side of sofa",
-                "bbox": [
-                  0.6,
-                  0.37,
-                  0.68,
-                  0.43
-                ]
-              },
-              {
-                "id": "i7",
-                "category": "decor",
-                "description": "Sage green knit throw blanket draped over sofa arm",
-                "bbox": [
-                  0.6,
-                  0.42,
-                  0.7,
-                  0.52
-                ]
-              },
-              {
-                "id": "i8",
-                "category": "rug",
-                "description": "Large woven beige textured area rug on floor",
-                "bbox": [
-                  0.05,
-                  0.53,
-                  0.87,
-                  0.9
-                ]
-              },
-              {
-                "id": "i9",
                 "category": "wall_art",
-                "description": "Framed landscape painting in wood frame above sofa",
+                "description": "Framed abstract landscape painting in wood frame",
                 "bbox": [
                   0.42,
                   0.21,
@@ -1441,14 +1177,80 @@
                 ]
               },
               {
-                "id": "i10",
-                "category": "curtains",
-                "description": "Sheer white curtain panel beside sliding glass door",
+                "id": "i6",
+                "category": "sectional",
+                "description": "Large beige upholstered sectional sofa with chaise",
                 "bbox": [
-                  0.78,
-                  0.14,
-                  0.85,
-                  0.47
+                  0.27,
+                  0.36,
+                  0.71,
+                  0.53
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Two grey-green throw pillows on sofa",
+                "bbox": [
+                  0.31,
+                  0.37,
+                  0.4,
+                  0.44
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "decor",
+                "description": "White textured throw pillow on sofa",
+                "bbox": [
+                  0.37,
+                  0.38,
+                  0.46,
+                  0.44
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "decor",
+                "description": "Cream striped lumbar pillow on sofa",
+                "bbox": [
+                  0.44,
+                  0.4,
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "decor",
+                "description": "Grey-green throw pillow on right side of sofa",
+                "bbox": [
+                  0.6,
+                  0.37,
+                  0.68,
+                  0.44
+                ]
+              },
+              {
+                "id": "i11",
+                "category": "decor",
+                "description": "Olive green knit throw blanket draped over sofa",
+                "bbox": [
+                  0.58,
+                  0.42,
+                  0.71,
+                  0.52
+                ]
+              },
+              {
+                "id": "i12",
+                "category": "rug",
+                "description": "Large woven beige textured area rug",
+                "bbox": [
+                  0.04,
+                  0.5,
+                  0.87,
+                  0.68
                 ]
               }
             ]
@@ -1458,132 +1260,224 @@
               {
                 "id": "i1",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in round beige pot",
+                "description": "Large fiddle-leaf fig plant in round beige ceramic pot",
                 "bbox": [
                   0.098,
-                  0.255,
+                  0.243,
                   0.24,
-                  0.49
+                  0.494
                 ]
               },
               {
                 "id": "i2",
                 "category": "curtains",
-                "description": "Red patterned curtain over kitchen window",
+                "description": "Red-orange short valance curtains above kitchen windows",
                 "bbox": [
                   0,
-                  0.19,
-                  0.13,
-                  0.29
+                  0.192,
+                  0.14,
+                  0.24
                 ]
               },
               {
                 "id": "i3",
                 "category": "curtains",
-                "description": "Red patterned curtain over left living room window",
+                "description": "Rust-orange valance curtain over middle window",
                 "bbox": [
-                  0.24,
-                  0.2,
-                  0.37,
-                  0.29
+                  0.235,
+                  0.196,
+                  0.38,
+                  0.24
                 ]
               },
               {
                 "id": "i4",
-                "category": "sectional",
-                "description": "Large beige upholstered sectional sofa with cushions",
+                "category": "wall_art",
+                "description": "Framed abstract landscape painting in wood frame, beige/blue tones",
                 "bbox": [
-                  0.265,
+                  0.423,
+                  0.216,
+                  0.577,
+                  0.353
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "curtains",
+                "description": "Sheer white curtain panel beside sliding glass door",
+                "bbox": [
+                  0.775,
+                  0.16,
+                  0.86,
+                  0.47
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "sectional",
+                "description": "Large beige upholstered sectional sofa with chaise",
+                "bbox": [
+                  0.263,
                   0.365,
                   0.7,
                   0.53
                 ]
               },
               {
-                "id": "i5",
-                "category": "decor",
-                "description": "Green throw pillow on left arm of sofa",
-                "bbox": [
-                  0.31,
-                  0.37,
-                  0.39,
-                  0.43
-                ]
-              },
-              {
-                "id": "i6",
-                "category": "decor",
-                "description": "White textured throw pillow on sofa",
-                "bbox": [
-                  0.37,
-                  0.39,
-                  0.44,
-                  0.44
-                ]
-              },
-              {
                 "id": "i7",
                 "category": "decor",
-                "description": "Cream striped lumbar pillow centered on sofa",
+                "description": "Green throw pillow on sofa left side",
                 "bbox": [
-                  0.43,
-                  0.39,
-                  0.55,
+                  0.313,
+                  0.365,
+                  0.385,
                   0.44
                 ]
               },
               {
                 "id": "i8",
                 "category": "decor",
-                "description": "Sage green pillow on right side of sofa",
+                "description": "Cream textured throw pillow on sofa",
                 "bbox": [
-                  0.6,
-                  0.37,
-                  0.67,
-                  0.43
+                  0.375,
+                  0.385,
+                  0.44,
+                  0.44
                 ]
               },
               {
                 "id": "i9",
                 "category": "decor",
-                "description": "Green knit throw blanket draped on sofa",
+                "description": "Striped cream lumbar pillow at center of sofa",
                 "bbox": [
-                  0.58,
-                  0.42,
-                  0.7,
-                  0.52
+                  0.44,
+                  0.39,
+                  0.55,
+                  0.44
                 ]
               },
               {
                 "id": "i10",
-                "category": "wall_art",
-                "description": "Framed abstract landscape painting in wood frame",
+                "category": "decor",
+                "description": "Green throw pillow on sofa right side",
                 "bbox": [
-                  0.42,
-                  0.215,
-                  0.575,
-                  0.35
+                  0.595,
+                  0.365,
+                  0.665,
+                  0.44
                 ]
               },
               {
                 "id": "i11",
-                "category": "rug",
-                "description": "Large woven beige textured area rug",
+                "category": "decor",
+                "description": "Sage green knit throw blanket draped over chaise",
                 "bbox": [
-                  0.05,
-                  0.53,
-                  0.87,
-                  0.68
+                  0.595,
+                  0.42,
+                  0.71,
+                  0.53
                 ]
               },
               {
                 "id": "i12",
-                "category": "curtains",
-                "description": "Sheer white curtain by sliding glass door",
+                "category": "rug",
+                "description": "Large woven beige textured area rug",
                 "bbox": [
-                  0.79,
-                  0.19,
+                  0.045,
+                  0.5,
                   0.87,
+                  0.69
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "plant",
+                "description": "Large fiddle-leaf fig plant in round beige ceramic pot",
+                "bbox": [
+                  0.1,
+                  0.256,
+                  0.24,
+                  0.49
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered sectional sofa with cushions",
+                "bbox": [
+                  0.27,
+                  0.365,
+                  0.7,
+                  0.535
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Two olive-green throw pillows on sofa ends",
+                "bbox": [
+                  0.31,
+                  0.365,
+                  0.68,
+                  0.44
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Two cream/white patterned throw pillows on sofa",
+                "bbox": [
+                  0.36,
+                  0.375,
+                  0.55,
+                  0.44
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Olive-green knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.59,
+                  0.4,
+                  0.7,
+                  0.5
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "wall_art",
+                "description": "Framed landscape painting in muted earth tones",
+                "bbox": [
+                  0.42,
+                  0.3,
+                  0.58,
+                  0.44
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "rug",
+                "description": "Large tan woven textured area rug",
+                "bbox": [
+                  0.04,
+                  0.52,
+                  0.87,
+                  0.69
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "curtains",
+                "description": "Sheer white curtain panel by sliding glass door",
+                "bbox": [
+                  0.78,
+                  0.19,
+                  0.86,
                   0.47
                 ]
               }
@@ -1596,12 +1490,12 @@
               {
                 "id": "i1",
                 "category": "curtains",
-                "description": "red fabric valance swags on decorative rod",
+                "description": "red patterned curtain swag over left window",
                 "bbox": [
                   0.06,
                   0.09,
-                  0.31,
-                  0.2
+                  0.3,
+                  0.19
                 ]
               },
               {
@@ -1618,7 +1512,7 @@
               {
                 "id": "i3",
                 "category": "wall_art",
-                "description": "abstract framed print in beige and brown tones",
+                "description": "abstract framed artwork in beige and brown tones",
                 "bbox": [
                   0.37,
                   0.21,
@@ -1629,100 +1523,111 @@
               {
                 "id": "i4",
                 "category": "curtains",
-                "description": "sheer white curtain panel by sliding glass door",
+                "description": "sheer white curtains flanking rear sliding glass doors",
                 "bbox": [
-                  0.85,
+                  0.53,
                   0.19,
-                  0.94,
-                  0.47
+                  0.6,
+                  0.48
                 ]
               },
               {
                 "id": "i5",
-                "category": "sectional",
-                "description": "large beige upholstered sectional sofa with chaise",
+                "category": "curtains",
+                "description": "long white curtain panel by right sliding door",
                 "bbox": [
-                  0.49,
-                  0.34,
-                  0.85,
-                  0.55
+                  0.83,
+                  0.19,
+                  0.93,
+                  0.52
                 ]
               },
               {
                 "id": "i6",
-                "category": "decor",
-                "description": "cluster of beige and green throw pillows on sofa",
+                "category": "sectional",
+                "description": "large beige upholstered sectional sofa with chaise",
                 "bbox": [
                   0.5,
+                  0.34,
+                  0.83,
+                  0.55
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "cream and green throw pillows on sectional",
+                "bbox": [
+                  0.52,
                   0.35,
                   0.79,
                   0.42
                 ]
               },
               {
-                "id": "i7",
+                "id": "i8",
                 "category": "decor",
-                "description": "olive green throw blanket draped on chaise",
+                "description": "green throw blanket draped on chaise end",
                 "bbox": [
-                  0.68,
+                  0.7,
                   0.42,
                   0.83,
                   0.53
                 ]
               },
               {
-                "id": "i8",
-                "category": "coffee_table",
-                "description": "rectangular wooden coffee table with lower shelf",
-                "bbox": [
-                  0.43,
-                  0.43,
-                  0.63,
-                  0.54
-                ]
-              },
-              {
                 "id": "i9",
-                "category": "decor",
-                "description": "stack of books on coffee table",
+                "category": "coffee_table",
+                "description": "rectangular dark wood coffee table with lower shelf",
                 "bbox": [
-                  0.48,
                   0.42,
-                  0.53,
-                  0.45
+                  0.42,
+                  0.63,
+                  0.53
                 ]
               },
               {
                 "id": "i10",
                 "category": "decor",
-                "description": "white vase with small potted greenery on table",
+                "description": "stack of books on coffee table",
                 "bbox": [
+                  0.47,
+                  0.42,
                   0.51,
-                  0.4,
-                  0.57,
-                  0.45
+                  0.44
                 ]
               },
               {
                 "id": "i11",
-                "category": "decor",
-                "description": "round decorative bowl with balls on coffee table",
+                "category": "plant",
+                "description": "small potted plant in woven basket on table",
                 "bbox": [
-                  0.55,
-                  0.44,
-                  0.61,
-                  0.47
+                  0.5,
+                  0.4,
+                  0.56,
+                  0.45
                 ]
               },
               {
                 "id": "i12",
-                "category": "rug",
-                "description": "large tan woven jute area rug under seating",
+                "category": "decor",
+                "description": "round bowl with decorative balls on coffee table",
                 "bbox": [
-                  0.29,
-                  0.47,
+                  0.55,
+                  0.43,
+                  0.61,
+                  0.45
+                ]
+              },
+              {
+                "id": "i13",
+                "category": "rug",
+                "description": "large tan jute woven area rug under seating",
+                "bbox": [
+                  0.31,
+                  0.46,
                   0.87,
-                  0.68
+                  0.65
                 ]
               }
             ]
@@ -1732,18 +1637,18 @@
               {
                 "id": "i1",
                 "category": "curtains",
-                "description": "Red patterned curtain swags on rod, left window",
+                "description": "Red decorative valance/tieback fabric over left window",
                 "bbox": [
                   0.06,
                   0.09,
-                  0.31,
-                  0.19
+                  0.3,
+                  0.2
                 ]
               },
               {
                 "id": "i2",
                 "category": "plant",
-                "description": "Large fiddle-leaf fig plant in woven cream pot",
+                "description": "Large fiddle-leaf fig plant in woven beige planter",
                 "bbox": [
                   0.01,
                   0.22,
@@ -1754,133 +1659,122 @@
               {
                 "id": "i3",
                 "category": "wall_art",
-                "description": "Abstract framed print, brown and beige tones",
+                "description": "Abstract framed painting, beige and brown tones",
                 "bbox": [
                   0.37,
-                  0.21,
+                  0.22,
                   0.48,
                   0.36
                 ]
               },
               {
                 "id": "i4",
-                "category": "table_lamp",
-                "description": "Multi-arm chandelier with glass shades hanging above dining area",
+                "category": "curtains",
+                "description": "White sheer curtain panel over right sliding door",
                 "bbox": [
+                  0.55,
                   0.19,
-                  0.02,
-                  0.35,
-                  0.18
+                  0.67,
+                  0.46
                 ]
               },
               {
                 "id": "i5",
-                "category": "sectional",
-                "description": "Large cream fabric sectional sofa with chaise",
+                "category": "curtains",
+                "description": "Long white sheer curtain by right glass door",
                 "bbox": [
-                  0.5,
-                  0.35,
-                  0.85,
-                  0.55
+                  0.83,
+                  0.19,
+                  0.93,
+                  0.48
                 ]
               },
               {
                 "id": "i6",
-                "category": "decor",
-                "description": "Assorted throw pillows in beige and green tones on sofa",
+                "category": "sectional",
+                "description": "Large beige L-shaped sectional sofa with cushions",
                 "bbox": [
-                  0.53,
+                  0.51,
                   0.35,
-                  0.79,
-                  0.44
+                  0.83,
+                  0.55
                 ]
               },
               {
                 "id": "i7",
                 "category": "decor",
-                "description": "Green throw blanket draped over sectional chaise",
+                "description": "Assorted throw pillows in cream and green tones",
                 "bbox": [
-                  0.7,
-                  0.44,
-                  0.84,
-                  0.52
+                  0.53,
+                  0.35,
+                  0.79,
+                  0.42
                 ]
               },
               {
                 "id": "i8",
-                "category": "coffee_table",
-                "description": "Rectangular wooden coffee table with lower shelf",
+                "category": "decor",
+                "description": "Green throw blanket draped over sectional chaise",
                 "bbox": [
-                  0.42,
-                  0.43,
-                  0.63,
-                  0.55
+                  0.7,
+                  0.44,
+                  0.83,
+                  0.53
                 ]
               },
               {
                 "id": "i9",
-                "category": "decor",
-                "description": "Stack of books and small vase on coffee table",
+                "category": "coffee_table",
+                "description": "Wooden rectangular coffee table with lower shelf",
                 "bbox": [
-                  0.47,
                   0.42,
-                  0.52,
-                  0.47
+                  0.43,
+                  0.63,
+                  0.53
                 ]
               },
               {
                 "id": "i10",
                 "category": "decor",
-                "description": "Round wooden bowl on coffee table",
+                "description": "Small stack of books on coffee table",
                 "bbox": [
-                  0.53,
-                  0.44,
-                  0.6,
+                  0.47,
+                  0.43,
+                  0.51,
                   0.46
                 ]
               },
               {
                 "id": "i11",
-                "category": "decor",
-                "description": "Small potted plant on coffee table",
+                "category": "plant",
+                "description": "Small potted plant in white vase on table",
                 "bbox": [
-                  0.49,
-                  0.41,
-                  0.54,
-                  0.45
+                  0.51,
+                  0.4,
+                  0.55,
+                  0.46
                 ]
               },
               {
                 "id": "i12",
-                "category": "rug",
-                "description": "Large tan woven jute area rug under sofa and table",
+                "category": "decor",
+                "description": "Round wooden bowl with decorative balls on table",
                 "bbox": [
-                  0.29,
-                  0.44,
-                  0.86,
-                  0.68
+                  0.56,
+                  0.43,
+                  0.61,
+                  0.46
                 ]
               },
               {
                 "id": "i13",
-                "category": "curtains",
-                "description": "White sheer curtain by sliding glass door",
+                "category": "rug",
+                "description": "Large woven jute area rug, beige tan",
                 "bbox": [
-                  0.85,
-                  0.19,
-                  0.93,
-                  0.47
-                ]
-              },
-              {
-                "id": "i14",
-                "category": "curtains",
-                "description": "White sheer curtain panel on small side window",
-                "bbox": [
-                  0.53,
-                  0.24,
-                  0.6,
-                  0.4
+                  0.29,
+                  0.46,
+                  0.86,
+                  0.67
                 ]
               }
             ]
@@ -1890,31 +1784,31 @@
               {
                 "id": "i1",
                 "category": "curtains",
-                "description": "Red fabric valance swags on window rod",
+                "description": "Red patterned curtain panels on rod above left window",
                 "bbox": [
                   0.06,
                   0.09,
-                  0.32,
+                  0.29,
                   0.2
                 ]
               },
               {
                 "id": "i2",
                 "category": "plant",
-                "description": "Large fiddle leaf fig plant in woven basket planter",
+                "description": "Large fiddle leaf fig plant in woven cream planter",
                 "bbox": [
-                  0,
+                  0.01,
                   0.22,
                   0.21,
-                  0.56
+                  0.57
                 ]
               },
               {
                 "id": "i3",
                 "category": "wall_art",
-                "description": "Abstract framed print, muted brown and cream tones",
+                "description": "Abstract framed print, muted earth tones, rectangular",
                 "bbox": [
-                  0.38,
+                  0.37,
                   0.21,
                   0.48,
                   0.36
@@ -1922,90 +1816,112 @@
               },
               {
                 "id": "i4",
-                "category": "sectional",
-                "description": "Large cream fabric sectional sofa with chaise",
+                "category": "curtains",
+                "description": "Sheer white curtains flanking sliding glass door",
                 "bbox": [
-                  0.51,
-                  0.35,
-                  0.83,
-                  0.54
+                  0.53,
+                  0.19,
+                  0.63,
+                  0.5
                 ]
               },
               {
                 "id": "i5",
-                "category": "decor",
-                "description": "Assorted throw pillows on sectional, cream and green tones",
+                "category": "curtains",
+                "description": "Sheer white curtain panel on right side of sliding door",
                 "bbox": [
-                  0.52,
+                  0.86,
+                  0.19,
+                  0.94,
+                  0.49
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "sectional",
+                "description": "Beige upholstered L-shaped sectional sofa with cushions",
+                "bbox": [
+                  0.5,
+                  0.35,
+                  0.83,
+                  0.55
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Assorted throw pillows in cream and green tones on sofa",
+                "bbox": [
+                  0.51,
                   0.35,
                   0.79,
                   0.42
                 ]
               },
               {
-                "id": "i6",
+                "id": "i8",
                 "category": "decor",
-                "description": "Green throw blanket draped over chaise",
+                "description": "Green throw blanket draped over sectional chaise",
                 "bbox": [
-                  0.7,
+                  0.68,
                   0.45,
-                  0.84,
+                  0.81,
                   0.53
                 ]
               },
               {
-                "id": "i7",
+                "id": "i9",
                 "category": "coffee_table",
-                "description": "Rectangular dark wood coffee table with lower shelf",
+                "description": "Dark wood rectangular coffee table with lower shelf",
                 "bbox": [
                   0.42,
-                  0.42,
+                  0.44,
                   0.63,
                   0.53
                 ]
               },
               {
-                "id": "i8",
+                "id": "i10",
                 "category": "decor",
                 "description": "Small potted plant on coffee table",
                 "bbox": [
-                  0.49,
-                  0.39,
-                  0.56,
-                  0.45
-                ]
-              },
-              {
-                "id": "i9",
-                "category": "decor",
-                "description": "Stack of books and bowl on coffee table",
-                "bbox": [
-                  0.44,
-                  0.42,
-                  0.6,
-                  0.45
-                ]
-              },
-              {
-                "id": "i10",
-                "category": "rug",
-                "description": "Large tan woven jute area rug",
-                "bbox": [
-                  0.29,
-                  0.46,
-                  0.86,
-                  0.68
+                  0.5,
+                  0.4,
+                  0.55,
+                  0.46
                 ]
               },
               {
                 "id": "i11",
-                "category": "curtains",
-                "description": "White sheer curtain panel by sliding glass door",
+                "category": "decor",
+                "description": "Stack of books and decorative bowl on coffee table",
                 "bbox": [
-                  0.85,
-                  0.19,
-                  0.92,
-                  0.47
+                  0.46,
+                  0.42,
+                  0.58,
+                  0.46
+                ]
+              },
+              {
+                "id": "i12",
+                "category": "rug",
+                "description": "Large tan woven jute area rug under sofa and table",
+                "bbox": [
+                  0.27,
+                  0.44,
+                  0.87,
+                  0.66
+                ]
+              },
+              {
+                "id": "i13",
+                "category": "other",
+                "description": "Wall-mounted flat screen TV, black, right wall",
+                "bbox": [
+                  0.91,
+                  0.29,
+                  0.95,
+                  0.36
                 ]
               }
             ]
@@ -2027,88 +1943,12 @@
         {
           "shared": [
             {
-              "key": "main-seating",
-              "category": "sofa",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i3"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i4"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i5"
-                }
-              ],
-              "identity": 1,
-              "placement": 3
-            },
-            {
-              "key": "coffee-table",
-              "category": "coffee_table",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i9"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i8"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "area-rug",
-              "category": "rug",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i13"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i9"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i12"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "abstract-wall-art",
-              "category": "wall_art",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i1"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i8"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i3"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "fiddle-leaf-plant",
+              "key": "fiddle_leaf_plant",
               "category": "plant",
               "appearances": [
                 {
                   "photo": 1,
-                  "itemId": "i15"
+                  "itemId": "i12"
                 },
                 {
                   "photo": 2,
@@ -2119,11 +1959,99 @@
                   "itemId": "i2"
                 }
               ],
-              "identity": 3,
+              "identity": 2,
               "placement": 3
             },
             {
-              "key": "sheer-curtains",
+              "key": "small_table_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i8"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i11"
+                }
+              ],
+              "identity": 3,
+              "placement": 4
+            },
+            {
+              "key": "wood_coffee_table",
+              "category": "coffee_table",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i9"
+                }
+              ],
+              "identity": 3,
+              "placement": 4
+            },
+            {
+              "key": "beige_area_rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i10"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i12"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i13"
+                }
+              ],
+              "identity": 3,
+              "placement": 4
+            },
+            {
+              "key": "beige_sofa_sectional",
+              "category": "sofa",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i6"
+                }
+              ],
+              "identity": 2,
+              "placement": 3
+            },
+            {
+              "key": "abstract_wall_art",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i3"
+                }
+              ],
+              "identity": 3,
+              "placement": 4
+            },
+            {
+              "key": "white_sheer_curtains",
               "category": "curtains",
               "appearances": [
                 {
@@ -2132,371 +2060,39 @@
                 },
                 {
                   "photo": 2,
-                  "itemId": "i10"
+                  "itemId": "i4"
                 },
                 {
                   "photo": 3,
                   "itemId": "i4"
                 }
               ],
-              "identity": 4,
+              "identity": 3,
               "placement": 4
             },
             {
-              "key": "olive-throw-blanket",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i4"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i7"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i7"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "coffee-table-greenery",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i11"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i10"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "coffee-table-bowl",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i10"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i11"
-                }
-              ],
-              "identity": 2,
-              "placement": 3
-            },
-            {
-              "key": "coffee-table-books",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i12"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i9"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            }
-          ],
-          "visibility": {
-            "coffee_table": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "curtains": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": true
-            },
-            "decor": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "other": {
-              "1": true,
-              "2": false,
-              "3": true,
-              "4": true
-            },
-            "plant": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "rug": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "sectional": {
-              "1": true,
-              "2": false,
-              "3": true,
-              "4": false
-            },
-            "sofa": {
-              "1": true,
-              "2": false,
-              "3": true,
-              "4": false
-            },
-            "wall_art": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            }
-          }
-        },
-        {
-          "shared": [
-            {
-              "key": "main-seating",
-              "category": "sofa",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i3"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i4"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i5"
-                }
-              ],
-              "identity": 1,
-              "placement": 3
-            },
-            {
-              "key": "coffee-table",
-              "category": "coffee_table",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i9"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i8"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "area-rug",
-              "category": "rug",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i13"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i9"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i12"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "fiddle-leaf-plant",
-              "category": "plant",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i15"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i1"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i2"
-                }
-              ],
-              "identity": 4,
-              "placement": 3
-            },
-            {
-              "key": "wall-art",
-              "category": "wall_art",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i1"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i8"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i3"
-                }
-              ],
-              "identity": 2,
-              "placement": 3
-            },
-            {
-              "key": "sheer-curtains",
+              "key": "red_curtain_panels",
               "category": "curtains",
               "appearances": [
                 {
-                  "photo": 1,
+                  "photo": 2,
                   "itemId": "i2"
                 },
                 {
-                  "photo": 2,
-                  "itemId": "i10"
-                },
-                {
                   "photo": 3,
-                  "itemId": "i4"
+                  "itemId": "i1"
                 }
               ],
-              "identity": 4,
+              "identity": 3,
               "placement": 4
-            },
-            {
-              "key": "small-table-plant",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i11"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i10"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "book-stack",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i12"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i9"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "decor-bowl",
-              "category": "decor",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i10"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i11"
-                }
-              ],
-              "identity": 2,
-              "placement": 3
             }
-          ],
-          "visibility": {
-            "coffee_table": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "curtains": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "decor": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "other": {
-              "1": true,
-              "2": false,
-              "3": true,
-              "4": false
-            },
-            "plant": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "rug": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "sectional": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "sofa": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "wall_art": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            }
-          }
+          ]
         },
         {
           "shared": [
             {
-              "key": "main_seating",
-              "category": "sofa",
+              "key": "sofa_sectional",
+              "category": "other",
               "appearances": [
                 {
                   "photo": 1,
@@ -2504,11 +2100,11 @@
                 },
                 {
                   "photo": 2,
-                  "itemId": "i4"
+                  "itemId": "i6"
                 },
                 {
                   "photo": 3,
-                  "itemId": "i5"
+                  "itemId": "i6"
                 }
               ],
               "identity": 1,
@@ -2520,15 +2116,35 @@
               "appearances": [
                 {
                   "photo": 1,
-                  "itemId": "i9"
+                  "itemId": "i6"
                 },
                 {
                   "photo": 3,
-                  "itemId": "i8"
+                  "itemId": "i9"
                 }
               ],
               "identity": 3,
-              "placement": 3
+              "placement": 4
+            },
+            {
+              "key": "fiddle_leaf_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i12"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 3,
+              "placement": 2
             },
             {
               "key": "area_rug",
@@ -2536,15 +2152,15 @@
               "appearances": [
                 {
                   "photo": 1,
-                  "itemId": "i13"
+                  "itemId": "i10"
                 },
                 {
                   "photo": 2,
-                  "itemId": "i9"
+                  "itemId": "i12"
                 },
                 {
                   "photo": 3,
-                  "itemId": "i12"
+                  "itemId": "i13"
                 }
               ],
               "identity": 3,
@@ -2560,31 +2176,11 @@
                 },
                 {
                   "photo": 2,
-                  "itemId": "i8"
+                  "itemId": "i5"
                 },
                 {
                   "photo": 3,
                   "itemId": "i3"
-                }
-              ],
-              "identity": 3,
-              "placement": 3
-            },
-            {
-              "key": "fiddle_leaf_plant",
-              "category": "plant",
-              "appearances": [
-                {
-                  "photo": 1,
-                  "itemId": "i15"
-                },
-                {
-                  "photo": 2,
-                  "itemId": "i1"
-                },
-                {
-                  "photo": 3,
-                  "itemId": "i2"
                 }
               ],
               "identity": 2,
@@ -2600,72 +2196,394 @@
                 },
                 {
                   "photo": 2,
-                  "itemId": "i10"
+                  "itemId": "i4"
                 },
                 {
                   "photo": 3,
                   "itemId": "i4"
                 }
               ],
-              "identity": 4,
+              "identity": 3,
+              "placement": 4
+            },
+            {
+              "key": "green_throw_pillows",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i7"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "throw_blanket",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i11"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i8"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "decorative_bowl",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i12"
+                }
+              ],
+              "identity": 2,
+              "placement": 3
+            },
+            {
+              "key": "books_stack",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i9"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i10"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "small_potted_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i8"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i11"
+                }
+              ],
+              "identity": 2,
+              "placement": 3
+            }
+          ]
+        },
+        {
+          "shared": [
+            {
+              "key": "large_potted_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i12"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 2,
+              "placement": 3
+            },
+            {
+              "key": "area_rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i10"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i12"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i13"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "main_seating",
+              "category": "other",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i6"
+                }
+              ],
+              "identity": 1,
+              "placement": 3
+            },
+            {
+              "key": "coffee_table",
+              "category": "coffee_table",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i9"
+                }
+              ],
+              "identity": 2,
+              "placement": 3
+            },
+            {
+              "key": "wall_art",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i3"
+                }
+              ],
+              "identity": 1,
+              "placement": 2
+            },
+            {
+              "key": "sliding_door_curtains",
+              "category": "curtains",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i4"
+                }
+              ],
+              "identity": 3,
               "placement": 4
             }
-          ],
-          "visibility": {
-            "sofa": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "sectional": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "coffee_table": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "rug": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "wall_art": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "plant": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "curtains": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": true
-            },
-            "decor": {
-              "1": true,
-              "2": true,
-              "3": true,
-              "4": false
-            },
-            "other": {
-              "1": true,
-              "2": false,
-              "3": true,
-              "4": true
-            }
+          ]
+        }
+      ],
+      "visibility": [
+        {
+          "coffee_table": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": true
+          },
+          "curtains": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "decor": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "other": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "plant": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "rug": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": true
+          },
+          "sectional": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": true
+          },
+          "sofa": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": true
+          },
+          "wall_art": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          }
+        },
+        {
+          "coffee_table": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": false
+          },
+          "curtains": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "decor": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "other": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "plant": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "rug": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": false
+          },
+          "sectional": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": false
+          },
+          "sofa": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": false
+          },
+          "wall_art": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          }
+        },
+        {
+          "coffee_table": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": false
+          },
+          "curtains": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "decor": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "other": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
+          },
+          "plant": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": false
+          },
+          "rug": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": false
+          },
+          "sectional": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": false
+          },
+          "sofa": {
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": false
+          },
+          "wall_art": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true
           }
         }
       ],
@@ -2674,51 +2592,51 @@
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, art, and plant are proportionate with plausible shadows and floor contact, though lighting is slightly flat; all structural elements (walls, windows, doors, floor, ceiling, view) remain unchanged."
+            "notes": "Furniture, rug, plant and art are well-scaled with plausible shadows and floor contact, though lighting is slightly flat; all structural elements, windows, doors, and the outdoor view remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, art, and plant are well-scaled with plausible shadows and floor contact, though lighting is slightly flat; all structural elements (walls, windows, doors, flooring, ceiling fan, view) remain unchanged."
+            "notes": "Furniture, rug, art, and plant are well-scaled with plausible shadows and floor contact, though lighting is slightly flat; all structural elements (windows, doors, floor, ceiling, view) remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, art, and plant are well-scaled with plausible shadows and floor contact, though lighting on some objects looks slightly flat; all structural elements (walls, windows, doors, floor, ceiling, view) remain unchanged."
+            "notes": "Furniture, rug, art, and plant are well-scaled with plausible shadows and floor contact, though lighting looks slightly flat compared to original; all structural elements (walls, windows, doors, floor, ceiling fan, view) remain unchanged."
           }
         ],
         [
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and floor contact, though lighting on the sofa looks slightly flat compared to ambient room light; all fixed architectural elements remain unchanged."
+            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and floor contact, though lighting on the couch is slightly flat compared to ambient room light; all fixed architectural elements remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, plant, and art have consistent lighting, shadows, and scale with the room; minor softness around plant/pot edges keeps it from being perfect, but overall it reads as a plausible real photo with all original architectural features intact."
+            "notes": "Furniture, rug, plant, and artwork are well-scaled with plausible shadows and floor contact, though lighting is slightly flat; original walls, windows, floor, and view remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, plant, rug, and art are proportionate with plausible lighting and shadows, though the pet door on the wall is now oddly covered by artwork placement which is a minor inconsistency; all structural elements remain unchanged."
+            "notes": "Furniture, rug, plant, and artwork are well-scaled with plausible shadows and floor contact, though lighting on the sofa looks slightly flat compared to ambient room light; all structural elements remain unchanged."
           }
         ],
         [
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting, though the sofa's contact shadow on the rug is slightly soft; all structural elements (walls, windows, floor, ceiling, doors, view) remain unchanged."
+            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting consistent with the original room, though the rug edge and coffee table contact points look slightly soft; all structural elements (walls, windows, floor, ceiling, sliding door, view) remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting, though the rug edge and sofa contact points look slightly flat; all structural elements, windows, and the outdoor view remain unchanged."
+            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting, though the wall art appears slightly floating and the sofa's contact with the rug is a touch soft; all structural elements, windows, and view remain unchanged."
           },
           {
             "realism": 3,
             "architecture_preserved": true,
-            "notes": "Furniture, rug, plant, and art are well-scaled with plausible lighting and shadows, though the sofa placement slightly overlaps the sliding door track area; all structural elements remain unchanged."
+            "notes": "Furniture, rug, plant, and art are well-scaled with plausible shadows and lighting, though the rug edges and sofa contact points look slightly flat; all structural elements (windows, doors, floors, ceiling, fan) remain unchanged."
           }
         ],
         []
@@ -2736,8 +2654,8 @@
   },
   "judge": {
     "model": "claude-sonnet-5",
-    "prompt_version": "0.1.1",
-    "protocol_version": "0.1.2",
+    "prompt_version": "0.1.3",
+    "protocol_version": "0.1.3",
     "runs": 3,
     "aggregated": "median/majority"
   },
@@ -2745,6 +2663,6 @@
     "model": "replicate:andreasjansson/clip-features",
     "version": "75b33f253f7714a281ad3e9b28f63e3232d583716ef6718f2e46641077ea040a"
   },
-  "cost_usd": 0.3172,
-  "scored_at": "2026-09-27T16:32:17.500Z"
+  "cost_usd": 0.2891,
+  "scored_at": "2026-09-27T17:04:29.719Z"
 }

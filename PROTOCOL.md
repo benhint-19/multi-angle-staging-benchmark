@@ -1,12 +1,11 @@
-# MASB Scoring Protocol (benchmark v0.1.0, protocol 0.1.2, prompt set 0.1.1)
+# MASB Scoring Protocol (benchmark v0.1.0, protocol 0.1.3, prompt set 0.1.3)
 
 This document is the contract for the Multi-Angle Staging Benchmark scorer in `scorer/`. It publishes
 the judge prompts verbatim, the aggregation rules and the exact formulas. Any change to a prompt or a
 formula is a new protocol version; results from different versions are not comparable. Each result
-records `judge.prompt_version` (currently `0.1.1`: visibility is decided from the original photos'
-geometry only) and `judge.protocol_version` (currently `0.1.2`: absent angles count against
-inventory, see "Absent angles"; the prompts are unchanged). A result without `protocol_version` was
-scored under protocol 0.1.1, which gives the same scores whenever no angle is absent.
+records `judge.prompt_version` and `judge.protocol_version` (both currently `0.1.3`: visibility is
+judged by a separate call that sees only the original photos, and absent angles count against
+inventory, see "Absent angles"). All published results were scored with 0.1.3.
 
 ## Inputs
 
@@ -69,9 +68,10 @@ Output: `{ items: [{ id, category, description, bbox: [x0, y0, x1, y1] }] }`.
 ### Call 2: match (once per room)
 
 Input: for each angle i, the text `Original i`, the original photo, the text `Staged i`, the staged
-photo; then this text, with `{N}` = number of photos, `{INVENTORIES}` = JSON object
+photo; then this text, with `{N}` = number of photos and `{INVENTORIES}` = JSON object
 `{"photo 1": [{id, category, description}, ...], ...}` built from the pinned inventories (see
-aggregation), and `{CATEGORIES_PRESENT}` = the sorted, comma-separated categories in those inventories.
+aggregation). For an absent angle (see "Absent angles") the `Staged i` slot shows the original photo
+and its inventory is the empty list.
 
 ```text
 These photos show ONE room from {N} different camera angles. For each angle you are given the ORIGINAL photo (before staging) followed by the STAGED photo (the same view after virtual staging). The images are labelled in order: "Original 1", "Staged 1", "Original 2", "Staged 2", and so on.
@@ -83,24 +83,38 @@ Task A: shared items. Find every physical item that appears in two or more stage
 - "identity" 0-4: is it the same physical piece in every appearance (form, colour, material, size)? 4 = clearly identical, 3 = same piece with minor differences, 2 = similar but noticeably different, 1 = same kind but a different piece, 0 = unrelated.
 - "placement" 0-4: is it in the same position relative to fixed room features (windows, doors, wall corners, fireplace, built-ins) in every appearance? 4 = same spot, 3 = slightly shifted, 2 = clearly moved within the same area, 1 = a different area of the room, 0 = incompatible positions.
 
-Task B: visibility. For each category below and each angle, say whether an item of that category, standing where it stands in the room (as shown by the staged photos that contain it), would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Do not use whether the item appears in a staged photo. An item missing from a staged photo it should appear in is still visible=true. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
-Categories: {CATEGORIES_PRESENT}
-
 Return:
-{"shared": [{"key": "short-name", "category": "sofa", "appearances": [{"photo": 1, "itemId": "i2"}, {"photo": 2, "itemId": "i1"}], "identity": 4, "placement": 4}], "visibility": {"sofa": {"1": true, "2": false}}}
+{"shared": [{"key": "short-name", "category": "sofa", "appearances": [{"photo": 1, "itemId": "i2"}, {"photo": 2, "itemId": "i1"}], "identity": 4, "placement": 4}]}
 ```
 
-Output: `{ shared: [{ key, category, appearances: [{ photo, itemId }], identity: 0–4, placement: 0–4 }],
-visibility: { [category]: { [photo]: boolean } } }`.
+Output: `{ shared: [{ key, category, appearances: [{ photo, itemId }], identity: 0–4, placement: 0–4 }] }`.
 
 After validation the scorer drops appearances that reference an unknown photo or item id, keeps at
 most one appearance per photo per shared item, lets each inventory entry belong to only one shared
-item, and discards shared items left with fewer than two photos. Visibility keys are normalised
-(category keys: lower-case, spaces and hyphens to `_`; photo keys: `"01"`, `"photo 1"` → `"1"`); a key
-that is not a category in the pinned inventories or not a photo 1..N is dropped and listed in
-`details.flags.visibility_unknown_keys`.
+item, and discards shared items left with fewer than two photos.
 
-### Call 3: quality (per photo)
+### Call 3: visibility (once per room, originals only)
+
+Input: for each angle i, the text `Original i` and the original photo (no staged photo is ever shown
+to this call); then this text, with `{N}` = number of photos and `{CATEGORIES}` = the sorted,
+comma-separated categories present (by majority, see aggregation) in at least one staged photo.
+Skipped when no category is present.
+
+```text
+These photos show ONE empty room from {N} different camera angles, before any staging. The images are labelled in order: "Original 1", "Original 2", and so on. The room is to be furnished with items of the categories below, each placed where such an item would normally stand in this room.
+
+For each category below and each angle, say whether an item of that category, standing where it would normally stand in this room, would be in view from that camera (true) or not (false). Decide visibility from the camera angle and room geometry in the ORIGINAL photos only. Mark it false when its position is outside that camera's frame. Mark hidden only when a fixed architectural feature (wall, doorway, column) blocks the view from that angle.
+Categories: {CATEGORIES}
+
+Return:
+{"visibility": {"sofa": {"1": true, "2": false}}}
+```
+
+Output: `{ visibility: { [category]: { [photo]: boolean } } }`. Keys are normalised (category keys:
+lower-case, spaces and hyphens to `_`; photo keys: `"01"`, `"photo 1"` → `"1"`); a key that is not an
+asked category or not a photo 1..N is dropped and listed in `details.flags.visibility_unknown_keys`.
+
+### Call 4: quality (per photo)
 
 Input: the text `Image 1`, the original photo, the text `Image 2`, the staged photo, then this text.
 
@@ -128,8 +142,8 @@ Output: `{ realism: 0–4, architecture_preserved: boolean, notes }`.
   run item that contributed one of its kept links; its category is the most common among them. If no
   link reaches a majority but some run found shared items, the shared set of the run with the median
   mean(identity, placement) is used and `details.flags.shared_fallback_median_run` is true.
-  `visibility[c][p]` is the strict **majority** over runs (a run that omits the cell counts as
-  visible).
+- **Visibility.** `visibility[c][p]` is the strict **majority** over the visibility runs (a run that
+  omits the cell counts as visible), for every present category *c* and every photo 1..N.
 - **Quality.** Per photo, `realism` is the **median** over runs and `architecture_preserved` the
   strict **majority**; `notes` come from the first run.
 
@@ -148,14 +162,14 @@ identity_agreement  = 100 × mean(s.identity  for s in S) / 4         (0 if S is
 placement_agreement = 100 × mean(s.placement for s in S) / 4         (0 if S is empty)
 consistency         = mean(inventory_agreement, identity_agreement, placement_agreement)
 
-realism                     = 100 × mean(realism over photos) / 4
-architecture_preserved_rate = (photos with architecture_preserved) / N          (0–1)
+realism                     = 100 × mean(realism over delivered photos) / 4
+architecture_preserved_rate = (delivered photos with architecture_preserved) / (delivered photos)  (0–1)
 identity_embedding_similarity = mean over s in S of
                                   mean pairwise cosine(CLIP(crop_i), CLIP(crop_j)) over s's appearances
 ```
 
-- A category that is absent from a photo where the judge says it would not be visible (outside the
-  frame, or blocked by a wall, doorway or column) is **not** penalised: that photo is not in the
+- A category that is absent from a photo where the visibility call says it would not be visible
+  (outside the frame, or blocked by a wall, doorway or column) is **not** penalised: that photo is not in the
   denominator. An appearance in such a photo does not count either, so it cannot offset an absence
   where the category is expected (present {1,3}, visible {1,2} → 1/2 = 50).
 - If *S* is empty, identity and placement are 0 and the result carries `no_shared_items: true`.
@@ -175,10 +189,12 @@ identity_embedding_similarity = mean over s in S of
 A system that fails to deliver an angle is penalised, not excused. For an absent staged photo *p*:
 
 - **Inventory.** *p*'s inventory is empty (no judge call): no category is present in *p*.
-- **Visibility** is still judged from the ORIGINALS for all N angles. The match call is sent unchanged
-  with all N angles; in *p*'s "Staged" slot the judge sees the original photo, and *p*'s inventory
-  is the empty list. So every category expected visible from *p* counts as a miss in
-  `inventory_agreement`.
+- **Visibility** comes from the visibility call (Call 3), which sees only the N original photos for
+  every room, absent angles or not. So every category expected visible from *p* counts as a miss in
+  `inventory_agreement`, whatever the match judge does.
+- **Match call.** The match call still receives all N angles; *p*'s "Staged" slot shows the original
+  photo as a stand-in and *p*'s inventory is the empty list. The stand-in cannot affect visibility
+  (a separate call) or inventory (empty by rule), and no shared item can link to *p*.
 - **Identity and placement** are computed over the delivered photos only (no shared item can
   reference *p*, which has no items); formulas unchanged.
 - **Quality.** No quality call for *p*. `realism` and `architecture_preserved_rate` average over the
@@ -194,8 +210,8 @@ three: the sofa's ratio is 2/3, so its inventory contribution is 66.7 (unit test
 
 Three photos. Every inventory run lists a sofa in photos 1–3 and a rug in photos 1–2 (from angle 3
 the rug's position is behind a wall). The three match runs return the sofa with (identity, placement) =
-(4, 2), (2, 4), (4, 4) and the rug with (4, 4) each time; two of three runs say the rug is not visible
-from angle 3. Quality runs per photo give realism 3, 4, 2 and architecture true, true, false.
+(4, 2), (2, 4), (4, 4) and the rug with (4, 4) each time; two of three visibility runs say the rug is
+not visible from angle 3. Quality runs per photo give realism 3, 4, 2 and architecture true, true, false.
 
 - Present: sofa {1,2,3}, rug {1,2}. Visible (majority): sofa {1,2,3}, rug {1,2}.
 - inventory_agreement = 100 × mean(3/3, 2/2) = **100** (the rug is not penalised for angle 3).
@@ -229,14 +245,14 @@ rug ratio would be 2/3 and inventory_agreement 100 × mean(1, 0.667) = 83.3.
     "visibility": { "<category>": { "1": true } },
     "quality": [ /* aggregated per photo; null for an absent photo */ ],
     "embedding": [ { "key": "...", "similarity": 0.98 } ],
-    "runs": { "inventory": [[/* photo 1 runs */]], "match": [/* runs */], "quality": [[/* photo 1 runs */]] },
+    "runs": { "inventory": [[/* photo 1 runs */]], "match": [/* runs */], "visibility": [/* runs */], "quality": [[/* photo 1 runs */]] },
     "flags": {
       "no_shared_items": false, "shared_fallback_median_run": false,
       "visibility_unknown_keys": [], "embedding_note": "...",  // note only when embeddings are missing
-      "delivered": 3, "absent": []                              // protocol ≥ 0.1.2
+      "delivered": 3, "absent": []
     }
   },
-  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.1", "protocol_version": "0.1.2", "runs": 3, "aggregated": "median/majority" },
+  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.3", "protocol_version": "0.1.3", "runs": 3, "aggregated": "median/majority" },
   "embedder": { "model": "replicate:andreasjansson/clip-features", "version": "75b33f25…" } | null,
   "cost_usd": 0.16,
   "scored_at": "2026-09-27T00:00:00.000Z"
@@ -272,8 +288,9 @@ Options for `score`: `--runs <n>` (integer ≥ 1, default 3; an even count warns
 
 ## Cost and time
 
-Per room of N photos: 3N inventory calls, 3 match calls (all 2N images each) and 3N quality calls.
-Measured on a 3-photo room: **about $0.12–0.18** of judge usage (claude-sonnet-5 list price, $2 / $10
+Per room of N photos: 3N inventory calls, 3 match calls (all 2N images each), 3 visibility calls
+(N images each) and 3N quality calls (an absent photo gets no inventory or quality calls). Measured on
+3–4-photo rooms: **about $0.25–0.45** of judge usage (claude-sonnet-5 list price, $2 / $10
 per million input / output tokens) and 10–20 s wall time. CLIP embeddings add under $0.001, but a
 Replicate account with less than $5 credit is throttled to about 6 predictions per minute, so ~15
 crops can take 2–3 minutes. `cost_usd` in each result is the measured spend for that room.
@@ -296,6 +313,9 @@ crops can take 2–3 minutes. `cost_usd` in each result is the measured spend fo
   items to disagree about.
 - **Small dataset.** v0.1 has three rooms from one property. Treat differences of a few points as
   noise.
+- **Run-to-run judge variance.** Re-scoring one room (single-photo family) with the same images moved
+  identity by about 8 points (61.1 → 69.4) between independent 3-run scorings. Treat per-room
+  differences under ~10 points as within judge noise; system means over rooms are steadier.
 - **Realism is not discriminative yet.** In v0.1 every room of every system scored realism 75
   exactly (each photo's median rating was 3), so the realism column does not separate systems.
   Treat it as a sanity check, not a ranking signal, until the quality prompt or scale is revised.

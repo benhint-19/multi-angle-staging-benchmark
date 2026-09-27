@@ -21,6 +21,19 @@ export function aggregateQuality(runs: QualityResult[]): QualityResult {
   };
 }
 
+/**
+ * Per-(category, photo) strict majority over visibility runs, for every category in `categories` and
+ * photo 1..`photos`; a run that omits a cell counts as "visible".
+ */
+export function aggregateVisibility(runs: Visibility[], categories: string[], photos: number): Visibility {
+  const out: Visibility = {};
+  for (const c of [...categories].sort()) {
+    out[c] = {};
+    for (let p = 1; p <= photos; p++) out[c]![String(p)] = majority(runs.map((r) => r[c]?.[String(p)] ?? true));
+  }
+  return out;
+}
+
 export interface AggregatedMatch extends MatchResult {
   /** True when no link reached a majority and the median-consistency run's shared set was used. */
   fallback: boolean;
@@ -41,10 +54,9 @@ function runConsistency(run: MatchResult): number {
  * first, never joining two entries from the same photo). Each item's identity/placement is the median
  * over every run item that contributed one of its kept links; its category is the most common among
  * them. If no link reaches a majority but some run found shared items, the shared set of the run with
- * the median mean(identity, placement) is used instead (`fallback: true`). Visibility is the
- * per-(category, photo) majority over runs; a run that omits a cell counts as "visible".
+ * the median mean(identity, placement) is used instead (`fallback: true`).
  */
-export function aggregateMatch(runs: MatchResult[], photos: number): AggregatedMatch {
+export function aggregateMatch(runs: MatchResult[]): AggregatedMatch {
   type Contribution = { run: number; idx: number; item: SharedItem };
   const edges = new Map<string, { a: string; b: string; runs: Set<number>; contribs: Contribution[] }>();
   runs.forEach((run, r) => {
@@ -128,14 +140,5 @@ export function aggregateMatch(runs: MatchResult[], photos: number): AggregatedM
     fallback = true;
   }
 
-  const cats = new Set<string>();
-  for (const run of runs) for (const c of Object.keys(run.visibility)) cats.add(c);
-  const visibility: Visibility = {};
-  for (const c of [...cats].sort()) {
-    visibility[c] = {};
-    for (let p = 1; p <= photos; p++) {
-      visibility[c]![String(p)] = majority(runs.map((r) => r.visibility[c]?.[String(p)] ?? true));
-    }
-  }
-  return { shared, visibility, fallback };
+  return { shared, fallback };
 }

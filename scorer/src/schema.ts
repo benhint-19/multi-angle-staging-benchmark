@@ -14,7 +14,7 @@ const shared = z.object({
   placement: z.number().min(0).max(4),
 });
 const visibility = z.record(z.string(), z.record(z.string(), z.boolean()));
-const match = z.object({ shared: z.array(shared), visibility });
+const match = z.object({ shared: z.array(shared) });
 const quality = z.object({ realism: z.number().min(0).max(4), architecture_preserved: z.boolean(), notes: z.string() });
 const pct = z.number().min(0).max(100);
 
@@ -43,6 +43,7 @@ export const MasbResultSchema = z.object({
     runs: z.object({
       inventory: z.array(z.array(inventory)),
       match: z.array(match),
+      visibility: z.array(visibility),
       quality: z.array(z.array(quality)),
     }),
     flags: z.object({
@@ -50,14 +51,14 @@ export const MasbResultSchema = z.object({
       shared_fallback_median_run: z.boolean(),
       visibility_unknown_keys: z.array(z.string()),
       embedding_note: z.string().optional(),
-      delivered: z.number().int().min(0).optional(),
-      absent: z.array(z.number().int().min(1)).optional(),
+      delivered: z.number().int().min(0),
+      absent: z.array(z.number().int().min(1)),
     }),
   }),
   judge: z.object({
     model: z.string(),
     prompt_version: z.string(),
-    protocol_version: z.string().optional(),
+    protocol_version: z.string(),
     runs: z.number().int().min(1),
     aggregated: z.literal("median/majority"),
   }),

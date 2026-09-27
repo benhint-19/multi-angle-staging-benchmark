@@ -1,15 +1,17 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
-import { INVENTORY_PROMPT, QUALITY_PROMPT, SYSTEM_PROMPT, renderMatchPrompt } from "./prompts.js";
-import { CATEGORIES, type Category, type Inventory, type MatchResult, type QualityResult } from "./types.js";
+import { INVENTORY_PROMPT, QUALITY_PROMPT, SYSTEM_PROMPT, renderMatchPrompt, renderVisibilityPrompt } from "./prompts.js";
+import { CATEGORIES, type Inventory, type MatchResult, type QualityResult, type Visibility } from "./types.js";
 
 /** One judge run per call; the scorer repeats calls and aggregates. Inject a fake in tests. */
 export interface Judge {
   readonly model: string;
   /** Items in one staged photo. */
   inventory(staged: Buffer): Promise<Inventory>;
-  /** Cross-photo matching + visibility (raw; the scorer sanitises it). `inventories[i]` is photo i+1's. */
+  /** Cross-photo matching (raw; the scorer sanitises it). `inventories[i]` is photo i+1's. */
   match(originals: Buffer[], staged: Buffer[], inventories: Inventory[]): Promise<MatchResult>;
+  /** Visibility of each category from each angle, judged from the ORIGINAL photos only (raw). */
+  visibility(originals: Buffer[], categories: string[]): Promise<Visibility>;
   /** Per-photo realism + architecture check. */
   quality(original: Buffer, staged: Buffer): Promise<QualityResult>;
   costUsd(): number;
@@ -46,6 +48,9 @@ export const matchSchema = z.object({
       placement: rating,
     }),
   ),
+});
+
+export const visibilitySchema = z.object({
   visibility: z.record(z.string(), z.record(z.string(), z.boolean())),
 });
 
@@ -73,20 +78,12 @@ export function normalizePhotoKey(v: string): number | null {
   return m ? Number(m[1]) : null;
 }
 
-export interface SanitizedMatch {
-  match: MatchResult;
-  /** Visibility keys that did not normalise to a known category / photo number (dropped). */
-  unknownKeys: string[];
-}
-
 /**
- * Clean one raw match reply against the pinned inventories:
- * - shared: drop appearances that reference unknown photos/items, keep one appearance per photo, let each
- *   inventory entry belong to one shared item, drop items left with fewer than two photos;
- * - visibility: normalise category keys (case, spaces, hyphens) and photo keys ("01", "photo 1" → "1");
- *   drop and report keys that are not a category in the inventories or not a photo 1..N.
+ * Clean one raw match reply against the pinned inventories: drop appearances that reference unknown
+ * photos/items, keep one appearance per photo, let each inventory entry belong to one shared item,
+ * drop items left with fewer than two photos.
  */
-export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): SanitizedMatch {
+export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): MatchResult {
   const used = new Set<string>();
   const shared = [];
   for (const s of m.shared) {
@@ -103,27 +100,40 @@ export function sanitizeMatch(m: MatchResult, inventories: Inventory[]): Sanitiz
     for (const a of appearances) used.add(`${a.photo}:${a.itemId}`);
     shared.push({ ...s, appearances });
   }
+  return { shared };
+}
 
-  const known = new Set(inventories.flatMap((inv) => inv.items.map((i) => i.category as string)));
+export interface SanitizedVisibility {
+  visibility: Visibility;
+  /** Keys that did not normalise to an asked category / photo number (dropped). */
+  unknownKeys: string[];
+}
+
+/**
+ * Clean one raw visibility reply: normalise category keys (case, spaces, hyphens) and photo keys
+ * ("01", "photo 1" → "1"); drop and report keys that are not an asked category or not a photo 1..N.
+ */
+export function sanitizeVisibility(v: Visibility, categories: string[], photos: number): SanitizedVisibility {
+  const known = new Set(categories);
   const unknownKeys: string[] = [];
-  const visibility: MatchResult["visibility"] = {};
-  for (const [rawCat, row] of Object.entries(m.visibility)) {
+  const visibility: Visibility = {};
+  for (const [rawCat, row] of Object.entries(v)) {
     const cat = normalizeCategory(rawCat);
     if (!known.has(cat)) {
       unknownKeys.push(`category:${rawCat}`);
       continue;
     }
     const out = (visibility[cat] ??= {});
-    for (const [rawPhoto, v] of Object.entries(row)) {
+    for (const [rawPhoto, val] of Object.entries(row)) {
       const p = normalizePhotoKey(rawPhoto);
-      if (p === null || p < 1 || p > inventories.length) {
+      if (p === null || p < 1 || p > photos) {
         unknownKeys.push(`photo:${rawCat}/${rawPhoto}`);
         continue;
       }
-      if (!(String(p) in out)) out[String(p)] = v;
+      if (!(String(p) in out)) out[String(p)] = val;
     }
   }
-  return { match: { shared, visibility }, unknownKeys };
+  return { visibility, unknownKeys };
 }
 
 // ---------- Anthropic implementation ----------
@@ -211,9 +221,15 @@ export class AnthropicJudge implements Judge {
         ]),
       ),
     );
-    const cats = [...new Set(inventories.flatMap((inv) => inv.items.map((i) => i.category as Category)))].sort();
-    content.push(txt(renderMatchPrompt(originals.length, invJson, cats)));
+    content.push(txt(renderMatchPrompt(originals.length, invJson)));
     return (await this.call(content, matchSchema)) as MatchResult;
+  }
+
+  async visibility(originals: Buffer[], categories: string[]): Promise<Visibility> {
+    const content: Block[] = [];
+    originals.forEach((o, i) => content.push(txt(`Original ${i + 1}`), img(o)));
+    content.push(txt(renderVisibilityPrompt(originals.length, categories)));
+    return (await this.call(content, visibilitySchema)).visibility;
   }
 
   quality(original: Buffer, staged: Buffer): Promise<QualityResult> {

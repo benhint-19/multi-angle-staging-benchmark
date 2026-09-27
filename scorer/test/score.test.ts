@@ -18,7 +18,7 @@ describe("scoreRoom with a fake judge", () => {
     const photos = await Promise.all(["#888", "#999", "#aaa"].map(tinyJpeg));
     // inventory calls run photo-by-photo (3 runs each): photo 3 never shows the rug.
     const inv = (call: number) => (Math.floor(call / 3) === 2 ? sofaOnly : items);
-    const match = (id: number, pl: number, rugVisibleIn3: boolean): MatchResult => ({
+    const match = (id: number, pl: number): MatchResult => ({
       shared: [
         {
           key: "sofa",
@@ -35,16 +35,17 @@ describe("scoreRoom with a fake judge", () => {
           placement: 4,
         },
       ],
-      visibility: { sofa: { "1": true, "2": true, "3": true }, rug: { "1": true, "2": true, "3": rugVisibleIn3 } },
     });
+    const vis = (rugVisibleIn3: boolean) => ({ sofa: { "1": true, "2": true, "3": true }, rug: { "1": true, "2": true, "3": rugVisibleIn3 } });
     const judge = new FakeJudge(
       inv,
-      [match(4, 2, false), match(2, 4, true), match(4, 4, false)],
+      [match(4, 2), match(2, 4), match(4, 4)],
       [
         { realism: 3, architecture_preserved: true, notes: "" },
         { realism: 4, architecture_preserved: true, notes: "" },
         { realism: 2, architecture_preserved: false, notes: "" },
       ],
+      [vis(false), vis(true), vis(false)],
     );
     const r = await scoreRoom({
       system: "test",
@@ -56,7 +57,8 @@ describe("scoreRoom with a fake judge", () => {
       runs: 3,
       now: () => new Date("2026-09-27T00:00:00Z"),
     });
-    expect(judge.calls).toEqual({ inventory: 9, match: 3, quality: 9 });
+    expect(judge.calls).toEqual({ inventory: 9, match: 3, visibility: 3, quality: 9 });
+    expect(judge.visibilityInputs).toEqual([3, 3, 3]);
     // rug: present in 1,2; visibility majority says not visible in 3 → 2/2; sofa 3/3.
     expect(r.scores.inventory_agreement).toBe(100);
     // sofa identity median(4,2,4)=4, placement median(2,4,4)=4; rug 4/4.
@@ -68,6 +70,7 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.architecture_preserved_rate).toBe(1);
     expect(r.scores.identity_embedding_similarity).toBe(1);
     expect(r.details.runs.match).toHaveLength(3);
+    expect(r.details.runs.visibility).toHaveLength(3);
     expect(r.details.flags.no_shared_items).toBe(false);
     expect(r.judge).toEqual({ model: "fake-judge", prompt_version: PROMPT_VERSION, protocol_version: PROTOCOL_VERSION, runs: 3, aggregated: "median/majority" });
     expect(r.embedder).toEqual({ model: "fake-embedder", version: "0" });
@@ -82,7 +85,7 @@ describe("scoreRoom with a fake judge", () => {
     const photos = await Promise.all(["#111", "#222"].map(tinyJpeg));
     const judge = new FakeJudge(
       () => sofaOnly,
-      [{ shared: [], visibility: {} }],
+      [{ shared: [] }],
       [{ realism: 4, architecture_preserved: true, notes: "" }],
     );
     const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: photos, judge, embedder: null, runs: 3 });
@@ -103,7 +106,6 @@ describe("scoreRoom with a fake judge", () => {
       [
         {
           shared: [{ key: "sofa", category: "sofa", appearances: [1, 2].map((photo) => ({ photo, itemId: "i1" })), identity: 4, placement: 4 }],
-          visibility: { sofa: { "1": true, "2": true, "3": true } },
         },
       ],
       [
@@ -111,6 +113,7 @@ describe("scoreRoom with a fake judge", () => {
         { realism: 2, architecture_preserved: false, notes: "" },
         { realism: 4, architecture_preserved: true, notes: "" },
       ],
+      [{ sofa: { "1": true, "2": true, "3": true } }],
     );
     const r = await scoreRoom({
       system: "s",
@@ -122,7 +125,7 @@ describe("scoreRoom with a fake judge", () => {
       runs: 3,
     });
     // no inventory or quality calls for the absent photo; the match call still covers all 3 angles
-    expect(judge.calls).toEqual({ inventory: 6, match: 3, quality: 6 });
+    expect(judge.calls).toEqual({ inventory: 6, match: 3, visibility: 3, quality: 6 });
     expect(r.details.present).toEqual({ sofa: [1, 2] });
     // sofa visible from 1, 2, 3 but present in 1, 2 → 2/3
     expect(r.scores.inventory_agreement).toBe(66.7);
@@ -140,16 +143,45 @@ describe("scoreRoom with a fake judge", () => {
     expect(() => MasbResultSchema.parse(r)).not.toThrow();
   });
 
+  it("absent angle: the penalty does not depend on the match judge", async () => {
+    const photos = await Promise.all(["#888", "#999", "#aaa"].map(tinyJpeg));
+    // The match judge finds nothing shared; visibility (originals only) says the sofa is in view from 1–3.
+    const judge = new FakeJudge(
+      () => sofaOnly,
+      [{ shared: [] }],
+      [{ realism: 3, architecture_preserved: true, notes: "" }],
+      [{ sofa: { "1": true, "2": true, "3": true } }],
+    );
+    const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: [photos[0]!, photos[1]!, null], judge, embedder: null, runs: 3 });
+    expect(r.scores.inventory_agreement).toBe(66.7);
+    expect(r.details.visibility).toEqual({ sofa: { "1": true, "2": true, "3": true } });
+  });
+
+  it("delivered photo: a category the visibility judge says is out of view from photo 2 is excluded there", async () => {
+    const photos = await Promise.all(["#888", "#999", "#aaa"].map(tinyJpeg));
+    // rug present in staged photos 1 and 2 only; judged out of view from 2 and 3 → 1/1.
+    const inv = (call: number) => (Math.floor(call / 3) === 0 || Math.floor(call / 3) === 1 ? items : sofaOnly);
+    const judge = new FakeJudge(
+      inv,
+      [{ shared: [] }],
+      [{ realism: 3, architecture_preserved: true, notes: "" }],
+      [{ sofa: { "1": true, "2": true, "3": true }, rug: { "1": true, "2": false, "3": false } }],
+    );
+    const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: photos, judge, embedder: null, runs: 3 });
+    expect(r.details.present).toEqual({ sofa: [1, 2, 3], rug: [1, 2] });
+    expect(r.scores.inventory_agreement).toBe(100);
+  });
+
   it("rejects a non-integer or zero run count", async () => {
     const p = await tinyJpeg("#000");
-    const judge = new FakeJudge(() => sofaOnly, [{ shared: [], visibility: {} }], []);
+    const judge = new FakeJudge(() => sofaOnly, [{ shared: [] }], []);
     await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p], judge, runs: 0 })).rejects.toThrow(/runs/);
     await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p], judge, runs: 1.5 })).rejects.toThrow(/runs/);
   });
 
   it("rejects mismatched photo counts", async () => {
     const p = await tinyJpeg("#000");
-    const judge = new FakeJudge(() => sofaOnly, [{ shared: [], visibility: {} }], []);
+    const judge = new FakeJudge(() => sofaOnly, [{ shared: [] }], []);
     await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p, p], judge })).rejects.toThrow();
   });
 });

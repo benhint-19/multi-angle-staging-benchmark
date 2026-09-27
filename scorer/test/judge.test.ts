@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractJson, inventorySchema, normalizePhotoKey, sanitizeMatch } from "../src/judge.js";
+import { extractJson, inventorySchema, normalizePhotoKey, sanitizeMatch, sanitizeVisibility } from "../src/judge.js";
 
 describe("judge parsing", () => {
   it("extracts JSON from fenced replies", () => {
@@ -17,13 +17,12 @@ describe("judge parsing", () => {
       { items: [{ id: "i1", category: "sofa" as const, description: "", bbox: [0, 0, 1, 1] as [number, number, number, number] }] },
       { items: [{ id: "i1", category: "sofa" as const, description: "", bbox: [0, 0, 1, 1] as [number, number, number, number] }] },
     ];
-    const { match: m } = sanitizeMatch(
+    const m = sanitizeMatch(
       {
         shared: [
           { key: "a", category: "sofa", identity: 4, placement: 4, appearances: [{ photo: 1, itemId: "i1" }, { photo: 2, itemId: "i9" }] },
           { key: "b", category: "sofa", identity: 4, placement: 4, appearances: [{ photo: 1, itemId: "i1" }, { photo: 2, itemId: "i1" }] },
         ],
-        visibility: {},
       },
       inv,
     );
@@ -32,20 +31,12 @@ describe("judge parsing", () => {
   });
 
   it("normalises visibility keys and reports unknown ones", () => {
-    const inv = [0, 1].map(() => ({
-      items: [{ id: "i1", category: "coffee_table" as const, description: "", bbox: [0, 0, 1, 1] as [number, number, number, number] }],
-    }));
-    const { match, unknownKeys } = sanitizeMatch(
-      {
-        shared: [],
-        visibility: {
-          "Coffee Table": { "01": true, "photo 2": false, "3": true },
-          bar_stool: { "1": true },
-        },
-      },
-      inv,
+    const { visibility, unknownKeys } = sanitizeVisibility(
+      { "Coffee Table": { "01": true, "photo 2": false, "3": true }, bar_stool: { "1": true } },
+      ["coffee_table"],
+      2,
     );
-    expect(match.visibility).toEqual({ coffee_table: { "1": true, "2": false } });
+    expect(visibility).toEqual({ coffee_table: { "1": true, "2": false } });
     expect(unknownKeys).toEqual(["photo:Coffee Table/3", "category:bar_stool"]);
   });
 

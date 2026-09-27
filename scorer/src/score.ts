@@ -1,12 +1,12 @@
 import sharp from "sharp";
-import { aggregateMatch, aggregateQuality } from "./aggregate.js";
+import { aggregateMatch, aggregateQuality, aggregateVisibility } from "./aggregate.js";
 import type { Embedder } from "./embed.js";
 import { identityAgreement, itemEmbeddingSimilarity } from "./identity.js";
 import { inventoryAgreement, presentByMajority, representativeRun } from "./inventory.js";
-import { sanitizeMatch, type Judge } from "./judge.js";
+import { sanitizeMatch, sanitizeVisibility, type Judge } from "./judge.js";
 import { placementAgreement } from "./placement.js";
 import { PROMPT_VERSION, PROTOCOL_VERSION } from "./prompts.js";
-import type { BBox, Inventory, MasbResult, MatchResult, QualityResult, SharedItem } from "./types.js";
+import type { BBox, Inventory, MasbResult, MatchResult, QualityResult, SharedItem, Visibility } from "./types.js";
 
 export interface ScoreOptions {
   system: string;
@@ -80,8 +80,9 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   const n = staged.length;
   if (n < 2) throw new Error(`need at least 2 photos, got ${n}`);
   if (originals.length !== n) throw new Error(`originals (${originals.length}) and staged (${n}) counts differ`);
-  // Absent angles (PROTOCOL.md): inventory is empty (nothing present), the match call shows the
-  // original in the staged slot so visibility is still judged for all N angles, and quality skips it.
+  // Absent angles (PROTOCOL.md): inventory is empty (nothing present), quality skips it, and the match
+  // call shows the original in its staged slot (it has no items, so nothing can link to it).
+  // Visibility never sees staged photos: it is judged from the N originals alone.
   const absent = staged.flatMap((b, i) => (b ? [] : [i + 1]));
   const delivered = n - absent.length;
   if (delivered === 0) throw new Error("no staged photos delivered");
@@ -101,12 +102,19 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
     representativeRun(photoRuns, new Set(Object.entries(present).filter(([, ps]) => ps.includes(i + 1)).map(([c]) => c))),
   );
 
-  log(`match: ${runs} runs`);
-  const sanitized = await times(async () => sanitizeMatch(await judge.match(origJ, stagedJ, inventories), inventories));
-  const matchRuns: MatchResult[] = sanitized.map((x) => x.match);
-  const unknownKeys = [...new Set(sanitized.flatMap((x) => x.unknownKeys))];
+  const categories = Object.keys(present).sort();
+  log(`match: ${runs} runs; visibility (originals only): ${runs} runs over ${categories.length} categories`);
+  const [matchRuns, visSanitized] = await Promise.all([
+    times(async (): Promise<MatchResult> => sanitizeMatch(await judge.match(origJ, stagedJ, inventories), inventories)),
+    categories.length
+      ? times(async () => sanitizeVisibility(await judge.visibility(origJ, categories), categories, n))
+      : Promise.resolve([]),
+  ]);
+  const visibilityRuns: Visibility[] = visSanitized.map((x) => x.visibility);
+  const unknownKeys = [...new Set(visSanitized.flatMap((x) => x.unknownKeys))];
   if (unknownKeys.length) log(`visibility: dropped unknown keys ${unknownKeys.join(", ")}`);
-  const match = aggregateMatch(matchRuns, n);
+  const visibility = aggregateVisibility(visibilityRuns, categories, n);
+  const match = aggregateMatch(matchRuns);
   if (match.fallback) log("match: no link reached a majority; using the median-consistency run");
 
   log(`quality: ${delivered} photos x ${runs} runs`);
@@ -130,7 +138,7 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
   }
   const sims = embedding.flatMap((e) => (e.similarity === null ? [] : [e.similarity]));
 
-  const inv = inventoryAgreement(present, match.visibility, n);
+  const inv = inventoryAgreement(present, visibility, n);
   const id = identityAgreement(match.shared);
   const pl = placementAgreement(match.shared);
   const cost = judge.costUsd() + (opts.embedder?.costUsd() ?? 0);
@@ -154,10 +162,10 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
       inventories,
       present,
       shared: match.shared,
-      visibility: match.visibility,
+      visibility,
       quality,
       embedding,
-      runs: { inventory: invRuns, match: matchRuns, quality: qualityRuns },
+      runs: { inventory: invRuns, match: matchRuns, visibility: visibilityRuns, quality: qualityRuns },
       flags: {
         no_shared_items: match.shared.length === 0,
         shared_fallback_median_run: match.fallback,

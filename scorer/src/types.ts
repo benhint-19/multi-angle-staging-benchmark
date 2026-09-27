@@ -65,7 +65,6 @@ export type Visibility = Record<string, Record<string, boolean>>;
 
 export interface MatchResult {
   shared: SharedItem[];
-  visibility: Visibility;
 }
 
 export interface QualityResult {
@@ -102,6 +101,7 @@ export interface Details {
   runs: {
     inventory: Inventory[][]; // [photo][run]
     match: MatchResult[]; // [run]
+    visibility: Visibility[]; // [run], judged from the originals only
     quality: QualityResult[][]; // [photo][run]; [] for an absent photo
   };
   flags: {
@@ -111,10 +111,10 @@ export interface Details {
     /** Visibility keys from the judge that did not normalise to a known category / photo (dropped). */
     visibility_unknown_keys: string[];
     embedding_note?: string;
-    /** Photos the system delivered (N minus absent). Protocol ≥ 0.1.2. */
-    delivered?: number;
-    /** 1-based photo numbers the system did not deliver (see PROTOCOL.md "Absent angles"). Protocol ≥ 0.1.2. */
-    absent?: number[];
+    /** Photos the system delivered (N minus absent). */
+    delivered: number;
+    /** 1-based photo numbers the system did not deliver (see PROTOCOL.md "Absent angles"). */
+    absent: number[];
   };
 }
 
@@ -126,7 +126,7 @@ export interface MasbResult {
   photos: number;
   scores: Scores;
   details: Details;
-  judge: { model: string; prompt_version: string; protocol_version?: string; runs: number; aggregated: "median/majority" };
+  judge: { model: string; prompt_version: string; protocol_version: string; runs: number; aggregated: "median/majority" };
   /** Image embedder used for identity_embedding_similarity; null when none ran. */
   embedder: { model: string; version: string } | null;
   cost_usd: number;
