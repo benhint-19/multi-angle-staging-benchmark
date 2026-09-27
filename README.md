@@ -59,7 +59,7 @@ the published numbers.
 Each room directory (`data/rooms/<id>/`) has the numbered original photos (shooting
 order) and a `meta.json` with license and credit info. All photos have had metadata
 (EXIF, GPS, etc.) stripped and are capped at 2048px on the long edge. See
-`DATA_LICENSE` for the data's license (CC BY 4.0) — code in this repo is MIT-licensed
+`DATA_LICENSE` for the data's license (research and evaluation use for the v0.1 Amber Ridge sets; contributed sets are CC BY 4.0) — code in this repo is MIT-licensed
 separately (see `LICENSE`).
 
 ## How to contribute
