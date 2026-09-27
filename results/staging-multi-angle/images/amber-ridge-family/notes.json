@@ -20,5 +20,6 @@
       "photo": "04",
       "status": "delivered"
     }
-  ]
+  ],
+  "run_notes": "Run once per room; not redone for quality reasons."
 }

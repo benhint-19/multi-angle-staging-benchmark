@@ -9,6 +9,11 @@ You may not redistribute the photographs themselves, sell them, or use them for 
 or as training data, without written permission from the rights holder. Credit the source as
 "Amber Ridge set, Multi-Angle Staging Benchmark (credit: Ben Hinton)".
 
+Staged outputs derived from these photographs (a staging system's rendering of an original) may be
+redistributed when they are submitted to this benchmark's `results/` directory (by pull request),
+under the CC0 terms that apply to results; this permission covers the derived staged images only and
+does not extend to the original photographs themselves.
+
 Why not Creative Commons yet: the rights position on these specific photographs is being
 confirmed. Once it is, this file will be replaced by a CC BY 4.0 grant. Contributed room sets
 from other photographers are licensed under CC BY 4.0 as described in CONTRIBUTING.md, and a

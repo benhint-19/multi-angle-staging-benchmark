@@ -8,3 +8,4 @@ version: 0.1.0
 date-released: "2026-09-27"
 repository-code: "https://github.com/benhint-19/multi-angle-staging-benchmark"
 license: MIT
+# Code is MIT; the photographs under data/ are licensed separately (see DATA_LICENSE); results are CC0.

@@ -18,7 +18,9 @@
     },
     {
       "photo": "04",
-      "status": "absent"
+      "status": "absent",
+      "reason": "failed the system's own quality check; not rerun"
     }
-  ]
+  ],
+  "run_notes": "Run once per room; not redone for quality reasons. Photo 04 failed the system's own quality check and was not rerun; counted as absent per protocol."
 }

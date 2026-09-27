@@ -290,7 +290,7 @@ Options for `score`: `--runs <n>` (integer ≥ 1, default 3; an even count warns
 
 Per room of N photos: 3N inventory calls, 3 match calls (all 2N images each), 3 visibility calls
 (N images each) and 3N quality calls (an absent photo gets no inventory or quality calls). Measured on
-3–4-photo rooms: **about $0.25–0.45** of judge usage (claude-sonnet-5 list price, $2 / $10
+3–4-photo rooms: **about $0.20–0.35** of judge usage per room (claude-sonnet-5 list price, $2 / $10
 per million input / output tokens) and 10–20 s wall time. CLIP embeddings add under $0.001, but a
 Replicate account with less than $5 credit is throttled to about 6 predictions per minute, so ~15
 crops can take 2–3 minutes. `cost_usd` in each result is the measured spend for that room.

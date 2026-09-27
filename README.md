@@ -49,7 +49,7 @@ node dist/cli.js score ./rooms/my-tool/amber-ridge-living --system my-tool \
 node dist/cli.js table ../results --out ../RESULTS.md
 ```
 
-Scoring one 3-photo room costs about $0.12–0.18 in judge usage. Each result file keeps every
+Scoring a room costs about $0.20–0.35 in judge usage per room (see `cost_usd` in each result). Each result file keeps every
 raw judge reply, so the numbers can be audited and recomputed. `results/` + `RESULTS.md` hold
 the published numbers.
 

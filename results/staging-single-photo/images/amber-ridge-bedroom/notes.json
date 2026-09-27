@@ -16,5 +16,6 @@
       "photo": "03",
       "status": "delivered"
     }
-  ]
+  ],
+  "run_notes": "Run once per room. The first attempt failed on a provider rate limit (HTTP 429) before producing any images and was restarted once; no run was redone for quality reasons."
 }
