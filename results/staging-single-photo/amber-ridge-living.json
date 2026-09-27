@@ -1,0 +1,1766 @@
+{
+  "benchmark": "MASB",
+  "version": "0.1.0",
+  "system": "staging-single-photo",
+  "room": "amber-ridge-living",
+  "photos": 3,
+  "scores": {
+    "consistency": 74.4,
+    "inventory_agreement": 83.3,
+    "identity_agreement": 60,
+    "placement_agreement": 80,
+    "realism": 75,
+    "architecture_preserved_rate": 1,
+    "identity_embedding_similarity": 0.861
+  },
+  "details": {
+    "inventories": [
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "floor_lamp",
+            "description": "Hanging pendant light with glass shade on chain cord",
+            "bbox": [
+              0.16,
+              0.03,
+              0.23,
+              0.17
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "sofa",
+            "description": "Beige upholstered sofa with green and cream throw pillows",
+            "bbox": [
+              0.23,
+              0.37,
+              0.61,
+              0.58
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "decor",
+            "description": "Gray knit throw blanket draped over sofa arm",
+            "bbox": [
+              0.23,
+              0.42,
+              0.31,
+              0.58
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "coffee_table",
+            "description": "Rectangular wooden coffee table with tapered legs",
+            "bbox": [
+              0.43,
+              0.46,
+              0.72,
+              0.62
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "plant",
+            "description": "Small potted green plant in white round pot",
+            "bbox": [
+              0.6,
+              0.42,
+              0.68,
+              0.5
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "decor",
+            "description": "Stack of two books with a white bowl on top",
+            "bbox": [
+              0.52,
+              0.46,
+              0.62,
+              0.51
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "rug",
+            "description": "Beige woven textured area rug under sofa and table",
+            "bbox": [
+              0.17,
+              0.5,
+              0.85,
+              0.69
+            ]
+          },
+          {
+            "id": "i8",
+            "category": "plant",
+            "description": "Large fiddle leaf fig plant in tall round white pot",
+            "bbox": [
+              0.78,
+              0.22,
+              0.99,
+              0.54
+            ]
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "wall_art",
+            "description": "Framed abstract painting in beige, olive, and gray tones",
+            "bbox": [
+              0.427,
+              0.213,
+              0.562,
+              0.362
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "sofa",
+            "description": "Light beige upholstered three-seat sofa with dark wood legs",
+            "bbox": [
+              0.259,
+              0.367,
+              0.697,
+              0.541
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "decor",
+            "description": "Set of green and beige throw pillows on sofa",
+            "bbox": [
+              0.3,
+              0.365,
+              0.66,
+              0.45
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "decor",
+            "description": "Green knit throw blanket draped over sofa arm",
+            "bbox": [
+              0.264,
+              0.44,
+              0.36,
+              0.545
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "rug",
+            "description": "Beige woven jute area rug under sofa",
+            "bbox": [
+              0.147,
+              0.51,
+              0.86,
+              0.62
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "plant",
+            "description": "Large potted fiddle-leaf fig plant in white round planter",
+            "bbox": [
+              0.685,
+              0.268,
+              0.803,
+              0.512
+            ]
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "wall_art",
+            "description": "Framed landscape watercolor painting with wood frame",
+            "bbox": [
+              0.317,
+              0.211,
+              0.503,
+              0.339
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "sofa",
+            "description": "Beige upholstered three-seat sofa with wood base",
+            "bbox": [
+              0.249,
+              0.361,
+              0.663,
+              0.549
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "decor",
+            "description": "Green throw pillow on sofa left",
+            "bbox": [
+              0.269,
+              0.372,
+              0.35,
+              0.44
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "decor",
+            "description": "White textured throw pillow on sofa",
+            "bbox": [
+              0.328,
+              0.383,
+              0.405,
+              0.447
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "decor",
+            "description": "Beige striped throw pillow on sofa",
+            "bbox": [
+              0.51,
+              0.383,
+              0.585,
+              0.445
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "decor",
+            "description": "Green textured throw pillow on sofa right",
+            "bbox": [
+              0.555,
+              0.372,
+              0.635,
+              0.44
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "decor",
+            "description": "Gray knit throw blanket draped over sofa arm",
+            "bbox": [
+              0.55,
+              0.44,
+              0.665,
+              0.55
+            ]
+          },
+          {
+            "id": "i8",
+            "category": "plant",
+            "description": "Large fiddle leaf fig plant in round ceramic pot",
+            "bbox": [
+              0.638,
+              0.252,
+              0.775,
+              0.53
+            ]
+          }
+        ]
+      }
+    ],
+    "present": {
+      "floor_lamp": [
+        1
+      ],
+      "sofa": [
+        1,
+        2,
+        3
+      ],
+      "decor": [
+        1,
+        2,
+        3
+      ],
+      "coffee_table": [
+        1
+      ],
+      "plant": [
+        1,
+        2,
+        3
+      ],
+      "rug": [
+        1,
+        2
+      ],
+      "wall_art": [
+        2,
+        3
+      ]
+    },
+    "shared": [
+      {
+        "key": "sofa",
+        "category": "sofa",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i2"
+          },
+          {
+            "photo": 2,
+            "itemId": "i2"
+          },
+          {
+            "photo": 3,
+            "itemId": "i2"
+          }
+        ],
+        "identity": 3,
+        "placement": 3
+      },
+      {
+        "key": "throw_blanket",
+        "category": "decor",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i3"
+          },
+          {
+            "photo": 2,
+            "itemId": "i4"
+          },
+          {
+            "photo": 3,
+            "itemId": "i7"
+          }
+        ],
+        "identity": 2,
+        "placement": 4
+      },
+      {
+        "key": "area_rug",
+        "category": "rug",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i7"
+          },
+          {
+            "photo": 2,
+            "itemId": "i5"
+          }
+        ],
+        "identity": 3,
+        "placement": 3
+      },
+      {
+        "key": "fiddle_leaf_plant",
+        "category": "plant",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i8"
+          },
+          {
+            "photo": 2,
+            "itemId": "i6"
+          },
+          {
+            "photo": 3,
+            "itemId": "i8"
+          }
+        ],
+        "identity": 3,
+        "placement": 3
+      },
+      {
+        "key": "wall_art_piece",
+        "category": "wall_art",
+        "appearances": [
+          {
+            "photo": 2,
+            "itemId": "i1"
+          },
+          {
+            "photo": 3,
+            "itemId": "i1"
+          }
+        ],
+        "identity": 1,
+        "placement": 3
+      }
+    ],
+    "visibility": {
+      "coffee_table": {
+        "1": true,
+        "2": true,
+        "3": false
+      },
+      "decor": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "floor_lamp": {
+        "1": true,
+        "2": false,
+        "3": false
+      },
+      "plant": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "rug": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "sofa": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "wall_art": {
+        "1": true,
+        "2": true,
+        "3": true
+      }
+    },
+    "quality": [
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Furniture scale, shadows, and floor contact look plausible with only minor rug/perspective softness; all walls, windows, doors, and flooring remain unchanged from the original."
+      },
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Furniture scale, shadows, and rug placement look plausible with only minor lighting inconsistency, while windows, walls, floor, and TV remain unchanged."
+      },
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Furniture has plausible scale, lighting, and shadows with good floor contact, though the TV was removed and replaced with wall art which is a minor inconsistency; the room's structure, windows, and floors remain unchanged."
+      }
+    ],
+    "embedding": [
+      {
+        "key": "sofa",
+        "similarity": 0.8216157409294977
+      },
+      {
+        "key": "throw_blanket",
+        "similarity": 0.8371762702789874
+      },
+      {
+        "key": "area_rug",
+        "similarity": 0.9116313675953874
+      },
+      {
+        "key": "fiddle_leaf_plant",
+        "similarity": 0.8612915281379009
+      },
+      {
+        "key": "wall_art_piece",
+        "similarity": 0.8710623093990109
+      }
+    ],
+    "runs": {
+      "inventory": [
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "floor_lamp",
+                "description": "Hanging pendant light with glass shade on chain cord",
+                "bbox": [
+                  0.16,
+                  0.03,
+                  0.23,
+                  0.17
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered sofa with green and cream throw pillows",
+                "bbox": [
+                  0.23,
+                  0.37,
+                  0.61,
+                  0.58
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Gray knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.23,
+                  0.42,
+                  0.31,
+                  0.58
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "coffee_table",
+                "description": "Rectangular wooden coffee table with tapered legs",
+                "bbox": [
+                  0.43,
+                  0.46,
+                  0.72,
+                  0.62
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "plant",
+                "description": "Small potted green plant in white round pot",
+                "bbox": [
+                  0.6,
+                  0.42,
+                  0.68,
+                  0.5
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Stack of two books with a white bowl on top",
+                "bbox": [
+                  0.52,
+                  0.46,
+                  0.62,
+                  0.51
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "rug",
+                "description": "Beige woven textured area rug under sofa and table",
+                "bbox": [
+                  0.17,
+                  0.5,
+                  0.85,
+                  0.69
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "plant",
+                "description": "Large fiddle leaf fig plant in tall round white pot",
+                "bbox": [
+                  0.78,
+                  0.22,
+                  0.99,
+                  0.54
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "floor_lamp",
+                "description": "Hanging pendant light with glass shade on chain",
+                "bbox": [
+                  0.17,
+                  0.03,
+                  0.23,
+                  0.17
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered fabric sofa with cushions",
+                "bbox": [
+                  0.22,
+                  0.37,
+                  0.6,
+                  0.58
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Draped grey throw blanket on sofa arm",
+                "bbox": [
+                  0.22,
+                  0.42,
+                  0.32,
+                  0.58
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Sage green throw pillow",
+                "bbox": [
+                  0.27,
+                  0.38,
+                  0.35,
+                  0.44
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Cream throw pillow",
+                "bbox": [
+                  0.32,
+                  0.39,
+                  0.4,
+                  0.45
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Sage green throw pillow",
+                "bbox": [
+                  0.44,
+                  0.37,
+                  0.51,
+                  0.43
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Sage green throw pillow",
+                "bbox": [
+                  0.51,
+                  0.38,
+                  0.58,
+                  0.44
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "coffee_table",
+                "description": "Wooden rectangular coffee table with dark finish",
+                "bbox": [
+                  0.42,
+                  0.47,
+                  0.72,
+                  0.62
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "plant",
+                "description": "Small potted green plant on coffee table",
+                "bbox": [
+                  0.59,
+                  0.42,
+                  0.68,
+                  0.5
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "decor",
+                "description": "White ceramic bowl on coffee table",
+                "bbox": [
+                  0.55,
+                  0.45,
+                  0.6,
+                  0.48
+                ]
+              },
+              {
+                "id": "i11",
+                "category": "decor",
+                "description": "Stack of two books on coffee table",
+                "bbox": [
+                  0.5,
+                  0.46,
+                  0.58,
+                  0.49
+                ]
+              },
+              {
+                "id": "i12",
+                "category": "rug",
+                "description": "Woven beige round-edged area rug",
+                "bbox": [
+                  0.19,
+                  0.5,
+                  0.85,
+                  0.68
+                ]
+              },
+              {
+                "id": "i13",
+                "category": "plant",
+                "description": "Large fiddle leaf fig plant in round white pot",
+                "bbox": [
+                  0.78,
+                  0.24,
+                  1,
+                  0.53
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "Hanging pendant lamp with white glass shade",
+                "bbox": [
+                  0.16,
+                  0.03,
+                  0.23,
+                  0.17
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered sofa with green and cream throw pillows",
+                "bbox": [
+                  0.23,
+                  0.36,
+                  0.6,
+                  0.62
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Gray knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.24,
+                  0.42,
+                  0.32,
+                  0.58
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "coffee_table",
+                "description": "Wooden rectangular coffee table with dark stained top",
+                "bbox": [
+                  0.42,
+                  0.45,
+                  0.72,
+                  0.63
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "plant",
+                "description": "Small potted green plant in white pot on table",
+                "bbox": [
+                  0.6,
+                  0.42,
+                  0.68,
+                  0.5
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "White decorative bowl and stack of books on table",
+                "bbox": [
+                  0.52,
+                  0.44,
+                  0.62,
+                  0.49
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "rug",
+                "description": "Beige woven area rug covering tiled floor",
+                "bbox": [
+                  0.18,
+                  0.55,
+                  0.85,
+                  0.97
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "plant",
+                "description": "Large fiddle leaf fig plant in round beige pot",
+                "bbox": [
+                  0.76,
+                  0.22,
+                  0.98,
+                  0.55
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Framed abstract painting in beige, olive, and gray tones",
+                "bbox": [
+                  0.427,
+                  0.213,
+                  0.562,
+                  0.362
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Light beige upholstered three-seat sofa with dark wood legs",
+                "bbox": [
+                  0.259,
+                  0.367,
+                  0.697,
+                  0.541
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Set of green and beige throw pillows on sofa",
+                "bbox": [
+                  0.3,
+                  0.365,
+                  0.66,
+                  0.45
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Green knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.264,
+                  0.44,
+                  0.36,
+                  0.545
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "rug",
+                "description": "Beige woven jute area rug under sofa",
+                "bbox": [
+                  0.147,
+                  0.51,
+                  0.86,
+                  0.62
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "plant",
+                "description": "Large potted fiddle-leaf fig plant in white round planter",
+                "bbox": [
+                  0.685,
+                  0.268,
+                  0.803,
+                  0.512
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Abstract framed painting in beige, green, and brown tones",
+                "bbox": [
+                  0.425,
+                  0.213,
+                  0.562,
+                  0.359
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered three-seat sofa with wooden legs",
+                "bbox": [
+                  0.257,
+                  0.372,
+                  0.697,
+                  0.542
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Green textured throw pillow",
+                "bbox": [
+                  0.297,
+                  0.372,
+                  0.383,
+                  0.443
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Striped beige and white throw pillow",
+                "bbox": [
+                  0.36,
+                  0.383,
+                  0.44,
+                  0.449
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Textured brown round throw pillow",
+                "bbox": [
+                  0.44,
+                  0.398,
+                  0.516,
+                  0.451
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Striped beige and white throw pillow",
+                "bbox": [
+                  0.516,
+                  0.383,
+                  0.596,
+                  0.449
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Green textured throw pillow",
+                "bbox": [
+                  0.585,
+                  0.372,
+                  0.668,
+                  0.443
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "decor",
+                "description": "Green knit throw blanket draped on sofa arm",
+                "bbox": [
+                  0.278,
+                  0.44,
+                  0.4,
+                  0.55
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "rug",
+                "description": "Woven tan jute area rug",
+                "bbox": [
+                  0.14,
+                  0.54,
+                  0.86,
+                  0.62
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "plant",
+                "description": "Fiddle leaf fig plant in round white pot",
+                "bbox": [
+                  0.683,
+                  0.27,
+                  0.81,
+                  0.51
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Abstract framed painting in beige, green and gray tones",
+                "bbox": [
+                  0.427,
+                  0.213,
+                  0.562,
+                  0.362
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Light beige upholstered three-seat sofa with wooden legs",
+                "bbox": [
+                  0.262,
+                  0.365,
+                  0.7,
+                  0.535
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Two olive green textured throw pillows",
+                "bbox": [
+                  0.298,
+                  0.372,
+                  0.395,
+                  0.44
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Two beige striped throw pillows",
+                "bbox": [
+                  0.355,
+                  0.375,
+                  0.63,
+                  0.45
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Central brown textured throw pillow",
+                "bbox": [
+                  0.44,
+                  0.395,
+                  0.51,
+                  0.45
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Olive green knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.267,
+                  0.44,
+                  0.39,
+                  0.55
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "plant",
+                "description": "Large fiddle leaf fig plant in round white pot",
+                "bbox": [
+                  0.685,
+                  0.27,
+                  0.81,
+                  0.51
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "rug",
+                "description": "Beige woven jute-style area rug",
+                "bbox": [
+                  0.145,
+                  0.53,
+                  0.87,
+                  0.615
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Framed landscape watercolor painting with wood frame",
+                "bbox": [
+                  0.317,
+                  0.211,
+                  0.503,
+                  0.339
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered three-seat sofa with wood base",
+                "bbox": [
+                  0.249,
+                  0.361,
+                  0.663,
+                  0.549
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Green throw pillow on sofa left",
+                "bbox": [
+                  0.269,
+                  0.372,
+                  0.35,
+                  0.44
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "White textured throw pillow on sofa",
+                "bbox": [
+                  0.328,
+                  0.383,
+                  0.405,
+                  0.447
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Beige striped throw pillow on sofa",
+                "bbox": [
+                  0.51,
+                  0.383,
+                  0.585,
+                  0.445
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Green textured throw pillow on sofa right",
+                "bbox": [
+                  0.555,
+                  0.372,
+                  0.635,
+                  0.44
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Gray knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.55,
+                  0.44,
+                  0.665,
+                  0.55
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "plant",
+                "description": "Large fiddle leaf fig plant in round ceramic pot",
+                "bbox": [
+                  0.638,
+                  0.252,
+                  0.775,
+                  0.53
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Framed landscape painting, muted green and beige tones, wood frame",
+                "bbox": [
+                  0.313,
+                  0.211,
+                  0.5,
+                  0.34
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered three-seat sofa with wood base",
+                "bbox": [
+                  0.245,
+                  0.365,
+                  0.665,
+                  0.55
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Two olive green throw pillows on sofa",
+                "bbox": [
+                  0.27,
+                  0.375,
+                  0.35,
+                  0.45
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "White textured throw pillow center sofa",
+                "bbox": [
+                  0.32,
+                  0.39,
+                  0.4,
+                  0.46
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Beige striped throw pillow on sofa",
+                "bbox": [
+                  0.53,
+                  0.385,
+                  0.6,
+                  0.45
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Olive green throw pillow right side of sofa",
+                "bbox": [
+                  0.58,
+                  0.37,
+                  0.65,
+                  0.45
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Gray knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.55,
+                  0.44,
+                  0.66,
+                  0.55
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "plant",
+                "description": "Tall fiddle leaf fig plant in round beige ceramic pot",
+                "bbox": [
+                  0.65,
+                  0.25,
+                  0.79,
+                  0.53
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Framed landscape painting, muted green and beige tones, wood frame",
+                "bbox": [
+                  0.317,
+                  0.211,
+                  0.499,
+                  0.343
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "sofa",
+                "description": "Beige upholstered three-seat sofa with wooden base",
+                "bbox": [
+                  0.245,
+                  0.362,
+                  0.663,
+                  0.55
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Green and cream throw pillows on sofa",
+                "bbox": [
+                  0.28,
+                  0.375,
+                  0.605,
+                  0.45
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "decor",
+                "description": "Grey knit throw blanket draped over sofa arm",
+                "bbox": [
+                  0.55,
+                  0.42,
+                  0.66,
+                  0.55
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "plant",
+                "description": "Large fiddle-leaf fig plant in round beige pot",
+                "bbox": [
+                  0.645,
+                  0.253,
+                  0.775,
+                  0.53
+                ]
+              }
+            ]
+          }
+        ]
+      ],
+      "match": [
+        {
+          "shared": [
+            {
+              "key": "sofa",
+              "category": "sofa",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "fiddle_leaf_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i8"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i8"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "throw_blanket",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i7"
+                }
+              ],
+              "identity": 2,
+              "placement": 4
+            },
+            {
+              "key": "area_rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "wall_art_piece",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 1,
+              "placement": 3
+            }
+          ],
+          "visibility": {
+            "coffee_table": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "floor_lamp": {
+              "1": true,
+              "2": false,
+              "3": false
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "sofa": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": true,
+              "2": true,
+              "3": true
+            }
+          }
+        },
+        {
+          "shared": [
+            {
+              "key": "main-sofa",
+              "category": "sofa",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "fiddle-leaf-plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i8"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i8"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "wall-art-above-sofa",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 1,
+              "placement": 3
+            },
+            {
+              "key": "area-rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "throw-blanket",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i7"
+                }
+              ],
+              "identity": 2,
+              "placement": 4
+            }
+          ],
+          "visibility": {
+            "coffee_table": {
+              "1": true,
+              "2": false,
+              "3": false
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "floor_lamp": {
+              "1": true,
+              "2": false,
+              "3": false
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "sofa": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": false,
+              "2": true,
+              "3": true
+            }
+          }
+        },
+        {
+          "shared": [
+            {
+              "key": "main-sofa-window-wall",
+              "category": "sofa",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "corner-fiddle-leaf-plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i8"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i8"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "jute-area-rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            }
+          ],
+          "visibility": {
+            "coffee_table": {
+              "1": true,
+              "2": true,
+              "3": false
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "floor_lamp": {
+              "1": true,
+              "2": false,
+              "3": false
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": false
+            },
+            "sofa": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": true,
+              "2": true,
+              "3": true
+            }
+          }
+        }
+      ],
+      "quality": [
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and floor contact look plausible with only minor rug/perspective softness; all walls, windows, doors, and flooring remain unchanged from the original."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and rug placement look plausible with consistent lighting, though the rug edge under the couch and slightly flat plant shadow are minor tells; all walls, windows, doors, and flooring remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture has plausible scale, shadows, and floor contact, with only minor lighting flatness; all walls, windows, doors, and flooring match the original."
+          }
+        ],
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and rug placement look plausible with only minor lighting inconsistency, while windows, walls, floor, and TV remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and floor contact look plausible, with only minor rug/couch placement stiffness; all walls, windows, floor, and view remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and rug placement look plausible with only minor flaws (e.g., soft shadow under couch, slight rug edge blending), while all walls, windows, floor, and view remain unchanged."
+          }
+        ],
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture has plausible scale, lighting, and shadows with good floor contact, though the TV was removed and replaced with wall art which is a minor inconsistency; the room's structure, windows, and floors remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture has plausible scale, shadows, and floor contact, with only minor lighting flatness; the TV was removed and replaced with wall art but all structural elements (walls, window, floor, ceiling, kitchen view) remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture, art, and plant have plausible scale, lighting, and shadows with good floor contact, though the TV was removed and slightly altered the wall niche appearance while room structure remains intact."
+          }
+        ]
+      ]
+    },
+    "flags": {
+      "no_shared_items": false,
+      "shared_fallback_median_run": false,
+      "visibility_unknown_keys": []
+    }
+  },
+  "judge": {
+    "model": "claude-sonnet-5",
+    "prompt_version": "0.1.1",
+    "runs": 3,
+    "aggregated": "median/majority"
+  },
+  "embedder": {
+    "model": "replicate:andreasjansson/clip-features",
+    "version": "75b33f253f7714a281ad3e9b28f63e3232d583716ef6718f2e46641077ea040a"
+  },
+  "cost_usd": 0.2719,
+  "scored_at": "2026-09-27T16:23:23.216Z"
+}

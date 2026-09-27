@@ -1,0 +1,2116 @@
+{
+  "benchmark": "MASB",
+  "version": "0.1.0",
+  "system": "staging-multi-angle",
+  "room": "amber-ridge-bedroom",
+  "photos": 3,
+  "scores": {
+    "consistency": 97.6,
+    "inventory_agreement": 100,
+    "identity_agreement": 96.4,
+    "placement_agreement": 96.4,
+    "realism": 75,
+    "architecture_preserved_rate": 1,
+    "identity_embedding_similarity": 0.833
+  },
+  "details": {
+    "inventories": [
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "table_lamp",
+            "description": "Cream ceramic lamp with linen drum shade on nightstand",
+            "bbox": [
+              0,
+              0.269,
+              0.086,
+              0.462
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "plant",
+            "description": "Small green potted plant on nightstand",
+            "bbox": [
+              0.055,
+              0.379,
+              0.13,
+              0.451
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "nightstand",
+            "description": "Wood nightstand with drawer and open shelf",
+            "bbox": [
+              0,
+              0.447,
+              0.157,
+              0.667
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "bed",
+            "description": "Upholstered beige bed with layered white and green bedding",
+            "bbox": [
+              0.09,
+              0.285,
+              0.69,
+              0.667
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "decor",
+            "description": "Green fringed throw blanket draped on bed",
+            "bbox": [
+              0.38,
+              0.4,
+              0.62,
+              0.6
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "wall_art",
+            "description": "Horizontal abstract landscape framed wall art",
+            "bbox": [
+              0.404,
+              0.283,
+              0.578,
+              0.348
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "rug",
+            "description": "Woven jute-style beige area rug on floor",
+            "bbox": [
+              0.15,
+              0.6,
+              0.86,
+              0.683
+            ]
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "wall_art",
+            "description": "Abstract geometric painting in beige and green tones, framed",
+            "bbox": [
+              0.577,
+              0.207,
+              0.697,
+              0.32
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "bed",
+            "description": "Upholstered bed with beige headboard, layered green and cream bedding",
+            "bbox": [
+              0.318,
+              0.33,
+              0.755,
+              0.62
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "table_lamp",
+            "description": "Cream ceramic table lamp with white shade on left nightstand",
+            "bbox": [
+              0.484,
+              0.328,
+              0.545,
+              0.407
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "plant",
+            "description": "Small potted green plant on left nightstand",
+            "bbox": [
+              0.516,
+              0.383,
+              0.548,
+              0.41
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "table_lamp",
+            "description": "White ceramic table lamp with cream shade on right nightstand",
+            "bbox": [
+              0.782,
+              0.318,
+              0.844,
+              0.4
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "plant",
+            "description": "Small potted green plant on right nightstand",
+            "bbox": [
+              0.814,
+              0.383,
+              0.852,
+              0.41
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "nightstand",
+            "description": "Wooden nightstand with open shelf, holding lamp and books",
+            "bbox": [
+              0.755,
+              0.4,
+              0.868,
+              0.53
+            ]
+          },
+          {
+            "id": "i8",
+            "category": "decor",
+            "description": "White decorative bowl on open shelf of right nightstand",
+            "bbox": [
+              0.775,
+              0.465,
+              0.81,
+              0.49
+            ]
+          },
+          {
+            "id": "i9",
+            "category": "decor",
+            "description": "Stack of books on open shelf of right nightstand",
+            "bbox": [
+              0.81,
+              0.47,
+              0.855,
+              0.49
+            ]
+          },
+          {
+            "id": "i10",
+            "category": "rug",
+            "description": "Large woven jute area rug in tan, textured pattern",
+            "bbox": [
+              0.1,
+              0.5,
+              0.86,
+              0.69
+            ]
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "id": "i1",
+            "category": "table_lamp",
+            "description": "Cream ceramic bulbous lamp with beige drum shade",
+            "bbox": [
+              0,
+              0.3,
+              0.09,
+              0.53
+            ]
+          },
+          {
+            "id": "i2",
+            "category": "plant",
+            "description": "Small green potted plant in white pot",
+            "bbox": [
+              0.02,
+              0.4,
+              0.13,
+              0.51
+            ]
+          },
+          {
+            "id": "i3",
+            "category": "decor",
+            "description": "Stack of white books on nightstand",
+            "bbox": [
+              0.02,
+              0.48,
+              0.13,
+              0.53
+            ]
+          },
+          {
+            "id": "i4",
+            "category": "nightstand",
+            "description": "Wooden side table with drawer, light brown finish",
+            "bbox": [
+              0,
+              0.48,
+              0.14,
+              0.68
+            ]
+          },
+          {
+            "id": "i5",
+            "category": "bed",
+            "description": "Upholstered platform bed with beige linen bedding",
+            "bbox": [
+              0.06,
+              0.33,
+              0.66,
+              0.68
+            ]
+          },
+          {
+            "id": "i6",
+            "category": "decor",
+            "description": "Green throw pillow on bed",
+            "bbox": [
+              0.08,
+              0.34,
+              0.18,
+              0.44
+            ]
+          },
+          {
+            "id": "i7",
+            "category": "decor",
+            "description": "Beige textured throw pillow on bed",
+            "bbox": [
+              0.14,
+              0.34,
+              0.26,
+              0.44
+            ]
+          },
+          {
+            "id": "i8",
+            "category": "decor",
+            "description": "Green striped throw pillow on bed",
+            "bbox": [
+              0.2,
+              0.34,
+              0.28,
+              0.44
+            ]
+          },
+          {
+            "id": "i9",
+            "category": "decor",
+            "description": "Striped beige and green throw pillow on bed",
+            "bbox": [
+              0.24,
+              0.37,
+              0.32,
+              0.46
+            ]
+          },
+          {
+            "id": "i10",
+            "category": "decor",
+            "description": "Green fringed throw blanket on bed",
+            "bbox": [
+              0.31,
+              0.38,
+              0.6,
+              0.58
+            ]
+          },
+          {
+            "id": "i11",
+            "category": "rug",
+            "description": "Woven jute area rug in tan/beige tone",
+            "bbox": [
+              0.32,
+              0.48,
+              0.78,
+              0.68
+            ]
+          }
+        ]
+      }
+    ],
+    "present": {
+      "table_lamp": [
+        1,
+        2,
+        3
+      ],
+      "plant": [
+        1,
+        2,
+        3
+      ],
+      "nightstand": [
+        1,
+        2,
+        3
+      ],
+      "bed": [
+        1,
+        2,
+        3
+      ],
+      "decor": [
+        1,
+        2,
+        3
+      ],
+      "wall_art": [
+        1,
+        2
+      ],
+      "rug": [
+        1,
+        2,
+        3
+      ]
+    },
+    "shared": [
+      {
+        "key": "table_lamp",
+        "category": "table_lamp",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i1"
+          },
+          {
+            "photo": 2,
+            "itemId": "i5"
+          },
+          {
+            "photo": 3,
+            "itemId": "i1"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      },
+      {
+        "key": "plant",
+        "category": "plant",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i2"
+          },
+          {
+            "photo": 2,
+            "itemId": "i6"
+          },
+          {
+            "photo": 3,
+            "itemId": "i2"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      },
+      {
+        "key": "nightstand",
+        "category": "nightstand",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i3"
+          },
+          {
+            "photo": 2,
+            "itemId": "i7"
+          },
+          {
+            "photo": 3,
+            "itemId": "i4"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      },
+      {
+        "key": "bed",
+        "category": "bed",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i4"
+          },
+          {
+            "photo": 2,
+            "itemId": "i2"
+          },
+          {
+            "photo": 3,
+            "itemId": "i5"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      },
+      {
+        "key": "throw_blanket",
+        "category": "decor",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i5"
+          },
+          {
+            "photo": 3,
+            "itemId": "i10"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      },
+      {
+        "key": "wall_art",
+        "category": "wall_art",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i6"
+          },
+          {
+            "photo": 2,
+            "itemId": "i1"
+          }
+        ],
+        "identity": 3,
+        "placement": 3
+      },
+      {
+        "key": "rug",
+        "category": "rug",
+        "appearances": [
+          {
+            "photo": 1,
+            "itemId": "i7"
+          },
+          {
+            "photo": 2,
+            "itemId": "i10"
+          },
+          {
+            "photo": 3,
+            "itemId": "i11"
+          }
+        ],
+        "identity": 4,
+        "placement": 4
+      }
+    ],
+    "visibility": {
+      "bed": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "decor": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "nightstand": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "plant": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "rug": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "table_lamp": {
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "wall_art": {
+        "1": true,
+        "2": true,
+        "3": false
+      }
+    },
+    "quality": [
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Furniture scale, perspective, and lighting look plausible with consistent shadows, though the rug edge and bed contact with floor look slightly soft; all walls, windows, doors, and ceiling remain unchanged."
+      },
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Furniture scale, lighting, and shadows look plausible with good floor contact, though the nightstand lamp shadows are slightly soft; all walls, windows, doors, and view remain unchanged."
+      },
+      {
+        "realism": 3,
+        "architecture_preserved": true,
+        "notes": "Bed, rug, nightstand and lamp are well-scaled and shadowed convincingly, though the bed placement slightly overlaps the rug edge oddly; all walls, doors, windows, and flooring remain unchanged."
+      }
+    ],
+    "embedding": [
+      {
+        "key": "table_lamp",
+        "similarity": 0.8389563901283373
+      },
+      {
+        "key": "plant",
+        "similarity": 0.8773741284256973
+      },
+      {
+        "key": "nightstand",
+        "similarity": 0.7775627627401551
+      },
+      {
+        "key": "bed",
+        "similarity": 0.8867383425803306
+      },
+      {
+        "key": "throw_blanket",
+        "similarity": 0.8488743334406142
+      },
+      {
+        "key": "wall_art",
+        "similarity": 0.7833373322762605
+      },
+      {
+        "key": "rug",
+        "similarity": 0.8163949175383166
+      }
+    ],
+    "runs": {
+      "inventory": [
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "Cream ceramic lamp with linen drum shade on nightstand",
+                "bbox": [
+                  0,
+                  0.269,
+                  0.086,
+                  0.462
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small green potted plant on nightstand",
+                "bbox": [
+                  0.055,
+                  0.379,
+                  0.13,
+                  0.451
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "nightstand",
+                "description": "Wood nightstand with drawer and open shelf",
+                "bbox": [
+                  0,
+                  0.447,
+                  0.157,
+                  0.667
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "bed",
+                "description": "Upholstered beige bed with layered white and green bedding",
+                "bbox": [
+                  0.09,
+                  0.285,
+                  0.69,
+                  0.667
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Green fringed throw blanket draped on bed",
+                "bbox": [
+                  0.38,
+                  0.4,
+                  0.62,
+                  0.6
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "wall_art",
+                "description": "Horizontal abstract landscape framed wall art",
+                "bbox": [
+                  0.404,
+                  0.283,
+                  0.578,
+                  0.348
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "rug",
+                "description": "Woven jute-style beige area rug on floor",
+                "bbox": [
+                  0.15,
+                  0.6,
+                  0.86,
+                  0.683
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "Ceramic textured lamp base with cream fabric shade",
+                "bbox": [
+                  0,
+                  0.265,
+                  0.09,
+                  0.46
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small green potted plant in white pot",
+                "bbox": [
+                  0.05,
+                  0.39,
+                  0.12,
+                  0.45
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Small stack of books on nightstand",
+                "bbox": [
+                  0.04,
+                  0.44,
+                  0.1,
+                  0.47
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "nightstand",
+                "description": "Wooden nightstand with drawer and open shelf",
+                "bbox": [
+                  0,
+                  0.44,
+                  0.15,
+                  0.65
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "bed",
+                "description": "Upholstered bed with beige headboard and quilted bedding",
+                "bbox": [
+                  0.1,
+                  0.28,
+                  0.7,
+                  0.68
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Multiple beige and green throw pillows on bed",
+                "bbox": [
+                  0.12,
+                  0.3,
+                  0.38,
+                  0.44
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Green fringed throw blanket draped on bed",
+                "bbox": [
+                  0.36,
+                  0.41,
+                  0.6,
+                  0.58
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "wall_art",
+                "description": "Abstract landscape framed art in muted tones",
+                "bbox": [
+                  0.4,
+                  0.28,
+                  0.58,
+                  0.35
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "rug",
+                "description": "Woven jute area rug in natural tan tone",
+                "bbox": [
+                  0.15,
+                  0.6,
+                  0.85,
+                  0.68
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "White ceramic base lamp with beige linen shade",
+                "bbox": [
+                  0,
+                  0.27,
+                  0.09,
+                  0.46
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small potted green plant in white textured pot",
+                "bbox": [
+                  0.05,
+                  0.38,
+                  0.13,
+                  0.46
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "nightstand",
+                "description": "Wooden nightstand with drawer and open shelf",
+                "bbox": [
+                  0,
+                  0.44,
+                  0.16,
+                  0.65
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "bed",
+                "description": "Upholstered beige bed with layered pillows and green throw",
+                "bbox": [
+                  0.08,
+                  0.28,
+                  0.68,
+                  0.66
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "wall_art",
+                "description": "Abstract landscape painting in muted tones, framed",
+                "bbox": [
+                  0.4,
+                  0.28,
+                  0.58,
+                  0.35
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "rug",
+                "description": "Woven jute-style beige area rug",
+                "bbox": [
+                  0.15,
+                  0.6,
+                  0.85,
+                  0.68
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "wall_art",
+                "description": "Abstract geometric painting in beige and green tones, framed",
+                "bbox": [
+                  0.577,
+                  0.207,
+                  0.697,
+                  0.32
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "bed",
+                "description": "Upholstered bed with beige headboard, layered green and cream bedding",
+                "bbox": [
+                  0.318,
+                  0.33,
+                  0.755,
+                  0.62
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "table_lamp",
+                "description": "Cream ceramic table lamp with white shade on left nightstand",
+                "bbox": [
+                  0.484,
+                  0.328,
+                  0.545,
+                  0.407
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "plant",
+                "description": "Small potted green plant on left nightstand",
+                "bbox": [
+                  0.516,
+                  0.383,
+                  0.548,
+                  0.41
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "table_lamp",
+                "description": "White ceramic table lamp with cream shade on right nightstand",
+                "bbox": [
+                  0.782,
+                  0.318,
+                  0.844,
+                  0.4
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "plant",
+                "description": "Small potted green plant on right nightstand",
+                "bbox": [
+                  0.814,
+                  0.383,
+                  0.852,
+                  0.41
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "nightstand",
+                "description": "Wooden nightstand with open shelf, holding lamp and books",
+                "bbox": [
+                  0.755,
+                  0.4,
+                  0.868,
+                  0.53
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "decor",
+                "description": "White decorative bowl on open shelf of right nightstand",
+                "bbox": [
+                  0.775,
+                  0.465,
+                  0.81,
+                  0.49
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "decor",
+                "description": "Stack of books on open shelf of right nightstand",
+                "bbox": [
+                  0.81,
+                  0.47,
+                  0.855,
+                  0.49
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "rug",
+                "description": "Large woven jute area rug in tan, textured pattern",
+                "bbox": [
+                  0.1,
+                  0.5,
+                  0.86,
+                  0.69
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "bed",
+                "description": "Upholstered bed with beige linen headboard, white and green bedding",
+                "bbox": [
+                  0.32,
+                  0.33,
+                  0.75,
+                  0.65
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "wall_art",
+                "description": "Framed abstract geometric painting in green and beige tones",
+                "bbox": [
+                  0.58,
+                  0.2,
+                  0.69,
+                  0.31
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "nightstand",
+                "description": "Small wooden nightstand with light finish",
+                "bbox": [
+                  0.48,
+                  0.36,
+                  0.55,
+                  0.42
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "table_lamp",
+                "description": "White ceramic lamp with round base on left nightstand",
+                "bbox": [
+                  0.48,
+                  0.33,
+                  0.53,
+                  0.4
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "plant",
+                "description": "Small green plant in pot on left nightstand",
+                "bbox": [
+                  0.51,
+                  0.36,
+                  0.55,
+                  0.4
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "nightstand",
+                "description": "Wooden nightstand with open shelf on right side of bed",
+                "bbox": [
+                  0.76,
+                  0.39,
+                  0.87,
+                  0.53
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "table_lamp",
+                "description": "White ceramic lamp with round shade on right nightstand",
+                "bbox": [
+                  0.77,
+                  0.32,
+                  0.84,
+                  0.41
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "plant",
+                "description": "Small green plant in pot on right nightstand",
+                "bbox": [
+                  0.82,
+                  0.38,
+                  0.86,
+                  0.42
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "decor",
+                "description": "Stack of white books on lower shelf of right nightstand",
+                "bbox": [
+                  0.78,
+                  0.47,
+                  0.83,
+                  0.51
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "rug",
+                "description": "Large woven jute area rug in tan color under bed",
+                "bbox": [
+                  0.1,
+                  0.52,
+                  0.87,
+                  0.72
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "bed",
+                "description": "Upholstered bed with beige and green bedding and pillows",
+                "bbox": [
+                  0.32,
+                  0.323,
+                  0.76,
+                  0.65
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "wall_art",
+                "description": "Framed abstract painting in beige, green, and cream tones",
+                "bbox": [
+                  0.58,
+                  0.207,
+                  0.7,
+                  0.316
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "nightstand",
+                "description": "Wooden nightstand with open shelf and small drawer",
+                "bbox": [
+                  0.755,
+                  0.402,
+                  0.87,
+                  0.53
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "table_lamp",
+                "description": "White ceramic lamp with cream fabric shade",
+                "bbox": [
+                  0.78,
+                  0.32,
+                  0.845,
+                  0.41
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "plant",
+                "description": "Small potted green plant on nightstand",
+                "bbox": [
+                  0.83,
+                  0.375,
+                  0.865,
+                  0.415
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Small stack of books and decorative bowl on nightstand shelf",
+                "bbox": [
+                  0.79,
+                  0.47,
+                  0.86,
+                  0.5
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "side_table",
+                "description": "Small wooden side table partially visible near sliding door",
+                "bbox": [
+                  0.47,
+                  0.39,
+                  0.53,
+                  0.45
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "table_lamp",
+                "description": "White lamp with cream shade on side table",
+                "bbox": [
+                  0.48,
+                  0.33,
+                  0.52,
+                  0.4
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "plant",
+                "description": "Small green potted plant on side table",
+                "bbox": [
+                  0.5,
+                  0.375,
+                  0.53,
+                  0.41
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "rug",
+                "description": "Large woven jute area rug in tan color",
+                "bbox": [
+                  0.1,
+                  0.5,
+                  0.87,
+                  0.86
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "White ceramic table lamp with tapered fabric shade",
+                "bbox": [
+                  0,
+                  0.3,
+                  0.09,
+                  0.53
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small potted green plant with trailing leaves",
+                "bbox": [
+                  0.02,
+                  0.42,
+                  0.12,
+                  0.52
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Stack of books under lamp on nightstand",
+                "bbox": [
+                  0,
+                  0.47,
+                  0.08,
+                  0.52
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "nightstand",
+                "description": "Wooden nightstand with drawers, light brown finish",
+                "bbox": [
+                  0,
+                  0.49,
+                  0.14,
+                  0.68
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "bed",
+                "description": "Upholstered bed with beige tufted headboard and frame",
+                "bbox": [
+                  0.06,
+                  0.32,
+                  0.65,
+                  0.68
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Beige and green throw pillows stacked on bed",
+                "bbox": [
+                  0.06,
+                  0.33,
+                  0.32,
+                  0.47
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Green knitted throw blanket draped on bed",
+                "bbox": [
+                  0.25,
+                  0.38,
+                  0.6,
+                  0.57
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "rug",
+                "description": "Woven jute area rug in tan tones",
+                "bbox": [
+                  0.15,
+                  0.47,
+                  0.79,
+                  0.68
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "wall_art",
+                "description": "Ceiling fan with light fixture, silver blades",
+                "bbox": [
+                  0.35,
+                  0.03,
+                  0.57,
+                  0.16
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "Cream ceramic bulbous lamp with beige drum shade",
+                "bbox": [
+                  0,
+                  0.3,
+                  0.09,
+                  0.53
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small green potted plant in white pot",
+                "bbox": [
+                  0.02,
+                  0.4,
+                  0.13,
+                  0.51
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "decor",
+                "description": "Stack of white books on nightstand",
+                "bbox": [
+                  0.02,
+                  0.48,
+                  0.13,
+                  0.53
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "nightstand",
+                "description": "Wooden side table with drawer, light brown finish",
+                "bbox": [
+                  0,
+                  0.48,
+                  0.14,
+                  0.68
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "bed",
+                "description": "Upholstered platform bed with beige linen bedding",
+                "bbox": [
+                  0.06,
+                  0.33,
+                  0.66,
+                  0.68
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Green throw pillow on bed",
+                "bbox": [
+                  0.08,
+                  0.34,
+                  0.18,
+                  0.44
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "decor",
+                "description": "Beige textured throw pillow on bed",
+                "bbox": [
+                  0.14,
+                  0.34,
+                  0.26,
+                  0.44
+                ]
+              },
+              {
+                "id": "i8",
+                "category": "decor",
+                "description": "Green striped throw pillow on bed",
+                "bbox": [
+                  0.2,
+                  0.34,
+                  0.28,
+                  0.44
+                ]
+              },
+              {
+                "id": "i9",
+                "category": "decor",
+                "description": "Striped beige and green throw pillow on bed",
+                "bbox": [
+                  0.24,
+                  0.37,
+                  0.32,
+                  0.46
+                ]
+              },
+              {
+                "id": "i10",
+                "category": "decor",
+                "description": "Green fringed throw blanket on bed",
+                "bbox": [
+                  0.31,
+                  0.38,
+                  0.6,
+                  0.58
+                ]
+              },
+              {
+                "id": "i11",
+                "category": "rug",
+                "description": "Woven jute area rug in tan/beige tone",
+                "bbox": [
+                  0.32,
+                  0.48,
+                  0.78,
+                  0.68
+                ]
+              }
+            ]
+          },
+          {
+            "items": [
+              {
+                "id": "i1",
+                "category": "table_lamp",
+                "description": "Round beige ceramic lamp with cream drum shade",
+                "bbox": [
+                  0,
+                  0.3,
+                  0.09,
+                  0.53
+                ]
+              },
+              {
+                "id": "i2",
+                "category": "plant",
+                "description": "Small green potted plant in white vase",
+                "bbox": [
+                  0.03,
+                  0.4,
+                  0.13,
+                  0.51
+                ]
+              },
+              {
+                "id": "i3",
+                "category": "nightstand",
+                "description": "Light wood nightstand with drawer, bottom left corner",
+                "bbox": [
+                  0,
+                  0.49,
+                  0.14,
+                  0.68
+                ]
+              },
+              {
+                "id": "i4",
+                "category": "bed",
+                "description": "Upholstered bed with cream linen headboard and frame",
+                "bbox": [
+                  0.06,
+                  0.34,
+                  0.65,
+                  0.68
+                ]
+              },
+              {
+                "id": "i5",
+                "category": "decor",
+                "description": "Cream and green throw pillows stacked against headboard",
+                "bbox": [
+                  0.08,
+                  0.34,
+                  0.33,
+                  0.47
+                ]
+              },
+              {
+                "id": "i6",
+                "category": "decor",
+                "description": "Olive green knitted throw blanket draped on bed",
+                "bbox": [
+                  0.27,
+                  0.38,
+                  0.62,
+                  0.57
+                ]
+              },
+              {
+                "id": "i7",
+                "category": "rug",
+                "description": "Woven jute-style beige area rug on carpet floor",
+                "bbox": [
+                  0.27,
+                  0.47,
+                  0.78,
+                  0.68
+                ]
+              }
+            ]
+          }
+        ]
+      ],
+      "match": [
+        {
+          "shared": [
+            {
+              "key": "bed",
+              "category": "bed",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i10"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i11"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "wall_art",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "nightstand",
+              "category": "nightstand",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i4"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "table_lamp",
+              "category": "table_lamp",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "throw_blanket",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i10"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            }
+          ],
+          "visibility": {
+            "bed": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "nightstand": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "table_lamp": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": true,
+              "2": true,
+              "3": false
+            }
+          }
+        },
+        {
+          "shared": [
+            {
+              "key": "bed",
+              "category": "bed",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "left_nightstand",
+              "category": "nightstand",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i4"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "left_table_lamp",
+              "category": "table_lamp",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "left_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "area_rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i10"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i11"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "green_throw",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i10"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "abstract_wall_art",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            }
+          ],
+          "visibility": {
+            "bed": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "nightstand": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "table_lamp": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": true,
+              "2": true,
+              "3": false
+            }
+          }
+        },
+        {
+          "shared": [
+            {
+              "key": "bed",
+              "category": "bed",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i4"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i5"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "main_nightstand",
+              "category": "nightstand",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i3"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i4"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "table_lamp",
+              "category": "table_lamp",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i1"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "small_plant",
+              "category": "plant",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i2"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i2"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "jute_rug",
+              "category": "rug",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i7"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i10"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i11"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "wall_art",
+              "category": "wall_art",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i6"
+                },
+                {
+                  "photo": 2,
+                  "itemId": "i1"
+                }
+              ],
+              "identity": 3,
+              "placement": 3
+            },
+            {
+              "key": "book_stack",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 2,
+                  "itemId": "i9"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i3"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            },
+            {
+              "key": "green_throw",
+              "category": "decor",
+              "appearances": [
+                {
+                  "photo": 1,
+                  "itemId": "i5"
+                },
+                {
+                  "photo": 3,
+                  "itemId": "i10"
+                }
+              ],
+              "identity": 4,
+              "placement": 4
+            }
+          ],
+          "visibility": {
+            "bed": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "decor": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "nightstand": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "plant": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "rug": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "table_lamp": {
+              "1": true,
+              "2": true,
+              "3": true
+            },
+            "wall_art": {
+              "1": true,
+              "2": true,
+              "3": false
+            }
+          }
+        }
+      ],
+      "quality": [
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, perspective, and lighting look plausible with consistent shadows, though the rug edge and bed contact with floor look slightly soft; all walls, windows, doors, and ceiling remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture placement, lighting, and shadows look plausible with proper floor contact, though the wall art scale and slightly flat shading feel a bit staged; all structural elements (walls, windows, doors, ceiling fan) remain unchanged."
+          },
+          {
+            "realism": 4,
+            "architecture_preserved": true,
+            "notes": "Bed, nightstand, lamp, rug, and art are well-scaled with consistent lighting and shadows, and the room's walls, windows, doors, ceiling, and flooring remain unchanged."
+          }
+        ],
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, lighting, and shadows look plausible with good floor contact, though the nightstand lamp shadows are slightly soft; all walls, windows, doors, and view remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, lighting, and shadows look plausible with proper floor contact, though nightstand lamps' light glow seems slightly artificial; room's walls, windows, doors, and floor remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Furniture scale, shadows, and placement look plausible with only minor lighting/shadow softness suggesting staging; walls, windows, doors, ceiling fan, and outdoor view remain unchanged."
+          }
+        ],
+        [
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Bed, rug, nightstand and lamp are well-scaled and shadowed convincingly, though the bed placement slightly overlaps the rug edge oddly; all walls, doors, windows, and flooring remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Bed, rug, nightstand and lamp are plausibly scaled and shadowed but bed appears to lack clear contact shadow with floor, giving a slightly composited look; all walls, doors, windows, and flooring remain unchanged."
+          },
+          {
+            "realism": 3,
+            "architecture_preserved": true,
+            "notes": "Bed, nightstand, rug, and lamp are plausibly scaled and shadowed, though bed placement partially blocks the closet in a slightly odd way; room structure, doors, windows, and floors remain unchanged."
+          }
+        ]
+      ]
+    },
+    "flags": {
+      "no_shared_items": false,
+      "shared_fallback_median_run": false,
+      "visibility_unknown_keys": []
+    }
+  },
+  "judge": {
+    "model": "claude-sonnet-5",
+    "prompt_version": "0.1.1",
+    "runs": 3,
+    "aggregated": "median/majority"
+  },
+  "embedder": {
+    "model": "replicate:andreasjansson/clip-features",
+    "version": "75b33f253f7714a281ad3e9b28f63e3232d583716ef6718f2e46641077ea040a"
+  },
+  "cost_usd": 0.2385,
+  "scored_at": "2026-09-27T15:53:37.327Z"
+}

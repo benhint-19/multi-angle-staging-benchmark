@@ -1,0 +1,24 @@
+{
+  "system": "staging-single-photo",
+  "room": "amber-ridge-family",
+  "run_finished_at": "2026-09-27T15:38:53.756+00:00",
+  "written_at": "2026-09-27T15:39:04.699Z",
+  "photos": [
+    {
+      "photo": "01",
+      "status": "delivered"
+    },
+    {
+      "photo": "02",
+      "status": "delivered"
+    },
+    {
+      "photo": "03",
+      "status": "delivered"
+    },
+    {
+      "photo": "04",
+      "status": "absent"
+    }
+  ]
+}
