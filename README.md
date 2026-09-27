@@ -28,17 +28,30 @@ alone).
 
 ## How to score
 
-The scorer is a Node CLI that takes a room's original photos and a tool's staged
-outputs, and produces a consistency score using a fixed, published judge prompt
-(see `PROTOCOL.md`). It's designed so that anyone can run it against their own tool's
-output and compare against the published results:
+The scorer (`scorer/`) is a Node 22 + TypeScript CLI. It takes a room's original photos and a
+tool's staged outputs and produces a consistency score using a fixed, published judge prompt
+(`claude-sonnet-5`, each call run 3 times, median taken). `PROTOCOL.md` has the prompts verbatim,
+the exact formulas, the output schema and the known limitations.
 
-```
-masb score <room-dir> --system <name>
+```bash
+cd scorer && pnpm install && pnpm build
+export ANTHROPIC_API_KEY=...        # required (judge)
+export REPLICATE_API_TOKEN=...      # optional (CLIP crop similarity, a secondary number)
+
+# 1. put a tool's outputs next to the originals (staged files numbered 01, 02, ... like the originals)
+node dist/cli.js prepare ../data/rooms/amber-ridge-living ./my-tool-output/living ./rooms/my-tool/amber-ridge-living
+
+# 2. score the room
+node dist/cli.js score ./rooms/my-tool/amber-ridge-living --system my-tool \
+  --room amber-ridge-living --out ../results/my-tool/amber-ridge-living.json
+
+# 3. rebuild the results table
+node dist/cli.js table ../results --out ../RESULTS.md
 ```
 
-See `PROTOCOL.md` for the exact judge prompt and scoring procedure once it's filled in
-(v0.1 scorer task), and `results/` + `RESULTS.md` for published numbers.
+Scoring one 3-photo room costs about $0.12–0.18 in judge usage. Each result file keeps every
+raw judge reply, so the numbers can be audited and recomputed. `results/` + `RESULTS.md` hold
+the published numbers.
 
 ## Dataset
 

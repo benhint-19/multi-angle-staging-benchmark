@@ -1,0 +1,96 @@
+import { describe, expect, it } from "vitest";
+import { scoreRoom } from "../src/score.js";
+import type { Inventory, MatchResult } from "../src/types.js";
+import { FakeEmbedder, FakeJudge, tinyJpeg } from "./fakes.js";
+
+const items: Inventory = {
+  items: [
+    { id: "i1", category: "sofa", description: "grey sofa", bbox: [0.1, 0.4, 0.6, 0.9] },
+    { id: "i2", category: "rug", description: "wool rug", bbox: [0.2, 0.7, 0.8, 1] },
+  ],
+};
+const sofaOnly: Inventory = { items: [items.items[0]!] };
+
+describe("scoreRoom with a fake judge", () => {
+  it("aggregates runs, excludes the occluded rug, and computes all scores", async () => {
+    const photos = await Promise.all(["#888", "#999", "#aaa"].map(tinyJpeg));
+    // inventory calls run photo-by-photo (3 runs each): photo 3 never shows the rug.
+    const inv = (call: number) => (Math.floor(call / 3) === 2 ? sofaOnly : items);
+    const match = (id: number, pl: number, rugVisibleIn3: boolean): MatchResult => ({
+      shared: [
+        {
+          key: "sofa",
+          category: "sofa",
+          appearances: [1, 2, 3].map((photo) => ({ photo, itemId: "i1" })),
+          identity: id,
+          placement: pl,
+        },
+        {
+          key: "rug",
+          category: "rug",
+          appearances: [1, 2].map((photo) => ({ photo, itemId: "i2" })),
+          identity: 4,
+          placement: 4,
+        },
+      ],
+      visibility: { sofa: { "1": true, "2": true, "3": true }, rug: { "1": true, "2": true, "3": rugVisibleIn3 } },
+    });
+    const judge = new FakeJudge(
+      inv,
+      [match(4, 2, false), match(2, 4, true), match(4, 4, false)],
+      [
+        { realism: 3, architecture_preserved: true, notes: "" },
+        { realism: 4, architecture_preserved: true, notes: "" },
+        { realism: 2, architecture_preserved: false, notes: "" },
+      ],
+    );
+    const r = await scoreRoom({
+      system: "test",
+      room: "room",
+      originals: photos,
+      staged: photos,
+      judge,
+      embedder: new FakeEmbedder(),
+      runs: 3,
+      now: () => new Date("2026-09-27T00:00:00Z"),
+    });
+    expect(judge.calls).toEqual({ inventory: 9, match: 3, quality: 9 });
+    // rug: present in 1,2; visibility majority says not visible in 3 → 2/2; sofa 3/3.
+    expect(r.scores.inventory_agreement).toBe(100);
+    // sofa identity median(4,2,4)=4, placement median(2,4,4)=4; rug 4/4.
+    expect(r.scores.identity_agreement).toBe(100);
+    expect(r.scores.placement_agreement).toBe(100);
+    expect(r.scores.consistency).toBe(100);
+    // every photo's quality runs are (3,T),(4,T),(2,F) → median 3, majority true.
+    expect(r.scores.realism).toBe(75);
+    expect(r.scores.architecture_preserved_rate).toBe(1);
+    expect(r.scores.identity_embedding_similarity).toBe(1);
+    expect(r.details.runs.match).toHaveLength(3);
+    expect(r.details.flags.no_shared_items).toBe(false);
+    expect(r.judge).toEqual({ model: "fake-judge", runs: 3, aggregated: "median" });
+    expect(r.cost_usd).toBe(0.01);
+    expect(r.photos).toBe(3);
+  });
+
+  it("flags no shared items and scores identity/placement 0", async () => {
+    const photos = await Promise.all(["#111", "#222"].map(tinyJpeg));
+    const judge = new FakeJudge(
+      () => sofaOnly,
+      [{ shared: [], visibility: {} }],
+      [{ realism: 4, architecture_preserved: true, notes: "" }],
+    );
+    const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: photos, judge, embedder: null, runs: 3 });
+    expect(r.details.flags.no_shared_items).toBe(true);
+    expect(r.scores.identity_agreement).toBe(0);
+    expect(r.scores.placement_agreement).toBe(0);
+    expect(r.scores.inventory_agreement).toBe(100);
+    expect(r.scores.consistency).toBeCloseTo(33.3, 1);
+    expect(r.scores.identity_embedding_similarity).toBeNull();
+  });
+
+  it("rejects mismatched photo counts", async () => {
+    const p = await tinyJpeg("#000");
+    const judge = new FakeJudge(() => sofaOnly, [{ shared: [], visibility: {} }], []);
+    await expect(scoreRoom({ system: "s", room: "r", originals: [p, p], staged: [p, p, p], judge })).rejects.toThrow();
+  });
+});
