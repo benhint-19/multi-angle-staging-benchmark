@@ -65,6 +65,11 @@ export type Visibility = Record<string, Record<string, boolean>>;
 
 export interface MatchResult {
   shared: SharedItem[];
+  /**
+   * Judge replies only (not stored in `details.runs.match`): shared items the judge returned that
+   * failed validation and were excluded (protocol 0.1.4).
+   */
+  unrated?: number;
 }
 
 export interface QualityResult {
@@ -115,6 +120,8 @@ export interface Details {
     delivered: number;
     /** 1-based photo numbers the system did not deliver (see PROTOCOL.md "Absent angles"). */
     absent: number[];
+    /** Match items excluded over all match runs because they failed validation (protocol ≥ 0.1.4; absent in older files). */
+    unrated_items?: number;
   };
 }
 

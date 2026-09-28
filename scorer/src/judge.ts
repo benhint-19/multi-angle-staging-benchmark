@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { INVENTORY_PROMPT, QUALITY_PROMPT, SYSTEM_PROMPT, renderMatchPrompt, renderVisibilityPrompt } from "./prompts.js";
-import { CATEGORIES, type Inventory, type MatchResult, type QualityResult, type Visibility } from "./types.js";
+import { CATEGORIES, type Inventory, type MatchResult, type QualityResult, type SharedItem, type Visibility } from "./types.js";
 
 /** One judge run per call; the scorer repeats calls and aggregates. Inject a fake in tests. */
 export interface Judge {
@@ -38,16 +38,28 @@ export const inventorySchema = z.object({
   ),
 });
 
-export const matchSchema = z.object({
-  shared: z.array(
-    z.object({
-      key: z.string(),
-      category: categorySchema,
-      appearances: z.array(z.object({ photo: z.number().int(), itemId: z.string() })),
-      identity: rating,
-      placement: rating,
-    }),
-  ),
+export const sharedItemSchema = z.object({
+  key: z.string(),
+  category: categorySchema,
+  appearances: z.array(z.object({ photo: z.number().int(), itemId: z.string() })),
+  identity: rating,
+  placement: rating,
+});
+
+/**
+ * A match reply is validated item by item (protocol 0.1.4): a shared item that fails the item schema
+ * (missing identity or placement, a null itemId, ...) is excluded and counted in `unrated`, instead
+ * of failing the whole reply. Only a reply without a `shared` array fails (and is retried).
+ */
+export const matchSchema = z.object({ shared: z.array(z.unknown()) }).transform((m): MatchResult => {
+  const shared: SharedItem[] = [];
+  let unrated = 0;
+  for (const item of m.shared) {
+    const r = sharedItemSchema.safeParse(item);
+    if (r.success) shared.push(r.data);
+    else unrated++;
+  }
+  return { shared, unrated };
 });
 
 export const visibilitySchema = z.object({

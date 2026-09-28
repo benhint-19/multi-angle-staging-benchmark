@@ -104,12 +104,16 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
 
   const categories = Object.keys(present).sort();
   log(`match: ${runs} runs; visibility (originals only): ${runs} runs over ${categories.length} categories`);
-  const [matchRuns, visSanitized] = await Promise.all([
-    times(async (): Promise<MatchResult> => sanitizeMatch(await judge.match(origJ, stagedJ, inventories), inventories)),
+  const [matchRaw, visSanitized] = await Promise.all([
+    times(() => judge.match(origJ, stagedJ, inventories)),
     categories.length
       ? times(async () => sanitizeVisibility(await judge.visibility(origJ, categories), categories, n))
       : Promise.resolve([]),
   ]);
+  // Protocol 0.1.4: match items that failed validation were excluded by the judge; count them.
+  const unratedItems = matchRaw.reduce((n, m) => n + (m.unrated ?? 0), 0);
+  if (unratedItems) log(`match: excluded ${unratedItems} unrated item(s) that failed validation`);
+  const matchRuns: MatchResult[] = matchRaw.map((m) => sanitizeMatch(m, inventories));
   const visibilityRuns: Visibility[] = visSanitized.map((x) => x.visibility);
   const unknownKeys = [...new Set(visSanitized.flatMap((x) => x.unknownKeys))];
   if (unknownKeys.length) log(`visibility: dropped unknown keys ${unknownKeys.join(", ")}`);
@@ -173,6 +177,7 @@ export async function scoreRoom(opts: ScoreOptions): Promise<MasbResult> {
         ...(embeddingNote ? { embedding_note: embeddingNote } : {}),
         delivered,
         absent,
+        unrated_items: unratedItems,
       },
     },
     judge: { model: judge.model, prompt_version: PROMPT_VERSION, protocol_version: PROTOCOL_VERSION, runs, aggregated: "median/majority" },

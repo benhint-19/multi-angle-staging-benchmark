@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractJson, inventorySchema, normalizePhotoKey, sanitizeMatch, sanitizeVisibility } from "../src/judge.js";
+import { extractJson, inventorySchema, matchSchema, normalizePhotoKey, sanitizeMatch, sanitizeVisibility } from "../src/judge.js";
 
 describe("judge parsing", () => {
   it("extracts JSON from fenced replies", () => {
@@ -38,6 +38,25 @@ describe("judge parsing", () => {
     );
     expect(visibility).toEqual({ coffee_table: { "1": true, "2": false } });
     expect(unknownKeys).toEqual(["photo:Coffee Table/3", "category:bar_stool"]);
+  });
+
+  it("match replies are validated per item: invalid items are excluded and counted, the rest kept (protocol 0.1.4)", () => {
+    const ok = { key: "sofa", category: "Sofa", appearances: [{ photo: 1, itemId: "i1" }, { photo: 2, itemId: "i1" }], identity: 4, placement: 3 };
+    const r = matchSchema.parse({
+      shared: [
+        ok,
+        { ...ok, key: "no-ratings", identity: undefined, placement: undefined }, // living 2026-09-27: shared[11].identity undefined
+        { ...ok, key: "null-id", appearances: [{ photo: 1, itemId: null }, { photo: 2, itemId: "i2" }] }, // shared[7].appearances[0].itemId null
+        { ...ok, key: "out-of-range", identity: 7 },
+        "not an object",
+      ],
+    });
+    expect(r.shared.map((s) => s.key)).toEqual(["sofa"]);
+    expect(r.shared[0]!.category).toBe("sofa");
+    expect(r.unrated).toBe(4);
+    expect(matchSchema.parse({ shared: [ok] }).unrated).toBe(0);
+    // A reply without a shared array still fails (and is retried by the judge).
+    expect(() => matchSchema.parse({ items: [] })).toThrow();
   });
 
   it("normalizePhotoKey", () => {

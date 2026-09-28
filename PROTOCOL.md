@@ -1,11 +1,13 @@
-# MASB Scoring Protocol (benchmark v0.1.0, protocol 0.1.3, prompt set 0.1.3)
+# MASB Scoring Protocol (benchmark v0.1.0, protocol 0.1.4, prompt set 0.1.3)
 
 This document is the contract for the Multi-Angle Staging Benchmark scorer in `scorer/`. It publishes
 the judge prompts verbatim, the aggregation rules and the exact formulas. Any change to a prompt or a
 formula is a new protocol version; results from different versions are not comparable. Each result
-records `judge.prompt_version` and `judge.protocol_version` (both currently `0.1.3`: visibility is
+records `judge.prompt_version` and `judge.protocol_version`. Prompt set `0.1.3`: visibility is
 judged by a separate call that sees only the original photos, and absent angles count against
-inventory, see "Absent angles"). All published results were scored with 0.1.3.
+inventory, see "Absent angles". Protocol `0.1.4` validates match replies item by item (see "Judge"):
+a reply whose items all validate scores exactly as under 0.1.3, so 0.1.3 and 0.1.4 results of the
+same judge replies are identical. All published results were scored with 0.1.3.
 
 ## Inputs
 
@@ -36,6 +38,12 @@ Before judging, every image is auto-rotated and downscaled to at most 1024 px on
 - Every reply must be a single JSON object. It is parsed and validated with a strict schema (zod);
   an invalid reply is retried up to 3 more times, after which scoring fails. Validation normalises a
   category outside the fixed list to `other` and clamps bounding-box coordinates to 0–1.
+- Match replies (Call 2) are validated **item by item** (protocol 0.1.4). A shared item that fails the
+  item schema (for example a missing `identity` or `placement`, or a null `itemId`) is excluded from
+  that run and counted; the run's other items are kept. Only a reply without a `shared` array is
+  invalid (and retried as above). The count over all match runs is `details.flags.unrated_items`.
+  An excluded item contributes no links, so a pair it would have linked counts only if a majority
+  of runs link it anyway.
 - Each call is run **3 times** (`--runs`, default 3).
 
 Fixed category list: `sofa, sectional, armchair, coffee_table, side_table, console, dining_table, dining_chair, bed, nightstand, dresser, desk, office_chair, rug, floor_lamp, table_lamp, wall_art, mirror, plant, curtains, decor, other`.
@@ -249,10 +257,11 @@ rug ratio would be 2/3 and inventory_agreement 100 × mean(1, 0.667) = 83.3.
     "flags": {
       "no_shared_items": false, "shared_fallback_median_run": false,
       "visibility_unknown_keys": [], "embedding_note": "...",  // note only when embeddings are missing
-      "delivered": 3, "absent": []
+      "delivered": 3, "absent": [],
+      "unrated_items": 0   // protocol ≥ 0.1.4: match items excluded for failing validation
     }
   },
-  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.3", "protocol_version": "0.1.3", "runs": 3, "aggregated": "median/majority" },
+  "judge": { "model": "claude-sonnet-5", "prompt_version": "0.1.3", "protocol_version": "0.1.4", "runs": 3, "aggregated": "median/majority" },
   "embedder": { "model": "replicate:andreasjansson/clip-features", "version": "75b33f25…" } | null,
   "cost_usd": 0.16,
   "scored_at": "2026-09-27T00:00:00.000Z"

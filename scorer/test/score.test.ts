@@ -172,6 +172,32 @@ describe("scoreRoom with a fake judge", () => {
     expect(r.scores.inventory_agreement).toBe(100);
   });
 
+  it("counts unrated match items over all runs; scores come from the rated items only (protocol 0.1.4)", async () => {
+    const photos = await Promise.all(["#888", "#999"].map(tinyJpeg));
+    const sofa = { key: "sofa", category: "sofa" as const, appearances: [1, 2].map((photo) => ({ photo, itemId: "i1" })), identity: 4, placement: 4 };
+    const judge = new FakeJudge(
+      () => sofaOnly,
+      [{ shared: [sofa], unrated: 2 }, { shared: [sofa], unrated: 0 }, { shared: [sofa], unrated: 1 }],
+      [{ realism: 3, architecture_preserved: true, notes: "" }],
+      [{ sofa: { "1": true, "2": true } }],
+    );
+    const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: photos, judge, embedder: null, runs: 3 });
+    expect(r.details.flags.unrated_items).toBe(3);
+    expect(r.scores.identity_agreement).toBe(100);
+    expect(r.details.runs.match.every((m) => !("unrated" in m))).toBe(true);
+    expect(r.judge.protocol_version).toBe("0.1.4");
+    expect(() => MasbResultSchema.parse(r)).not.toThrow();
+  });
+
+  it("result files written before protocol 0.1.4 (no unrated_items) still validate", async () => {
+    const photos = await Promise.all(["#888", "#999"].map(tinyJpeg));
+    const judge = new FakeJudge(() => sofaOnly, [{ shared: [] }], [{ realism: 3, architecture_preserved: true, notes: "" }]);
+    const r = await scoreRoom({ system: "s", room: "r", originals: photos, staged: photos, judge, embedder: null, runs: 1 });
+    expect(r.details.flags.unrated_items).toBe(0);
+    const { unrated_items: _drop, ...flags } = r.details.flags;
+    expect(() => MasbResultSchema.parse({ ...r, details: { ...r.details, flags } })).not.toThrow();
+  });
+
   it("rejects a non-integer or zero run count", async () => {
     const p = await tinyJpeg("#000");
     const judge = new FakeJudge(() => sofaOnly, [{ shared: [] }], []);

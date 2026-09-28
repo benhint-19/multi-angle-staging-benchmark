@@ -53,6 +53,7 @@ export const MasbResultSchema = z.object({
       embedding_note: z.string().optional(),
       delivered: z.number().int().min(0),
       absent: z.array(z.number().int().min(1)),
+      unrated_items: z.number().int().min(0).optional(),
     }),
   }),
   judge: z.object({
